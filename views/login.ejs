@@ -1,0 +1,16 @@
+<% include ./header.ejs %>
+    <% if(messages.error){ %>
+        <%= messages.error %>
+    <% } %>
+    <script type="text/javascript" src="js/login.js"></script>
+    This is login page
+    <div>
+        <form action="/login?url=<%= redirectUrl  %>" method="POST">
+            ID : <input id="user_email" type="email" name="email" required="required"/>
+            Password : <input id="user_pw" type="password" name="password" required="required"/>
+            <button type="submit">login</button>
+        </form>
+    </div>
+    <a href="/register">resgister</a>
+
+<% include ./footer.ejs %>

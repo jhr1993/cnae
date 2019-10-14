@@ -1,0 +1,18 @@
+<% include ./header.ejs %>
+    <script type="text/javascript" src="js/login.js"></script>
+    This is register page
+    <% if(messages.error){ %>
+        <%= messages.error %>
+    <% } %>
+    <div>
+        <form action="/register/newUser" method="POST">
+            Name : <input id="user_name" type="text" name="name" required="required"/>
+            ID : <input id="user_email" type="text" name="email" required="required"/>
+            Password : <input id="user_pw" type="password" name="pw" required="required"/>
+            Password Confirm : <input id="user_pw" type="password" name="pw2" required="required"/>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <a href="/login">login</a>
+
+<% include ./footer.ejs %>

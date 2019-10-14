@@ -1,0 +1,74 @@
+<% include ./header.ejs %>
+
+<!-- map js -->
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<style text=""></style>
+<div id="scroll-up">TOP</div>
+<div id="map-container">
+	<div id="map-main-container" class="map-content">
+		<!-- google map -->
+		<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+		<div id="map"></div>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEpEB7aKAhd1FwGykhkQgGWnRKRntZ3ro&callback=initMap&libraries=places"
+		async defer></script>
+	</div>
+	<div id="map-info-container" class="map-content">
+		<div id="map-info-tag">
+			<ul>
+				<li id="map-info-tag-main" class="map-info-tag-content">
+					<div class="map-info-tag-content-title" value="main">M a i n</div>
+					<div class="map-info-tag-hider-container">
+						<div class="map-info-tag-hider"></div>
+					</div>
+				</li>
+				<li id="map-info-tag-like" class="map-info-tag-content">
+					<div class="map-info-tag-content-title" value="like">L i k e</div>
+					<div class="map-info-tag-hider-container">
+						<div class="map-info-tag-hider"></div>
+					</div>
+				</li>
+				<li id="map-info-tag-history" class="map-info-tag-content">
+					<div class="map-info-tag-content-title" value="history">History</div>
+					<div class="map-info-tag-hider-container">
+						<div class="map-info-tag-hider"></div>
+					</div>
+				</li>
+				<li id="map-info-tag-info" class="map-info-tag-content">
+					<div class="map-info-tag-content-title" value="eventInfo">I n f o</div>
+					<div class="map-info-tag-hider-container">
+						<div class="map-info-tag-hider"></div>
+					</div>
+				</li>
+			</ul>
+			<div class="float-clear-both"></div>
+		</div>
+		<div id="map-info">
+			<div id="map-info-main" class="map-info-content">
+				<div class="map-info-title">Main</div>
+			</div>
+			<div id="map-info-like" class="map-info-content">
+				<div class="map-info-title">Like</div>
+				<div><span id="map-info-like-event-button">Event</span><span id="map-info-like-user-button">User</span></div>
+				<div class="map-info-body-container">
+					<div id="map-info-history-content" class="map-info-body">
+						
+					</div>
+				</div>
+			</div>
+			<div id="map-info-history" class="map-info-content">
+				<div class="map-info-title">History</div>
+				<div class="map-info-body-container">
+					<div id="map-info-history-content" class="map-info-body">
+						<ul></ul>
+					</div>
+				</div>
+			</div>
+			<div id="map-info-eventInfo" class="map-info-content">
+				This is info
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include ./footer.ejs %>
