@@ -59,60 +59,72 @@ module.exports = (app, User, passport) => {
 
     initialize(passport);
 
-    app.post('/login', checkNotAuthenticated, passport.authenticate('local', {failureRedirect: '/login',failureFlash: true}),(req,res)=>{
-        console.log(req.params.url);
-        res.redirect(decodeURIComponent(req.params.url))
+    app.post('/login', NotauthenticateRedirect, passport.authenticate('local', {failureRedirect: '/login',failureFlash: true}),(req,res)=>{
+        res.redirect('/map');
     });
 
-    app.get('/logout', checkAuthenticated, (req,res) => {
+    app.get('/logout', authenticateRedirect, (req,res) => {
         req.logOut();
         res.redirect('/login');
     });
 
-    app.put('/user/add/event/:id', checkAuthenticated, (req,res) => {
+    app.put('/user/add/event/:id', authenticateMessage, (req,res) => {
         const id = req.params.id;
         const user = req.user;
-        User.findById(user, (err, user) => {
-            if(err) res.redirect('/error/500');
-            if(!user) res.redirect('/error/404');
+        User.findById(user._id, (err, userData) => {
+            if(err) res.status(500).json({error:'Connection lost'});
+            if(!userData) res.status(404).json({error:'Failed to upload'});
             
-            let user_add_event = JSON.parse(user.event_sub);
+            let user_add_event = JSON.parse(userData.event_sub);
             if(user_add_event.includes(`user_${id}`)) {
                 return; 
             }
             user_add_event.unshift(`user_${id}`);
-            user.event_sub = JSON.stringify(user_add_event);
+            userData.event_sub = JSON.stringify(user_add_event);
 
-            user.save((err) => {
-                if(err) res.status(500).json({error:'falied to update'});
+            userData.save((err) => {
+                if(err) res.status(500).json({error:'failed to update'});
                 res.json({error:false});
             });
         });
+        console.log(req.user);
     });
 
-    function checkAuthenticated(req, res, next) {
+    function authenticateRedirect(req, res, next) {
         if (req.isAuthenticated()) {
             next();
         }
         return res.redirect('/error/404');
     }
 
-    function checkNotAuthenticated(req, res, next) {
+    function NotauthenticateRedirect(req, res, next) {
         if (req.isAuthenticated()) {
             return res.redirect('/error/404');
         }
         next();
     }
 
-    app.get('/user/get_event/:dir', (req, res) => {
-        if(!req.user){
-            res.redirect('/error/404');
+    function authenticateMessage(req, res, next) {
+        if (req.isAuthenticated()) {
+            next();
         }
+        return;
+    }
+
+    function NotauthenticateMessage(req, res, next) {
+        if (req.isAuthenticated()) {
+            return;
+        }
+        next();
+    }
+
+    app.get('/user/get_event/:dir', authenticateMessage, (req, res) => {
         const id = req.user._id;
         const dir = req.params.dir;
         User.findById(id).select('event_sub').exec((err, data)=>{
-            if(data._id == id)
-                console.log(data);
+            if(err) res.status(500).json({error:'Connection lost'});
+            if(!data) res.status(404).json({error:'Failed to upload'});
+            const events = JSON.parse(data.event_sub);
         });
     });
 } 

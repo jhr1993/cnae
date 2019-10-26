@@ -338,11 +338,14 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
     }).then((res)=>{
         const data = res.data;
 
+        const addTag = 
+
         // Display selected data info
         $('#map-info-eventInfo').html(
             `<div class="map-info-title">${data.title}</div>
             <div class="map-info-body-container"><div class="map-info-body">${data.content}</div></div>
             <div id="${data._id}" class="map-info-event-id">Add+</div>
+            ${addTag}
             <div id="data._eventUserId" class="map-info-event-userId">username</div>`
         );
         // Scroll to bottom
