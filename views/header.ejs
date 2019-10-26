@@ -12,17 +12,83 @@
     
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <!--Bootstrap-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/test.css">
 
         <!-- JS -->
         <script src="js/library/jquery-3.4.1.min.js"></script>
         <script src="js/library/md5-min.js"></script>
+        <!--Bootstrap-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="/js/test.js"></script>
     </head>
     <body>
-        <header>
-            <% if(username){ %>
-                <div>welcome <%= username %> <a href="/logout">Log out</a></div>
-            <% } else { %>
-                <div><a href="login?url=<%= curUrl %>">Log in</a> <a href="/register">Sign in</a></div> 
-            <% } %>
-        </header>
+        <!-- header -->
+        <!-- Navbar content -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+
+            <!-- Left Collapse button -->
+            <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+            aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation" style="color:transparent;border-color: transparent;">
+                <div class="animated-icon1"><span></span><span></span><span></span></div>
+            </button>
+
+            <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"
+            aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation" style="color:transparent;border-color: transparent;">
+                <div class="animated-icon2"><span></span><span></span><span></span></div>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/map">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+                <!-- Links -->
+
+            </div>
+
+            <!-- Middle Collapsible Logo -->
+            <a class="navbar-brand navbar-center" href="/">
+                <img src="/img/folder_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                C&AE
+            </a>
+            
+            <!-- Right Collapsible Content -->
+            <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent2">
+
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <% if(username){ %>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/myprofile">My Profile <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Log Out</a>
+                        </li>
+                    <% } else{ %>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/login">Sign In <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Sign Up</a>
+                        </li>
+                    <% } %>
+                </ul>
+                <!-- Links -->
+
+            </div>
+
+
+        </nav>
         <div id="body-main">

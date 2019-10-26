@@ -35,6 +35,7 @@ module.exports = function(app, Event){
             if(err) return res.status(500).json({error: err});
             if(!data) return res.status(404).json({error: 'data not found'});
             result.data = data;
+            result.login = (req.user) ? true : false;
             res.json(result);
         }); 
     });
