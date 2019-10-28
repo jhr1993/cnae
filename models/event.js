@@ -5,7 +5,8 @@ const eventSchema = new Schema({
     title: { type: String, required: true },
     lat: { type: 'decimal128', required: true },
     lng: { type: 'decimal128', required: true },
-    team: { type: String, required: true }, 
+    user: { type: String, required: true },
+    content: { type: String, default: "No contents" },
     published_date: { type: Date, default: Date.now },
     edited_date: { type: Date, default: Date.now },
 });

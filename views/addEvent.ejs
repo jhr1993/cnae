@@ -1,0 +1,22 @@
+<% include ./header.ejs %>
+    
+<div>
+    <form method="POST" action="/db/add_event">
+        <label> Name:
+            <input type="text" name="name"/>
+        </label>
+        <br>
+        <label> lat:
+            <input type="text" name="lat"/>
+        </label>
+        <br>
+        <label> lng:
+            <input type="text" name="lng"/>
+        </label>
+        <br>
+        <textarea name="content"></textarea>
+        <button type="submit">submit</button>
+    </form>
+</div>
+
+<% include ./footer.ejs %>

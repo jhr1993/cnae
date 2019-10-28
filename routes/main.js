@@ -41,9 +41,23 @@ module.exports = function(app){
         });
     });
 
+    app.get('/event/add' ,(req,res)=>{
+        res.render('addEvent',{
+            title: 'CNAE - Add Event',
+            username: (req.user) ? req.user.name : false
+        });
+    });
+
+    function checkAuthenticated(req, res, next) {
+        if (req.isAuthenticated()) {
+            next()
+        }
+        return res.redirect('/error/404')
+    }
+
     function checkNotAuthenticated(req, res, next) {
         if (req.isAuthenticated()) {
-            return res.redirect('/')
+            return res.redirect('/error/404')
         }
         next()
     }
