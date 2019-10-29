@@ -69,17 +69,17 @@ module.exports = (app, User, passport) => {
     });
 
     app.put('/user/add/event/:id', authenticateMessage, (req,res) => {
-        const id = req.params.id;
+        const id = req.params.id.split('_')[1];
         const user = req.user;
         User.findById(user._id, (err, userData) => {
             if(err) res.status(500).json({error:'Connection lost'});
             if(!userData) res.status(404).json({error:'Failed to upload'});
             
             let user_add_event = JSON.parse(userData.event_sub);
-            if(user_add_event.includes(`user_${id}`)) {
+            if(user_add_event.includes(`${id}`)) {
                 return; 
             }
-            user_add_event.unshift(`user_${id}`);
+            user_add_event.unshift(`${id}`);
             userData.event_sub = JSON.stringify(user_add_event);
 
             userData.save((err) => {
@@ -87,7 +87,6 @@ module.exports = (app, User, passport) => {
                 res.json({error:false});
             });
         });
-        console.log(req.user);
     });
 
     function authenticateRedirect(req, res, next) {

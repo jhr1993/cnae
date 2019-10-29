@@ -16,6 +16,7 @@ module.exports = function(app, Event){
         if(!req.params.id)
             return;
         const id = req.params.id;
+        console.log(id);
 
         // Session
         const sess = req.session; // Session open
@@ -36,6 +37,7 @@ module.exports = function(app, Event){
             if(!data) return res.status(404).json({error: 'data not found'});
             result.data = data;
             result.login = (req.user) ? true : false;
+            if(req.user) result.include = JSON.parse(req.user.event_sub).includes(id) ? true : false;
             res.json(result);
         }); 
     });

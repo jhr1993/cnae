@@ -6,6 +6,7 @@ const eventSchema = new Schema({
     lat: { type: 'decimal128', required: true },
     lng: { type: 'decimal128', required: true },
     user: { type: String, required: true },
+    users: { type: Array },
     content: { type: String, default: "No contents" },
     published_date: { type: Date, default: Date.now },
     edited_date: { type: Date, default: Date.now },

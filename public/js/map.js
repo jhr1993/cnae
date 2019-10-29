@@ -337,12 +337,20 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
         return res.json();
     }).then((res)=>{
         const data = res.data;
+        let addTag = `<div id="add_${data._id}" class="map-info-event-id">Add+</div>`;
+        
+        if(!res.login){
+            addTag = '<div><a href="/login">Please log in to add</a></div>'
+        }
+        if(res.include){
+            addTag = `<div id="delete_${data._id}">Please log in to add</div>`
+        }
 
         // Display selected data info
         $('#map-info-eventInfo').html(
             `<div class="map-info-title">${data.title}</div>
             <div class="map-info-body-container"><div class="map-info-body">${data.content}</div></div>
-            <div id="${data._id}" class="map-info-event-id">Add+</div>
+            ${addTag}
             <div id="data._eventUserId" class="map-info-event-userId">username</div>`
         );
         // Scroll to bottom
