@@ -1,5 +1,5 @@
 //routes/users.js
-module.exports = (app, User, passport) => {
+module.exports = (app, User, Event, passport) => {
     app.post('/register/newUser', (req, res)=>{
 
         User.findOne({email:req.body.email}, (err,data)=>{
@@ -69,22 +69,28 @@ module.exports = (app, User, passport) => {
     });
 
     app.put('/user/add/event/:id', authenticateMessage, (req,res) => {
-        const id = req.params.id.split('_')[1];
+        const id = req.params.id;
         const user = req.user;
         User.findById(user._id, (err, userData) => {
             if(err) res.status(500).json({error:'Connection lost'});
             if(!userData) res.status(404).json({error:'Failed to upload'});
+
+            let action = 'add';
             
-            let user_add_event = JSON.parse(userData.event_sub);
-            if(user_add_event.includes(`${id}`)) {
-                return; 
+            let user_events = JSON.parse(userData.event_sub);
+            if(user_events.includes(`${id}`)) {
+                user_events.splice(user_events.indexOf(id),1);
+                action = 'delete';
+            }else{
+                user_events.unshift(`${id}`);
             }
-            user_add_event.unshift(`${id}`);
-            userData.event_sub = JSON.stringify(user_add_event);
+            console.log(action);
+
+            userData.event_sub = JSON.stringify(user_events);
 
             userData.save((err) => {
                 if(err) res.status(500).json({error:'failed to update'});
-                res.json({error:false});
+                res.json({error:false,action:action});
             });
         });
     });
@@ -116,14 +122,4 @@ module.exports = (app, User, passport) => {
         }
         next();
     }
-
-    app.get('/user/get_event/:dir', authenticateMessage, (req, res) => {
-        const id = req.user._id;
-        const dir = req.params.dir;
-        User.findById(id).select('event_sub').exec((err, data)=>{
-            if(err) res.status(500).json({error:'Connection lost'});
-            if(!data) res.status(404).json({error:'Failed to upload'});
-            const events = JSON.parse(data.event_sub);
-        });
-    });
 } 

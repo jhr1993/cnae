@@ -337,13 +337,13 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
         return res.json();
     }).then((res)=>{
         const data = res.data;
-        let addTag = `<div id="add_${data._id}" class="map-info-event-id">Add+</div>`;
+        let addTag = `<div id="${data._id}" class="map-info-event-id">Sub</div>`;
         
         if(!res.login){
             addTag = '<div><a href="/login">Please log in to add</a></div>'
         }
         if(res.include){
-            addTag = `<div id="delete_${data._id}">Please log in to add</div>`
+            addTag = `<div id="${data._id}" class="map-info-event-id">Un Sub</div>`
         }
 
         // Display selected data info
@@ -397,16 +397,18 @@ $(document).on('click','.map-info-event-id',function(){
     fetch(`/user/add/event/${id}`, {method : 'put'}).then((res)=>{
         return res.json();
     }).then((res)=>{
-        
+        if(res.action == "add")
+            $('.map-info-event-id').html('Un sub')
+        else if(res.action == "delete")
+            $('.map-info-event-id').html('Sub')
     })
 });
 
 $(document).on('click','#map-info-like-event-button',function(){
-    const id = $(this).attr('id');
+    console.log('ha');
     fetch(`/user/get_event/test`, {method : 'get'}).then((res)=>{
         return res.json();
     }).then((res)=>{
-        
+        console.log(res.data);
     })
 });
-
