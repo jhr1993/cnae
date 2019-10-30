@@ -135,6 +135,7 @@ html,body {
 
 .map-info-body-container {
 	padding: 0 20px;
+	width: 100%;
 }
 
 
@@ -158,6 +159,7 @@ html,body {
 /* Map info content display none firt load */
 .map-info-content {
 	display: none;
+	width: 100%;
 }
 
 /* Only map info main display */
@@ -253,3 +255,50 @@ html,body {
     text-align: center;
     margin-bottom: 25px;
 }*/
+
+/**
+ * Like Tab CSS 
+ */
+.map-info-body .map-info-body-ul {
+	padding: 0;
+	margin: 0;
+}
+.map-info-body .map-info-body-list-container {
+	float: left;
+	width: 33%;
+	list-style: none;
+	padding: 1%;
+}
+
+.map-info-body .map-info-body-list {
+	padding: 5%;
+	padding-top: 8%;
+	border: 2px solid #000000
+}
+
+.map-info-body-list-img {
+	height: 160px;
+	border: 2px solid black;
+}
+
+.map-info-body-list-content {
+	font-size: 0.9em;
+}
+
+.map-info-body-list-pin-container {
+	position: relative;
+	width: 100%;
+}
+
+.map-info-body-list-pin {
+	position: absolute;
+	top:-45px;
+	left:0;
+	right:0;
+	margin-left: auto; 
+	margin-right: auto; 
+	height: 75px;
+	width: 20px;
+	border: 2px solid black;
+	background-color: white;
+}

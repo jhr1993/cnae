@@ -373,7 +373,7 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
             $(`#history_${data._id}`).remove();
 
         // Add to history front
-        $('#map-info-history-content ul').prepend(`
+        $('#map-info-history .map-info-body ul').prepend(`
             <li class="map-info-history-content-event" id="history_${data._id}">
                 <div>${data.title}</div>
                 <div>${data.user_id}</div>
@@ -416,7 +416,6 @@ $(document).on('click','.map-info-event-id',function(){
  * Call user subed events
  */
 $(document).on('click','#map-info-like-event-button',function(){
-    console.log('ha');
     fetch(`/user/get_event/test`, {method : 'get'}).then((res)=>{
         return res.json();
     }).then((res)=>{

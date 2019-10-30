@@ -57,7 +57,7 @@ module.exports = (app, User, Event, passport) => {
             })
         }
 
-        //session
+        // Passport session
         passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser))
         passport.serializeUser((user, done) => done(null, user.id))
         passport.deserializeUser((id, done) => {
