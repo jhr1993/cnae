@@ -265,7 +265,7 @@ html,body {
 }
 .map-info-body .map-info-body-list-container {
 	float: left;
-	width: 33%;
+	width: 33.3%;
 	list-style: none;
 	padding: 1%;
 }
@@ -301,4 +301,15 @@ html,body {
 	width: 20px;
 	border: 2px solid black;
 	background-color: white;
+}
+.map-info-body-list-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.map-info-body-list-title {
+	font-weight: bold;
+}
+.map-info-body-list-user {
+	color: grey;
 }

@@ -303,10 +303,22 @@ $(document).ready(function(){
 
         // Add to history front
         for(let i=0; i<data.length; i++){
-            $('#map-info-history-content ul').append(`
-                <li class="map-info-history-content-event" id="history_${data[i]._id}">
-                    <div>${data[i].title}</div>
-                    <div>${data[i].user_id}</div>
+            const rand1 = Math.floor(Math.random() * 20)-10; 
+            const rand2 = Math.floor(Math.random() * 20)-10; 
+            $('#map-info-history-content .map-info-body-ul').append(`
+                <li class="map-info-body-list-container">
+                    <div class="map-info-body-list-pin-container">
+                        <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
+                        -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
+                        transform: rotate(${rand1}deg);"></div>
+                    </div>
+                    <div class="map-info-body-list" style="-ms-transform: rotate(${rand2}deg); /* IE 9 */
+                    -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
+                    transform: rotate(${rand2}deg);">
+                        <div class="map-info-body-list-img map-info-body-list-content"><img src="${data[i].title_img}"></div>
+                        <div class="map-info-body-list-title map-info-body-list-content">${data[i].title}</div>
+                        <div class="map-info-body-list-user map-info-body-list-content">${data[i].user_id}</div>
+                    </div>
                 </li>
             `);
         }
@@ -372,11 +384,24 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
         if($(`#history_${data._id}`))
             $(`#history_${data._id}`).remove();
 
+        
+        const rand1 = Math.floor(Math.random() * 20)-10; 
+        const rand2 = Math.floor(Math.random() * 20)-10; 
         // Add to history front
-        $('#map-info-history .map-info-body ul').prepend(`
-            <li class="map-info-history-content-event" id="history_${data._id}">
-                <div>${data.title}</div>
-                <div>${data.user_id}</div>
+        $('#map-info-history .map-info-body-ul').prepend(`
+            <li class="map-info-body-list-container">
+                <div class="map-info-body-list-pin-container">
+                    <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
+                    -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
+                    transform: rotate(${rand1}deg);"></div>
+                </div>
+                <div class="map-info-body-list" style="-ms-transform: rotate(${rand2}deg); /* IE 9 */
+                -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
+                transform: rotate(${rand2}deg);">
+                    <div class="map-info-body-list-img map-info-body-list-content"><img src="${data.title_img}"></div>
+                    <div class="map-info-body-list-title map-info-body-list-content">${data.title}</div>
+                    <div class="map-info-body-list-user map-info-body-list-content">${data.user_id}</div>
+                </div>
             </li>
         `);
         
