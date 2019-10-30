@@ -300,24 +300,29 @@ $(document).ready(function(){
     fetch(`/db/get_history`, {method : 'get'}).then((res)=>{
         return res.json();
     }).then((data)=>{
-
+        console.log(data)
         // Add to history front
         for(let i=0; i<data.length; i++){
-            const rand1 = Math.floor(Math.random() * 20)-10; 
+            const rand1 = Math.floor(Math.random() * 30)-10; 
             const rand2 = Math.floor(Math.random() * 20)-10; 
-            $('#map-info-history-content .map-info-body-ul').append(`
-                <li class="map-info-body-list-container">
-                    <div class="map-info-body-list-pin-container">
-                        <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
-                        -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
-                        transform: rotate(${rand1}deg);"></div>
+            $('#map-info-history .map-info-body-ul').append(`
+                <li class="map-info-body-list-li">
+                    <div style="position:relative">
+                        <div class="map-info-body-list-line-pin"></div>
                     </div>
-                    <div class="map-info-body-list" style="-ms-transform: rotate(${rand2}deg); /* IE 9 */
-                    -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
-                    transform: rotate(${rand2}deg);">
-                        <div class="map-info-body-list-img map-info-body-list-content"><img src="${data[i].title_img}"></div>
-                        <div class="map-info-body-list-title map-info-body-list-content">${data[i].title}</div>
-                        <div class="map-info-body-list-user map-info-body-list-content">${data[i].user_id}</div>
+                    <div class="map-info-body-list-container" style="-ms-transform: rotate(${rand1}deg); /* IE 9 */
+                    -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
+                    transform: rotate(${rand1}deg);">
+                        <div class="map-info-body-list-pin-container">
+                            <div class="map-info-body-list-pin" style="-ms-transform: rotate(${rand2}deg); /* IE 9 */
+                            -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
+                            transform: rotate(${rand2}deg);"></div>
+                        </div>
+                        <div class="map-info-body-list">
+                            <div class="map-info-body-list-img map-info-body-list-content"><img src="${data[i].title_img}"></div>
+                            <div class="map-info-body-list-title map-info-body-list-content">${data[i].title}</div>
+                            <div class="map-info-body-list-user map-info-body-list-content">${data[i].user_id}</div>
+                        </div>
                     </div>
                 </li>
             `);
@@ -386,21 +391,29 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
 
         
         const rand1 = Math.floor(Math.random() * 20)-10; 
-        const rand2 = Math.floor(Math.random() * 20)-10; 
+        const rand2 = Math.floor(Math.random() * 30)-10; 
         // Add to history front
         $('#map-info-history .map-info-body-ul').prepend(`
-            <li class="map-info-body-list-container">
-                <div class="map-info-body-list-pin-container">
-                    <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
-                    -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
-                    transform: rotate(${rand1}deg);"></div>
+            <li class="map-info-body-list-li">
+                <div style="position:relative">
+                    <div class="map-info-body-list-line-pin map-info-body-list-line-pin-left"></div>
                 </div>
-                <div class="map-info-body-list" style="-ms-transform: rotate(${rand2}deg); /* IE 9 */
-                -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
-                transform: rotate(${rand2}deg);">
-                    <div class="map-info-body-list-img map-info-body-list-content"><img src="${data.title_img}"></div>
-                    <div class="map-info-body-list-title map-info-body-list-content">${data.title}</div>
-                    <div class="map-info-body-list-user map-info-body-list-content">${data.user_id}</div>
+                <div style="position:relative">
+                    <div class="map-info-body-list-line-pin map-info-body-list-line-pin-right"></div>
+                </div>
+                <div class="map-info-body-list-container" style="-ms-transform: rotate(${rand1}deg); /* IE 9 */
+                -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
+                transform: rotate(${rand1}deg);">
+                    <div class="map-info-body-list-pin-container">
+                        <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand2}deg); /* IE 9 */
+                        -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
+                        transform: rotate(${rand2}deg);"></div>
+                    </div>
+                    <div class="map-info-body-list">
+                        <div class="map-info-body-list-img map-info-body-list-content"><img src="${data.title_img}"></div>
+                        <div class="map-info-body-list-title map-info-body-list-content">${data.title}</div>
+                        <div class="map-info-body-list-user map-info-body-list-content">${data.user_id}</div>
+                    </div>
                 </div>
             </li>
         `);
