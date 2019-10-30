@@ -177,6 +177,7 @@ function initMap() {
                     content:content
                 });
 
+                // CLick marker to display infowindow
                 marker.addListener('click',function(){
                     if (activeInfoWindow) { activeInfoWindow.close();}
                     infoWindow.open(map, marker);
@@ -381,7 +382,10 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
         
     });
 });
-    
+
+/**
+ * Click tag menu to switch
+ */
 $(document).on('click','.map-info-tag-content-title',function(){
     
     $(this).parent().parent().find('.map-info-tag-hider').hide();
@@ -392,11 +396,15 @@ $(document).on('click','.map-info-tag-content-title',function(){
 
 });
 
+/**
+ * User sub event 
+ */
 $(document).on('click','.map-info-event-id',function(){
     const id = $(this).attr('id');
     fetch(`/user/add/event/${id}`, {method : 'put'}).then((res)=>{
         return res.json();
     }).then((res)=>{
+        // Change sub and unsub button
         if(res.action == "add")
             $('.map-info-event-id').html('Un sub')
         else if(res.action == "delete")
@@ -404,6 +412,9 @@ $(document).on('click','.map-info-event-id',function(){
     })
 });
 
+/**
+ * Call user subed events
+ */
 $(document).on('click','#map-info-like-event-button',function(){
     console.log('ha');
     fetch(`/user/get_event/test`, {method : 'get'}).then((res)=>{

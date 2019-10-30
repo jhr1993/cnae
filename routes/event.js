@@ -23,12 +23,13 @@ module.exports = function(app, Event, User){
         if(!sess.markerHistory) // Declare marker history array 
             sess.markerHistory = [];
 
+        // if history includes id move it to front
         if(sess.markerHistory.includes(id)){
             const index = sess.markerHistory.indexOf(id);
             sess.markerHistory.splice(index,1);
             sess.markerHistory.unshift(id);
-        }else{
-            sess.markerHistory.unshift(id);
+        }else{// else just unshift
+            sess.markerHistory.unshift(id); 
         }
 
         // Find data by id
@@ -36,8 +37,8 @@ module.exports = function(app, Event, User){
             if(err) return res.status(500).json({error: err});
             if(!data) return res.status(404).json({error: 'data not found'});
             result.data = data;
-            result.login = (req.user) ? true : false;
-            if(req.user) result.include = JSON.parse(req.user.event_sub).includes(id) ? true : false;
+            result.login = (req.user) ? true : false; //check user has logged
+            if(req.user) result.include = JSON.parse(req.user.event_sub).includes(id) ? true : false;// check user sub
             res.json(result);
         }); 
     });
@@ -51,13 +52,17 @@ module.exports = function(app, Event, User){
         const historyData = sess.markerHistory;
         const historyList = [];
 
+        // convert array to objectId
         for(let i=0;i<historyData.length;i++)
             historyList.push(mongoose.Types.ObjectId(historyData[i]));
 
+        // Get history elements' value
         Event.find({'_id': {$in: historyList}},(err,data)=>{
             if(err) return res.status(500).json({error: err});
             if(!data) return res.status(404).json({error: 'data not found'});
             let dataList = [];
+
+            //sort history
             for(let i=0; i<historyList.length; i++){
                 for(let j=0; j<data.length; j++){
                     if(`${historyList[i]}` == `${data[j]._id}`){

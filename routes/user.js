@@ -1,18 +1,25 @@
 //routes/users.js
 module.exports = (app, User, Event, passport) => {
+
+    /**
+     * Register user
+     */
     app.post('/register/newUser', (req, res)=>{
 
         User.findOne({email:req.body.email}, (err,data)=>{
             if(err) res.status(500).redirect('/error/500');
+            // Check email exists
             if(data) {
                 req.flash('error',"That email is already used. Try another.")
                 res.redirect('/register')
                 return;
             }
             
+            //pasword confirm
             var password = req.body.pw;
             var password2 = req.body.pw2;
 
+            // If password corofirm save it db
             if (password == password2){
                 var newUser = new User({
                     name: req.body.name,
@@ -25,12 +32,15 @@ module.exports = (app, User, Event, passport) => {
                     res.redirect('/login');
                 });
             } else {
-                res.redirect('/register');
+                res.redirect('/register'); //redirect
             }
         });
 
     });
 
+    /**
+     * Passoprot login authenticator
+     */
     const LocalStrategy = require('passport-local').Strategy
     const bcrypt = require('bcrypt')
 
@@ -47,6 +57,7 @@ module.exports = (app, User, Event, passport) => {
             })
         }
 
+        //session
         passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser))
         passport.serializeUser((user, done) => done(null, user.id))
         passport.deserializeUser((id, done) => {
@@ -59,15 +70,22 @@ module.exports = (app, User, Event, passport) => {
 
     initialize(passport);
 
+    // redirect if login
     app.post('/login', NotauthenticateRedirect, passport.authenticate('local', {failureRedirect: '/login',failureFlash: true}),(req,res)=>{
         res.redirect('/map');
     });
 
+    /**
+     * Log out
+     */
     app.get('/logout', authenticateRedirect, (req,res) => {
         req.logOut();
         res.redirect('/login');
     });
 
+    /**
+     * User sub function to add or delete
+     */
     app.put('/user/add/event/:id', authenticateMessage, (req,res) => {
         const id = req.params.id;
         const user = req.user;
@@ -75,19 +93,21 @@ module.exports = (app, User, Event, passport) => {
             if(err) res.status(500).json({error:'Connection lost'});
             if(!userData) res.status(404).json({error:'Failed to upload'});
 
-            let action = 'add';
+            let action = 'add';// default action 
             
             let user_events = JSON.parse(userData.event_sub);
             if(user_events.includes(`${id}`)) {
-                user_events.splice(user_events.indexOf(id),1);
-                action = 'delete';
+                user_events.splice(user_events.indexOf(id),1);// Delete if includes
+                action = 'delete';// change if value includes
             }else{
-                user_events.unshift(`${id}`);
+                user_events.unshift(`${id}`); // else jsut shift
             }
             console.log(action);
 
+            //String JSON
             userData.event_sub = JSON.stringify(user_events);
 
+            //save
             userData.save((err) => {
                 if(err) res.status(500).json({error:'failed to update'});
                 res.json({error:false,action:action});
