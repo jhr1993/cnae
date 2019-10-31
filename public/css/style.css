@@ -1,5 +1,9 @@
 @import url("map.css"); /* Map CSS */
 
+html, body{
+    width: 100%;
+}
+
 .float-clear-both {
     clear:both;
 }
@@ -12,4 +16,12 @@ footer {
     width: 100%;
     clear: both;
     list-style: none;
+}
+
+.enter-space {
+    visibility: hidden;
+}
+
+.text-align-right {
+    text-align: right;
 }

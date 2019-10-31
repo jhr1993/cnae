@@ -293,6 +293,7 @@ function addMarker(props, map, isOpenInfo = false){
 
 }
 
+let listFloatLeft = true;
 /**
  * History initialization
  */
@@ -303,24 +304,12 @@ $(document).ready(function(){
 
         // Add to history front
         for(let i=0; i<data.length; i++){
-            const rand1 = Math.floor(Math.random() * 20)-10; 
-            const rand2 = Math.floor(Math.random() * 20)-10; 
-            $('#map-info-history-content .map-info-body-ul').append(`
-                <li class="map-info-body-list-container">
-                    <div class="map-info-body-list-pin-container">
-                        <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
-                        -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
-                        transform: rotate(${rand1}deg);"></div>
-                    </div>
-                    <div class="map-info-body-list" style="-ms-transform: rotate(${rand2}deg); /* IE 9 */
-                    -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
-                    transform: rotate(${rand2}deg);">
-                        <div class="map-info-body-list-img map-info-body-list-content"><img src="${data[i].title_img}"></div>
-                        <div class="map-info-body-list-title map-info-body-list-content">${data[i].title}</div>
-                        <div class="map-info-body-list-user map-info-body-list-content">${data[i].user_id}</div>
-                    </div>
-                </li>
-            `);
+            
+            $('#map-info-history .map-info-body-ul').append(listContent(listFloatLeft,data[i]));
+            if(listFloatLeft)
+                listFloatLeft = false;
+            else
+                listFloatLeft = true;
         }
     });
 });
@@ -385,25 +374,12 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
             $(`#history_${data._id}`).remove();
 
         
-        const rand1 = Math.floor(Math.random() * 20)-10; 
-        const rand2 = Math.floor(Math.random() * 20)-10; 
         // Add to history front
-        $('#map-info-history .map-info-body-ul').prepend(`
-            <li class="map-info-body-list-container">
-                <div class="map-info-body-list-pin-container">
-                    <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
-                    -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
-                    transform: rotate(${rand1}deg);"></div>
-                </div>
-                <div class="map-info-body-list" style="-ms-transform: rotate(${rand2}deg); /* IE 9 */
-                -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
-                transform: rotate(${rand2}deg);">
-                    <div class="map-info-body-list-img map-info-body-list-content"><img src="${data.title_img}"></div>
-                    <div class="map-info-body-list-title map-info-body-list-content">${data.title}</div>
-                    <div class="map-info-body-list-user map-info-body-list-content">${data.user_id}</div>
-                </div>
-            </li>
-        `);
+        $('#map-info-history .map-info-body-ul').prepend(listContent(listFloatLeft,data));
+        if(listFloatLeft)
+            listFloatLeft = false;
+        else
+            listFloatLeft = true;
         
     });
 });
@@ -447,3 +423,53 @@ $(document).on('click','#map-info-like-event-button',function(){
         console.log(res.data);
     })
 });
+
+function listContent(float, data){
+    const rand1 = Math.floor(Math.random() * 20)-10; 
+    const rand2 = Math.floor(Math.random() * 20)-10; 
+    let contentLeft = `<li class="map-info-body-li">
+        <div class="map-info-body-list-container" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
+        -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
+        transform: rotate(${rand1}deg);">
+            <div class="map-info-body-list-pin-container">
+                <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand2}deg); /* IE 9 */
+                -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
+                transform: rotate(${rand2}deg);"></div>
+            </div>
+            <div class="map-info-body-list">
+                <div class="map-info-body-list-img map-info-body-list-content"><img src="${data.title_img}"></div>
+            </div>
+        </div>
+        <div class="map-info-body-content-container">
+            <div class="map-info-body-content-title">${data.title}</div>
+            <div class="map-info-body-content-user">${data.user}</div>
+            <div class="map-info-body-content-content-container">
+                <div class="map-info-body-content-content">${data.content}</div>
+            </div>
+        </div>
+        <div class="float-clear-both"></div>
+    </li>`;
+    let contentRight = `<li class="map-info-body-li">
+        <div class="map-info-body-content-container">
+            <div class="map-info-body-content-title">${data.title}</div>
+            <div class="map-info-body-content-user">${data.user}</div>
+            <div class="map-info-body-content-content-container">
+                <div class="map-info-body-content-content">${data.content}</div>
+            </div>
+        </div>
+        <div class="map-info-body-list-container" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
+        -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
+        transform: rotate(${rand1}deg);">
+            <div class="map-info-body-list-pin-container">
+                <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand2}deg); /* IE 9 */
+                -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
+                transform: rotate(${rand2}deg);"></div>
+            </div>
+            <div class="map-info-body-list">
+                <div class="map-info-body-list-img map-info-body-list-content"><img src="${data.title_img}"></div>
+            </div>
+        </div>
+        <div class="float-clear-both"></div>
+    </li>`;
+    return (float) ? contentLeft : contentRight;
+}

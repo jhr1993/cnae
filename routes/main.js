@@ -41,7 +41,7 @@ module.exports = function(app){
         });
     });
 
-    app.get('/event/add' ,(req,res)=>{
+    app.get('/event_add' ,(req,res)=>{
         res.render('addEvent',{
             title: 'CNAE - Add Event',
             username: (req.user) ? req.user.name : false
