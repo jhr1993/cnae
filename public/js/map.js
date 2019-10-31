@@ -364,8 +364,6 @@ $(document).on('click','.map-marker, .map-info-body-id',function(){
         const scrollTO = $(document).height()-$('.page-footer').height()-$(window).height();
         $("html, body").animate({ scrollTop: $('#map-info-tag').offset().top-$('.header').innerHeight() }, 1000);
         // Tag open close
-        console.log($('#map-info-tag').offset().top);
-        console.log($('.header').height());
         $('#map-info-tag').find('.map-info-tag-hider').hide();
         $('#map-info-tag-info').find('.map-info-tag-hider').show();
 
