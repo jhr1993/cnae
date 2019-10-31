@@ -159,7 +159,12 @@ function initMap() {
         var clusterMarkers = locations.map(function(location){
             let lat = parseFloat(location.lat.$numberDecimal);
             let lng = parseFloat(location.lng.$numberDecimal);
-            let content = `<div class="map_marker" id="marker_${location._id}">${location.title}</div>`;
+            // Add marker id
+            let content = `<div class="map-marker" id="${location._id}">
+                            <div class="map-marker-img"><img src="${location.title_img}"></div>
+                            <div class="map-marker-title">${location.title}</div>
+                            <div class="map-marker-user">${location.user}</div>
+                        </div>`;
             const pos = {lat:lat,lng:lng};
             var marker = new google.maps.Marker({
                 position: pos,
@@ -330,8 +335,8 @@ $(document).on('click','#scroll-up',function(){
 /**
  * Map infowindow click event
  */
-$(document).on('click','.map_marker, .map-info-history-content-event',function(){
-    const id = $(this).attr('id').split("_")[1];
+$(document).on('click','.map-marker, .map-info-body-id',function(){
+    const id = $(this).attr('id');
 
 
     // Get data of marker with id
@@ -356,9 +361,11 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
             <div id="data._eventUserId" class="map-info-event-userId">username</div>`
         );
         // Scroll to bottom
-        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-        
+        const scrollTO = $(document).height()-$('.page-footer').height()-$(window).height();
+        $("html, body").animate({ scrollTop: $('#map-info-tag').offset().top-$('.header').innerHeight() }, 1000);
         // Tag open close
+        console.log($('#map-info-tag').offset().top);
+        console.log($('.header').height());
         $('#map-info-tag').find('.map-info-tag-hider').hide();
         $('#map-info-tag-info').find('.map-info-tag-hider').show();
 
@@ -367,11 +374,11 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
 
         // If history list is full remove last
         if(res.delHis)
-            $(`#history_${res.delHis}`).remove();
+            $(`#map-info-history #${res.delHis}`).remove();
         
         // If event is in histroy remove first
-        if($(`#history_${data._id}`))
-            $(`#history_${data._id}`).remove();
+        if($(`#map-info-history`).find(`#${data._id}`))
+            $(`#map-info-history`).find(`#${data._id}`).parent().parent().remove();
 
         
         // Add to history front
@@ -446,6 +453,7 @@ function listContent(float, data){
             <div class="map-info-body-content-content-container">
                 <div class="map-info-body-content-content">${data.content}</div>
             </div>
+            <div id="${data._id}" class="map-info-body-id">More Info</div>
         </div>
         <div class="float-clear-both"></div>
     </li>`;
@@ -456,6 +464,7 @@ function listContent(float, data){
             <div class="map-info-body-content-content-container">
                 <div class="map-info-body-content-content">${data.content}</div>
             </div>
+            <div id="${data._id}" class="map-info-body-id">More Info</div>
         </div>
         <div class="map-info-body-list-container" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
         -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */

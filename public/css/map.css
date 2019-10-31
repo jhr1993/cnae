@@ -65,7 +65,7 @@ html,body {
 @media only screen and (max-width: 750px) {
 	#map-main-container {
 		width: 100%;
-		height: calc(100% - 62px);
+		height: calc(100% - 81px);
 	}
 	
 	#map-info-container {
@@ -266,6 +266,7 @@ html,body {
 }
 
 .map-info-body-li {
+	margin-top: 25px;
 	position: relative;
 	border-top: 2px solid black;
 	list-style: none;
@@ -363,12 +364,27 @@ html,body {
 	height: 4.5em;
 	overflow-y: hidden;
 }
-.map-info-body-content-content-container::after {
-	content:"..."
-}
 
 .map-info-body-content-title,.map-info-body-content-user {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+.map-marker, .map-info-body-id {
+	cursor: pointer;
+}
+
+/*map marker infowindow*/
+.map-marker {
+	width: 150px;
+}
+.map-marker-title {
+	font-weight: bold;
+}
+.map-marker-user {
+	color: grey;
+}
+.map-marker-img img {
+	width: 100%;
 }

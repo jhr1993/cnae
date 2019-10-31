@@ -43,7 +43,7 @@ module.exports = function(app, Event, User){
     });
 
     /* Get history info */
-    app.get('/db/get_history',(req,res)=>{
+    app.get('/db/get_history',(req, res)=>{
         const sess = req.session;
         if(!sess.markerHistory || sess.markerHistory.length == 0)
             return;
