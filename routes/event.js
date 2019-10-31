@@ -21,7 +21,6 @@ module.exports = function(app, Event, User){
         const sess = req.session; // Session open
         if(!sess.markerHistory) // Declare marker history array 
             sess.markerHistory = [];
-        console.log(sess.markerHistory)
 
         // if history includes id move it to front
         if(sess.markerHistory.includes(id)){
