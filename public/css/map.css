@@ -54,11 +54,11 @@ html,body {
 
 #map-main-container {
 	width: 50%;
-	height: calc(100% - 184px);
+	height: calc(100% - 182px);
 }
 
 #map-info-container {
-	height: calc(100% - 184px);
+	height: calc(100% - 182px);
 	position: relative;
 }
 
@@ -69,7 +69,7 @@ html,body {
 	}
 	
 	#map-info-container {
-		height: calc(100% - 62px);
+		height: calc(100% - 172px);
 	}
 }
 
