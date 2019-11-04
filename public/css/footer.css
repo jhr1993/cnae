@@ -1,3 +1,22 @@
+/*foooter*/
+footer {
+    
+}
+
+.clear-both {
+    width: 100%;
+    clear: both;
+    list-style: none;
+}
+
+.enter-space {
+    visibility: hidden;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
 /* Icon 1 */
 footer {
     width: 100%;

@@ -1,9 +1,20 @@
 @import url("map.css"); /* Map CSS */
+@import url("footer.css"); /* Map CSS */
+
+html, body{
+    width: 100%;
+}
 
 .float-clear-both {
     clear:both;
 }
 
-footer {
+#body-main {
+	margin-top: 56px;
     
+}
+@media only screen and (max-width: 992px) {
+	#body-main {
+		margin-top: 46px;
+	}
 }

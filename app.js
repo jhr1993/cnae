@@ -69,8 +69,8 @@ const Team = require('./models/team');
 
 // [CONFIGURE ROUTER]
 const router = require('./routes/main')(app);
-const EventRouter = require('./routes/event')(app, Event);
-const UserRotuer = require('./routes/user')(app, User, passport);
+const EventRouter = require('./routes/event')(app, Event, User);
+const UserRotuer = require('./routes/user')(app, User, Event, passport);
 const TeamRouter = require('./routes/team')(app, Team);
 
 const validate = (email) => {

@@ -159,7 +159,12 @@ function initMap() {
         var clusterMarkers = locations.map(function(location){
             let lat = parseFloat(location.lat.$numberDecimal);
             let lng = parseFloat(location.lng.$numberDecimal);
-            let content = `<div class="map_marker" id="marker_${location._id}">${location.title}</div>`;
+            // Add marker id
+            let content = `<div class="map-marker" id="${location._id}">
+                            <div class="map-marker-img"><img src="${location.title_img}"></div>
+                            <div class="map-marker-title">${location.title}</div>
+                            <div class="map-marker-user">${location.user}</div>
+                        </div>`;
             const pos = {lat:lat,lng:lng};
             var marker = new google.maps.Marker({
                 position: pos,
@@ -177,6 +182,7 @@ function initMap() {
                     content:content
                 });
 
+                // CLick marker to display infowindow
                 marker.addListener('click',function(){
                     if (activeInfoWindow) { activeInfoWindow.close();}
                     infoWindow.open(map, marker);
@@ -292,6 +298,7 @@ function addMarker(props, map, isOpenInfo = false){
 
 }
 
+let HistoryFloatLeft = true;
 /**
  * History initialization
  */
@@ -302,12 +309,12 @@ $(document).ready(function(){
 
         // Add to history front
         for(let i=0; i<data.length; i++){
-            $('#map-info-history-content ul').append(`
-                <li class="map-info-history-content-event" id="history_${data[i]._id}">
-                    <div>${data[i].title}</div>
-                    <div>${data[i].user_id}</div>
-                </li>
-            `);
+            
+            $('#map-info-history .map-info-body-ul').append(listContent(HistoryFloatLeft,data[i]));
+            if(HistoryFloatLeft)
+                HistoryFloatLeft = false;
+            else
+                HistoryFloatLeft = true;
         }
     });
 });
@@ -328,8 +335,8 @@ $(document).on('click','#scroll-up',function(){
 /**
  * Map infowindow click event
  */
-$(document).on('click','.map_marker, .map-info-history-content-event',function(){
-    const id = $(this).attr('id').split("_")[1];
+$(document).on('click','.map-marker, .map-info-body-id',function(){
+    const id = $(this).attr('id');
 
 
     // Get data of marker with id
@@ -337,20 +344,25 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
         return res.json();
     }).then((res)=>{
         const data = res.data;
-
-        const addTag = 
+        let addTag = `<div id="${data._id}" class="map-info-event-id">Sub</div>`;
+        
+        if(!res.login){
+            addTag = '<div><a href="/login">Please log in to add</a></div>'
+        }
+        if(res.include){
+            addTag = `<div id="${data._id}" class="map-info-event-id">Un Sub</div>`
+        }
 
         // Display selected data info
         $('#map-info-eventInfo').html(
             `<div class="map-info-title">${data.title}</div>
             <div class="map-info-body-container"><div class="map-info-body">${data.content}</div></div>
-            <div id="${data._id}" class="map-info-event-id">Add+</div>
             ${addTag}
             <div id="data._eventUserId" class="map-info-event-userId">username</div>`
         );
         // Scroll to bottom
-        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-        
+        const scrollTO = $(document).height()-$('.page-footer').height()-$(window).height();
+        $("html, body").animate({ scrollTop: $('#map-info-tag').offset().top-$('.header').innerHeight() }, 1000);
         // Tag open close
         $('#map-info-tag').find('.map-info-tag-hider').hide();
         $('#map-info-tag-info').find('.map-info-tag-hider').show();
@@ -360,23 +372,26 @@ $(document).on('click','.map_marker, .map-info-history-content-event',function()
 
         // If history list is full remove last
         if(res.delHis)
-            $(`#history_${res.delHis}`).remove();
+            $(`#map-info-history #${res.delHis}`).remove();
         
         // If event is in histroy remove first
-        if($(`#history_${data._id}`))
-            $(`#history_${data._id}`).remove();
+        if($(`#map-info-history`).find(`#${data._id}`))
+            $(`#map-info-history`).find(`#${data._id}`).parent().parent().remove();
 
+        
         // Add to history front
-        $('#map-info-history-content ul').prepend(`
-            <li class="map-info-history-content-event" id="history_${data._id}">
-                <div>${data.title}</div>
-                <div>${data.user_id}</div>
-            </li>
-        `);
+        $('#map-info-history .map-info-body-ul').prepend(listContent(HistoryFloatLeft,data));
+        if(HistoryFloatLeft)
+            HistoryFloatLeft = false;
+        else
+            HistoryFloatLeft = true;
         
     });
 });
-    
+
+/**
+ * Click tag menu to switch
+ */
 $(document).on('click','.map-info-tag-content-title',function(){
     
     $(this).parent().parent().find('.map-info-tag-hider').hide();
@@ -387,21 +402,89 @@ $(document).on('click','.map-info-tag-content-title',function(){
 
 });
 
+/**
+ * User sub event 
+ */
 $(document).on('click','.map-info-event-id',function(){
     const id = $(this).attr('id');
     fetch(`/user/add/event/${id}`, {method : 'put'}).then((res)=>{
         return res.json();
     }).then((res)=>{
-        
+        // Change sub and unsub button
+        if(res.action == "add")
+            $('.map-info-event-id').html('Un sub')
+        else if(res.action == "delete")
+            $('.map-info-event-id').html('Sub')
     })
 });
 
+/**
+ * Call user subed events
+ */
+let likeFloatLeft = true;
 $(document).on('click','#map-info-like-event-button',function(){
-    const id = $(this).attr('id');
     fetch(`/user/get_event/test`, {method : 'get'}).then((res)=>{
         return res.json();
     }).then((res)=>{
-        
+        const data = res.data;
+        for(let i=0; i<data.length; i++){
+            $('#map-info-like .map-info-body-ul').append(listContent(likeFloatLeft,data[i]));
+            if(likeFloatLeft)
+                likeFloatLeft = false;
+            else
+                likeFloatLeft = true;
+        }
     })
 });
 
+function listContent(float, data){
+    const rand1 = Math.floor(Math.random() * 20)-10; 
+    const rand2 = Math.floor(Math.random() * 20)-10; 
+    let contentLeft = `<li class="map-info-body-li">
+        <div class="map-info-body-list-container" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
+        -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
+        transform: rotate(${rand1}deg);">
+            <div class="map-info-body-list-pin-container">
+                <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand2}deg); /* IE 9 */
+                -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
+                transform: rotate(${rand2}deg);"></div>
+            </div>
+            <div class="map-info-body-list">
+                <div class="map-info-body-list-img map-info-body-list-content"><img src="${data.title_img}"></div>
+            </div>
+        </div>
+        <div class="map-info-body-content-container">
+            <div class="map-info-body-content-title">${data.title}</div>
+            <div class="map-info-body-content-user">${data.user}</div>
+            <div class="map-info-body-content-content-container">
+                <div class="map-info-body-content-content">${data.content}</div>
+            </div>
+            <div id="${data._id}" class="map-info-body-id">More Info</div>
+        </div>
+        <div class="float-clear-both"></div>
+    </li>`;
+    let contentRight = `<li class="map-info-body-li">
+        <div class="map-info-body-content-container">
+            <div class="map-info-body-content-title">${data.title}</div>
+            <div class="map-info-body-content-user">${data.user}</div>
+            <div class="map-info-body-content-content-container">
+                <div class="map-info-body-content-content">${data.content}</div>
+            </div>
+            <div id="${data._id}" class="map-info-body-id">More Info</div>
+        </div>
+        <div class="map-info-body-list-container" style="-ms-transform: rotate${rand1}deg); /* IE 9 */
+        -webkit-transform: rotate(${rand1}deg); /* Safari 3-8 */
+        transform: rotate(${rand1}deg);">
+            <div class="map-info-body-list-pin-container">
+                <div class="map-info-body-list-pin" style="-ms-transform: rotate${rand2}deg); /* IE 9 */
+                -webkit-transform: rotate(${rand2}deg); /* Safari 3-8 */
+                transform: rotate(${rand2}deg);"></div>
+            </div>
+            <div class="map-info-body-list">
+                <div class="map-info-body-list-img map-info-body-list-content"><img src="${data.title_img}"></div>
+            </div>
+        </div>
+        <div class="float-clear-both"></div>
+    </li>`;
+    return (float) ? contentLeft : contentRight;
+}
