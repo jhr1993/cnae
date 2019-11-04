@@ -102,7 +102,6 @@ module.exports = (app, User, Event, passport) => {
             }else{
                 user_events.unshift(`${id}`); // else jsut shift
             }
-            console.log(action);
 
             //String JSON
             userData.event_sub = JSON.stringify(user_events);

@@ -8,3 +8,13 @@ html, body{
 .float-clear-both {
     clear:both;
 }
+
+#body-main {
+	margin-top: 56px;
+    
+}
+@media only screen and (max-width: 992px) {
+	#body-main {
+		margin-top: 46px;
+	}
+}

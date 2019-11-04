@@ -298,7 +298,7 @@ function addMarker(props, map, isOpenInfo = false){
 
 }
 
-let listFloatLeft = true;
+let HistoryFloatLeft = true;
 /**
  * History initialization
  */
@@ -310,11 +310,11 @@ $(document).ready(function(){
         // Add to history front
         for(let i=0; i<data.length; i++){
             
-            $('#map-info-history .map-info-body-ul').append(listContent(listFloatLeft,data[i]));
-            if(listFloatLeft)
-                listFloatLeft = false;
+            $('#map-info-history .map-info-body-ul').append(listContent(HistoryFloatLeft,data[i]));
+            if(HistoryFloatLeft)
+                HistoryFloatLeft = false;
             else
-                listFloatLeft = true;
+                HistoryFloatLeft = true;
         }
     });
 });
@@ -380,11 +380,11 @@ $(document).on('click','.map-marker, .map-info-body-id',function(){
 
         
         // Add to history front
-        $('#map-info-history .map-info-body-ul').prepend(listContent(listFloatLeft,data));
-        if(listFloatLeft)
-            listFloatLeft = false;
+        $('#map-info-history .map-info-body-ul').prepend(listContent(HistoryFloatLeft,data));
+        if(HistoryFloatLeft)
+            HistoryFloatLeft = false;
         else
-            listFloatLeft = true;
+            HistoryFloatLeft = true;
         
     });
 });
@@ -421,11 +421,19 @@ $(document).on('click','.map-info-event-id',function(){
 /**
  * Call user subed events
  */
+let likeFloatLeft = true;
 $(document).on('click','#map-info-like-event-button',function(){
     fetch(`/user/get_event/test`, {method : 'get'}).then((res)=>{
         return res.json();
     }).then((res)=>{
-        console.log(res.data);
+        const data = res.data;
+        for(let i=0; i<data.length; i++){
+            $('#map-info-like .map-info-body-ul').append(listContent(likeFloatLeft,data[i]));
+            if(likeFloatLeft)
+                likeFloatLeft = false;
+            else
+                likeFloatLeft = true;
+        }
     })
 });
 
