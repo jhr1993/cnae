@@ -39,6 +39,15 @@ html,body {
 /* 
  * Map and event info element 
  */
+#map-container {
+	margin-top: 56px;
+}
+@media only screen and (max-width: 992px) {
+	#map-container {
+		margin-top: 46px;
+	}
+}
+
 .map-content {
 	width: 50%;
 	float: left;
