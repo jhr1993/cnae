@@ -79,7 +79,7 @@ module.exports = function(app, Event, User){
         event.title = req.body.name;
         event.lat = req.body.lat;
         event.lng = req.body.lng;
-        event.user = 'test';
+        event.user = req.user._id;
 
         event.save((err)=>{
             if(err){
