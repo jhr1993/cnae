@@ -124,6 +124,16 @@ module.exports = (app, User, Event, passport) => {
         });
     });
 
+    app.get('/user/get_info/:id', (req,res) => {
+        const id = req.params.id;
+        console.log(id);
+        User.findById(id).select('-_id team phone own_event user_sub name email join_date').exec((err, data)=>{
+            if(err) res.status(500).json({error:'Connection lost'});
+            if(!data) res.status(404).json({error:'Failed to upload'});
+            console.log(data);
+        })
+    })
+
     
 
     function authenticateRedirect(req, res, next) {
