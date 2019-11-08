@@ -353,17 +353,12 @@ $(document).on('click','.map-marker, .map-info-body-id',function(){
             addTag = `<div id="${data._id}" class="map-info-event-id">Un Sub</div>`
         }
 
-        // Display selected data info
-        fetch(`/db/get_event/${data.user}`, {method : 'get'}).then((res)=>{
-            return res.json();
-        }).then((res)=> {
-            $('#map-info-eventInfo').html(
-                `<div class="map-info-title">${data.title}</div>
-                <div class="map-info-body-container"><div class="map-info-body">${data.content}</div></div>
-                ${addTag}
-                <div id="${data.user}" class="map-info-event-userId">${res.name}</div>`
-            );
-        })
+        $('#map-info-eventInfo').html(
+            `<div class="map-info-title">${data.title}</div>
+            <div class="map-info-body-container"><div class="map-info-body">${data.content}</div></div>
+            ${addTag}
+            <div id="${data.user}" class="map-info-event-userId"><a href="localhost/user/${data.user}">${res.username}</a></div>`
+        );
         // Scroll to bottom
         const scrollTO = $(document).height()-$('.page-footer').height()-$(window).height();
         $("html, body").animate({ scrollTop: $('#map-info-tag').offset().top-$('.header').innerHeight() }, 1000);
@@ -407,7 +402,7 @@ $(document).on('click','.map-info-tag-content-title',function(){
 });
 
 /**
- * User sub event 
+ * User add event 
  */
 $(document).on('click','.map-info-event-id',function(){
     const id = $(this).attr('id');
@@ -416,9 +411,9 @@ $(document).on('click','.map-info-event-id',function(){
     }).then((res)=>{
         // Change sub and unsub button
         if(res.action == "add")
-            $('.map-info-event-id').html('Un sub')
+            $('.map-info-event-id').html('Un add')
         else if(res.action == "delete")
-            $('.map-info-event-id').html('Sub')
+            $('.map-info-event-id').html('Add')
     })
 });
 
@@ -438,6 +433,22 @@ $(document).on('click','#map-info-like-event-button',function(){
             else
                 likeFloatLeft = true;
         }
+    })
+});
+
+/**
+ * User sub user 
+ */
+$(document).on('click','.map-info-event-id',function(){
+    const id = $(this).attr('id');
+    fetch(`/user/add/event/${id}`, {method : 'put'}).then((res)=>{
+        return res.json();
+    }).then((res)=>{
+        // Change sub and unsub button
+        if(res.action == "add")
+            $('.map-info-event-id').html('un sub')
+        else if(res.action == "delete")
+            $('.map-info-event-id').html('sub')
     })
 });
 

@@ -130,9 +130,9 @@ module.exports = (app, User, Event, passport) => {
         User.findById(id).select('-_id team phone own_event user_sub name email join_date').exec((err, data)=>{
             if(err) res.status(500).json({error:'Connection lost'});
             if(!data) res.status(404).json({error:'Failed to upload'});
-            console.log(data);
-        })
-    })
+            res.json({error:false,data:data});
+        });
+    });
 
     
 
