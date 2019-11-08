@@ -354,12 +354,16 @@ $(document).on('click','.map-marker, .map-info-body-id',function(){
         }
 
         // Display selected data info
-        $('#map-info-eventInfo').html(
-            `<div class="map-info-title">${data.title}</div>
-            <div class="map-info-body-container"><div class="map-info-body">${data.content}</div></div>
-            ${addTag}
-            <div id="data._eventUserId" class="map-info-event-userId">username</div>`
-        );
+        fetch(`/db/get_event/${data.user}`, {method : 'get'}).then((res)=>{
+            return res.json();
+        }).then((res)=> {
+            $('#map-info-eventInfo').html(
+                `<div class="map-info-title">${data.title}</div>
+                <div class="map-info-body-container"><div class="map-info-body">${data.content}</div></div>
+                ${addTag}
+                <div id="${data.user}" class="map-info-event-userId">${res.name}</div>`
+            );
+        })
         // Scroll to bottom
         const scrollTO = $(document).height()-$('.page-footer').height()-$(window).height();
         $("html, body").animate({ scrollTop: $('#map-info-tag').offset().top-$('.header').innerHeight() }, 1000);
