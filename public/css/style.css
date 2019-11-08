@@ -18,3 +18,17 @@ html, body{
 		margin-top: 46px;
 	}
 }
+
+/* login register */
+#sign-in-up-table-container input{
+	border: 0;
+}
+#sign-in-up-table-container input:focus{
+	outline: none;
+}
+.sign-in-up-content {
+	border: 1px solid #000000;
+}
+.sign-in-up-content-error {
+	display: none;
+}

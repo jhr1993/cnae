@@ -1,18 +1,58 @@
 <% include ./header.ejs %>
     <script type="text/javascript" src="js/login.js"></script>
-    This is register page
     <% if(messages.error){ %>
         <%= messages.error %>
     <% } %>
     <div>
-        <form action="/register/newUser" method="POST">
-            Name : <input id="user_name" type="text" name="name" required="required"/>
-            ID : <input id="user_email" type="text" name="email" required="required"/>
-            Password : <input id="user_pw" type="password" name="pw" required="required"/>
-            Password Confirm : <input id="user_pw" type="password" name="pw2" required="required"/>
-            <button type="submit">Register</button>
-        </form>
+        <div id="sign-in-up-table-container">
+            <form action="/register/newUser" method="POST">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                                <img src="/img/logo.png" />
+                        </td>
+                    </tr>
+                    <tr class="sign-in-up-content">
+                        <td>email</td>
+                        <td><input type="email" name="name" value="Email" required="required"></td>
+                    </tr>
+                    <tr class="sign-in-up-content-error">
+                        <td colspan="2">error</td>
+                    </tr>
+                    <tr class="sign-in-up-content">
+                        <td>name</td>
+                        <td><input type="text" name="name" value="Name" required="required"></td>
+                    </tr>
+                    <tr class="sign-in-up-content-error">
+                        <td colspan="2">error</td>
+                    </tr>
+                    <tr class="sign-in-up-content">
+                        <td>ps</td>
+                        <td><input type="password" name="pw" required="required"></td>
+                    </tr>
+                    <tr class="sign-in-up-content-error">
+                        <td colspan="2">error</td>
+                    </tr>
+                    <tr class="sign-in-up-content">
+                        <td>pc</td>
+                        <td><input type="password" name="pw2" required="required"></td>
+                    </tr>
+                    <tr class="sign-in-up-content-error">
+                        <td colspan="2">error</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="submit">Register</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">or</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Have an account? <a href="/login">login</a></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </div>
-    <a href="/login">login</a>
+    
 
 <% include ./footer.ejs %>
