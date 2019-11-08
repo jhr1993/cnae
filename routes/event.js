@@ -38,7 +38,10 @@ module.exports = function(app, Event, User){
             result.data = data;
             result.login = (req.user) ? true : false; //check user has logged
             if(req.user) result.include = JSON.parse(req.user.event_sub).includes(id) ? true : false;// check user sub
-            res.json(result);
+            User.findById(data.user,'-_id name',(err,userData)=>{
+                result.username = userData.name;
+                res.json(result);
+            })
         }); 
     });
 
