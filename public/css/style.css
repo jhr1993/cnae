@@ -11,7 +11,11 @@ html, body{
 
 #body-main {
 	margin-top: 56px;
-    
+    min-height: calc(100vh - 172px);
+}
+
+form {
+	margin: 0;
 }
 @media only screen and (max-width: 992px) {
 	#body-main {
@@ -33,7 +37,7 @@ html, body{
 
 #sign-in-up-table-container input{
 	border: 0;
-	width: 230px;
+	width: 220px;
 }
 
 #sign-in-up-table-container input:focus{
@@ -42,6 +46,7 @@ html, body{
 
 .sign-in-up-img-container {
 	width: 100%;
+	margin: 40px 0;
 } 
 
 .sign-in-up-img-container img {
@@ -60,6 +65,7 @@ html, body{
 
 #sign-in-up-table-container td {
 	position: relative;
+	text-align: center;
 }
 
 #sign-in-up-table-container td i{
