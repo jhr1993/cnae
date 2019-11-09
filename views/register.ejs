@@ -8,46 +8,58 @@
             <form action="/register/newUser" method="POST">
                 <table>
                     <tr>
-                        <td colspan="2">
+                        <td>
+                            <div class="sign-in-up-img-container">
                                 <img src="/img/logo.png" />
+                            </div>
                         </td>
                     </tr>
                     <tr class="sign-in-up-content">
-                        <td>email</td>
-                        <td><input type="email" name="name" value="Email" required="required"></td>
-                    </tr>
-                    <tr class="sign-in-up-content-error">
-                        <td colspan="2">error</td>
-                    </tr>
-                    <tr class="sign-in-up-content">
-                        <td>name</td>
-                        <td><input type="text" name="name" value="Name" required="required"></td>
-                    </tr>
-                    <tr class="sign-in-up-content-error">
-                        <td colspan="2">error</td>
+                        <td>
+                            <div class="sign-in-up-content-input-container">
+                                <i class="fa fa-envelope-o"></i>
+                                <input type="email" name="name" value="Email" required="required">
+                            </div>
+                        </td>
                     </tr>
                     <tr class="sign-in-up-content">
-                        <td>ps</td>
-                        <td><input type="password" name="pw" required="required"></td>
-                    </tr>
-                    <tr class="sign-in-up-content-error">
-                        <td colspan="2">error</td>
+                        <td>
+                            <div class="sign-in-up-content-input-container">
+                                <i class="fa fa-address-card-o"></i>
+                                <input type="text" name="name" value="Name" required="required">
+                            </div>
+                        </td>
                     </tr>
                     <tr class="sign-in-up-content">
-                        <td>pc</td>
-                        <td><input type="password" name="pw2" required="required"></td>
+                        <td>
+                            <div class="sign-in-up-content-input-container">
+                                <i class="fa fa-unlock-alt"></i>
+                                <i class="fa fa-eye eye-icon"></i>
+                                <input type="password" name="pw" value="password" required="required">
+                            </div>
+                        </td>
                     </tr>
-                    <tr class="sign-in-up-content-error">
-                        <td colspan="2">error</td>
+                    <tr class="sign-in-up-content">
+                        <td>
+                            <div class="sign-in-up-content-input-container">
+                                <i class="fa fa-unlock-alt"></i>
+                                <i class="fa fa-eye-slash eye-icon"></i>
+                                <input type="password" name="pw2" value="password" required="required">
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td colspan="2"><button type="submit">Register</button></td>
+                        <td>
+                            <div class="sign-in-up-content-button">
+                                <button type="submit">Register</button>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td colspan="2">or</td>
+                        <td>or</td>
                     </tr>
                     <tr>
-                        <td colspan="2">Have an account? <a href="/login">login</a></td>
+                        <td>Have an account? <a href="/login">login</a></td>
                     </tr>
                 </table>
             </form>

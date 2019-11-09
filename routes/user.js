@@ -134,7 +134,33 @@ module.exports = (app, User, Event, passport) => {
         });
     });
 
-    
+    app.put('/user/sub/user/:id', authenticateMessage, (req,res) => {
+        const id = req.params.id;
+        const user = req.user;
+        User.findById(user._id, (err, userData) => {
+            if(err) res.status(500).json({error:'Connection lost'});
+            if(!userData) res.status(404).json({error:'Failed to upload'});
+
+            let action = 'add';// default action 
+            
+            let user_events = JSON.parse(userData.event_sub);
+            if(user_events.includes(`${id}`)) {
+                user_events.splice(user_events.indexOf(id),1);// Delete if includes
+                action = 'delete';// change if value includes
+            }else{
+                user_events.unshift(`${id}`); // else jsut shift
+            }
+
+            //String JSON
+            userData.event_sub = JSON.stringify(user_events);
+
+            //save
+            userData.save((err) => {
+                if(err) res.status(500).json({error:'failed to update'});
+                res.json({error:false,action:action});
+            });
+        });
+    });
 
     function authenticateRedirect(req, res, next) {
         if (req.isAuthenticated()) {

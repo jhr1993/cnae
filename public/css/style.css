@@ -20,15 +20,66 @@ html, body{
 }
 
 /* login register */
+#sign-in-up-table-container {
+	width: 300px;
+	margin: 0 auto;
+}
+
+.sign-in-up-content-input-container {
+	margin: 10px 0;
+	border: 1px solid black;
+	border-radius: 31px;
+}
+
 #sign-in-up-table-container input{
 	border: 0;
+	width: 230px;
 }
+
 #sign-in-up-table-container input:focus{
 	outline: none;
 }
-.sign-in-up-content {
-	border: 1px solid #000000;
+
+.sign-in-up-img-container {
+	width: 100%;
+} 
+
+.sign-in-up-img-container img {
+	display: block;
+	width: 150px;
+	margin: 0 auto;
 }
+
+#sign-in-up-table-container table {
+	width: 100%;
+}
+
+#sign-in-up-table-container tr {
+	margin: 5px;
+}
+
+#sign-in-up-table-container td {
+	position: relative;
+}
+
+#sign-in-up-table-container td i{
+	margin: 0;
+}
+
+.eye-icon {
+	position: absolute;
+	right: 0;
+}
+
 .sign-in-up-content-error {
 	display: none;
+}
+
+.sign-in-up-content-button button {
+	background-color: white;
+	width: 100%;
+	margin: 10px 0;
+	border: 1px solid black;
+	border-radius: 31px;
+	height: 60px;
 }
