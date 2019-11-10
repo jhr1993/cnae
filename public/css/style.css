@@ -118,7 +118,12 @@ form {
 	width: 220px;
 }
 
-.animated-icon2 img {
+.animated-icon2 .profile-img-container {
 	height: 30px;
 	width: 30px;
+	border-radius: 100%;
+}
+
+.animated-icon2 .profile-img-container img{
+	width: 100%;
 }

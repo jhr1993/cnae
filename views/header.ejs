@@ -38,11 +38,13 @@
             <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"
             aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation" style="color:transparent;border-color: transparent;">
                 <div class="animated-icon2">
+                    <div class="profile-img-container"> 
                     <% if(user) { %>
                         <img src="<%= user.user_img %>">
                     <% }else { %>
                         <img src="img/noImg.png">
                     <% } %>
+                    </div>
                 </div>
             </button>
 
