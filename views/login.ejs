@@ -4,7 +4,7 @@
     <% } %>
     <script type="text/javascript" src="js/login.js"></script>
     <div id="sign-in-up-table-container">
-            <form action="/register/newUser" method="POST">
+            <form action="/login" method="POST">
                 <table>
                     <tr>
                         <td>
@@ -17,19 +17,26 @@
                         <td>
                             <div class="sign-in-up-content-input-container">
                                 <i class="fa fa-envelope-o"></i>
-                                <input class="sign-in-up-content-input" type="email" name="name" placeholder="Email" required="required">
+                                <input class="sign-in-up-content-input" type="email" name="email" placeholder="Email" required="required">
                             </div>
                         </td>
                     </tr>
                     <tr class="sign-in-up-content">
-                            <td>
-                                <div class="sign-in-up-content-input-container">
-                                    <i class="fa fa-unlock-alt"></i>
-                                    <i class="fa fa-eye-slash eye-icon"></i>
-                                    <input id="register-pw-input1" class="register-pw-input sign-in-up-content-input" type="password" name="pw" placeholder="••••••••" required="required">
-                                </div>
-                            </td>
-                        </tr>
+                        <td>
+                            <div class="sign-in-up-content-input-container">
+                                <i class="fa fa-unlock-alt"></i>
+                                <i class="fa fa-eye-slash eye-icon"></i>
+                                <input id="register-pw-input1" class="register-pw-input sign-in-up-content-input" type="password" name="password" placeholder="••••••••" required="required">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="sign-in-up-content-button">
+                                <button type="submit">Sign In</button>
+                            </div>
+                        </td>
+                    </tr>
                     <tr>
                         <td><br>or</td>
                     </tr>

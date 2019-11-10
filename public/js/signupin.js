@@ -11,20 +11,21 @@ $(document).on('click','.sign-in-up-content-input-container .eye-icon',function(
 })
 
 $(document).on('keyup keydown','.register-pw-input',function(){
+    console.log('working')
     if($('#register-pw-input1').val()!=$('#register-pw-input2').val()){
-        if($(this).parent().find('.fa-unlock-alt').hasClass('register-pw-input-green')){
-            $('#register-pw-input1').parent().find('.fa-unlock-alt').removeClass('register-pw-input-green');
-            $('#register-pw-input1').parent().find('.fa-unlock-alt').addClass('register-pw-input-red');
-            $('#register-pw-input2').parent().find('.fa-unlock-alt').removeClass('register-pw-input-green');
-            $('#register-pw-input2').parent().find('.fa-unlock-alt').addClass('register-pw-input-red');
+        if($('.fa-unlock-alt').hasClass('register-pw-input-green')){
+            $('.fa-unlock-alt').removeClass('register-pw-input-green');
+            $('.fa-unlock-alt').addClass('register-pw-input-red');
+            $('.fa-unlock-alt').removeClass('register-pw-input-green');
+            $('.fa-unlock-alt').addClass('register-pw-input-red');
             $('#sign-in-up-content-input-pw-msg').slideDown()
         }
     }else {
-        if($(this).parent().find('.fa-unlock-alt').hasClass('register-pw-input-red')){
-            $('#register-pw-input1').parent().find('.fa-unlock-alt').removeClass('register-pw-input-red');
-            $('#register-pw-input1').parent().find('.fa-unlock-alt').addClass('register-pw-input-green');
-            $('#register-pw-input2').parent().find('.fa-unlock-alt').removeClass('register-pw-input-red');
-            $('#register-pw-input2').parent().find('.fa-unlock-alt').addClass('register-pw-input-green');
+        if($('.fa-unlock-alt').hasClass('register-pw-input-red')){
+            $('.fa-unlock-alt').removeClass('register-pw-input-red');
+            $('.fa-unlock-alt').addClass('register-pw-input-green');
+            $('.fa-unlock-alt').removeClass('register-pw-input-red');
+            $('.fa-unlock-alt').addClass('register-pw-input-green');
             $('#sign-in-up-content-input-pw-msg').slideUp()
         }
     }
