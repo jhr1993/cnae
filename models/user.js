@@ -8,6 +8,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     join_date: { type: Date, default: Date.now  },
     pw_date: { type: Date, default: Date.now  },
+    user_img: { type: String, required: true},
     team : { type: String, default: '[]' },
     phone: { type: String, default: '[]' },
     own_event: { type: String, default: '[]' },

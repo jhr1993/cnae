@@ -37,7 +37,13 @@
 
             <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"
             aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation" style="color:transparent;border-color: transparent;">
-                <div class="animated-icon2"><span></span><span></span><span></span></div>
+                <div class="animated-icon2">
+                    <% if(user) { %>
+                        <img src="<%= user.user_img %>">
+                    <% }else { %>
+                        <img src="img/noImg.png">
+                    <% } %>
+                </div>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent1">
@@ -69,12 +75,12 @@
 
                 <!-- Links -->
                 <ul class="navbar-nav">
-                    <% if(username){ %>
+                    <% if(user){ %>
                         <li class="nav-item active">
-                            <a class="nav-link" href="/myprofile">My Profile <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/profile">My Profile <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">Log Out</a>
+                            <a class="nav-link" href="/logout">Log Out</a>
                         </li>
                     <% } else{ %>
                         <li class="nav-item active">

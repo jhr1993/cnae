@@ -78,7 +78,7 @@ module.exports = (app, User, Event, passport) => {
     /**
      * Log out
      */
-    app.get('/logout', authenticateRedirect, (req,res) => {
+    app.get('/logout', (req,res) => {
         req.logOut();
         res.redirect('/login');
     });

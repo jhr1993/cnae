@@ -11,16 +11,11 @@ html, body{
 
 #body-main {
 	margin-top: 56px;
-    min-height: calc(100vh - 172px);
+    min-height: calc(100vh - 182px);
 }
 
 form {
 	margin: 0;
-}
-@media only screen and (max-width: 992px) {
-	#body-main {
-		margin-top: 46px;
-	}
 }
 
 /* login register */
@@ -112,4 +107,18 @@ form {
 
 #sign-in-up-content-input-pw-msg {
 	display: none;
+}
+
+.login-pw-eye-icon {
+	position: absolute;
+	right: 0;
+}
+
+#sign-in-up-table-container .login-in-input {
+	width: 220px;
+}
+
+.animated-icon2 img {
+	height: 30px;
+	width: 30px;
 }

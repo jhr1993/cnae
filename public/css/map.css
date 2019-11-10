@@ -62,18 +62,6 @@ html,body {
 	position: relative;
 }
 
-@media only screen and (max-width: 992px) {
-	#map-main-container {
-		width: 50%;
-		height: calc(100% - 172px);
-	}
-	
-	#map-info-container {
-		height: calc(100% - 172px);
-		position: relative;
-	}
-}
-
 @media only screen and (max-width: 750px) {
 	#map-main-container {
 		width: 100%;

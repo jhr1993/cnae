@@ -1,50 +1,47 @@
 <% include ./header.ejs %>
-    <% if(messages.error){ %>
-        <%= messages.error %>
-    <% } %>
     <script type="text/javascript" src="js/login.js"></script>
     <div id="sign-in-up-table-container">
-            <form action="/login" method="POST">
-                <table>
-                    <tr>
-                        <td>
-                            <div class="sign-in-up-img-container">
-                                <img src="/img/logo.png" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="sign-in-up-content">
-                        <td>
-                            <div class="sign-in-up-content-input-container">
-                                <i class="fa fa-envelope-o"></i>
-                                <input class="sign-in-up-content-input" type="email" name="email" placeholder="Email" required="required">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="sign-in-up-content">
-                        <td>
-                            <div class="sign-in-up-content-input-container">
-                                <i class="fa fa-unlock-alt"></i>
-                                <i class="fa fa-eye-slash eye-icon"></i>
-                                <input id="register-pw-input1" class="register-pw-input sign-in-up-content-input" type="password" name="password" placeholder="••••••••" required="required">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="sign-in-up-content-button">
-                                <button type="submit">Sign In</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><br>or</td>
-                    </tr>
-                    <tr>
-                        <td><br>Have no account? <a href="/register">register</a></td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+        <form action="/login" method="POST">
+            <table>
+                <tr>
+                    <td>
+                        <div class="sign-in-up-img-container">
+                            <img src="/img/logo.png" />
+                        </div>
+                    </td>
+                </tr>
+                <tr class="sign-in-up-content">
+                    <td>
+                        <div class="sign-in-up-content-input-container">
+                            <i class="fa fa-envelope-o"></i>
+                            <input class="sign-in-up-content-input" type="email" name="email" placeholder="Email" required="required">
+                        </div>
+                    </td>
+                </tr>
+                <tr class="sign-in-up-content">
+                    <td>
+                        <div class="sign-in-up-content-input-container">
+                            <i class="fa fa-unlock-alt"></i>
+                            <i class="fa fa-eye-slash eye-icon login-pw-eye-icon"></i>
+                            <input id="register-pw-input1" class="register-pw-input sign-in-up-content-input login-in-input" type="password" name="password" placeholder="••••••••" required="required">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="sign-in-up-content-button">
+                            <button type="submit">Sign In</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><br>or</td>
+                </tr>
+                <tr>
+                    <td><br>Have no account? <a href="/register">register</a></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 <% include ./footer.ejs %>

@@ -6,7 +6,7 @@ module.exports = function(app){
         res.render('index', {
             title : 'CNAE',
             curUrl: encodeURIComponent(req.originalUrl),
-            username: (req.user) ? req.user.name : false
+            user: (req.user) ? req.user : false
         });
     });
 
@@ -14,7 +14,7 @@ module.exports = function(app){
         res.render('register',{
             title: 'CNAE - Register',
             curUrl: '',
-            username: false
+            user: false
         });
     });
 
@@ -23,7 +23,7 @@ module.exports = function(app){
             title: 'CNAE - Login',
             curUrl: '',
             redirectUrl: req.params.url,
-            username: false
+            user: false
         });
     });
 
@@ -31,7 +31,7 @@ module.exports = function(app){
         res.render('map', {
             title: 'CNAE - MAP',
             curUrl: encodeURIComponent(req.originalUrl),
-            username: (req.user) ? req.user.name : false
+            user: (req.user) ? req.user : false
         });
     });
 
@@ -44,13 +44,21 @@ module.exports = function(app){
     app.get('/event_add' ,(req,res)=>{
         res.render('addEvent',{
             title: 'CNAE - Add Event',
-            username: (req.user) ? req.user.name : false
+            user: (req.user) ? req.user : false
+        });
+    });
+
+    app.get('/profile' ,checkAuthenticated ,(req,res)=>{
+        res.render('profile',{
+            title: 'CNAE - Profile',
+            user: (req.user) ? req.user : false
         });
     });
 
     function checkAuthenticated(req, res, next) {
         if (req.isAuthenticated()) {
-            next()
+            next();
+            return;
         }
         return res.redirect('/error/404')
     }
