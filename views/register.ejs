@@ -7,58 +7,62 @@
         <form action="/register/newUser" method="POST">
             <table>
                 <tr>
-                    <td>
-                        <div class="sign-in-up-img-container">
-                            <img src="/img/logo.png" />
-                        </div>
+                    <td colspan="2">
+                        <h1>Create Account</h1>
                     </td>
                 </tr>
                 <tr class="sign-in-up-content">
-                    <td>
+                    <td colspan="2">
                         <div class="sign-in-up-content-input-container">
                             <i class="fa fa-envelope-o"></i>
-                            <input type="email" name="name" value="Email" required="required">
+                            <input class="sign-in-up-content-input" type="email" name="name" placeholder="Email" required="required">
                         </div>
                     </td>
                 </tr>
                 <tr class="sign-in-up-content">
-                    <td>
+                    <td colspan="2">
                         <div class="sign-in-up-content-input-container">
                             <i class="fa fa-address-card-o"></i>
-                            <input type="text" name="name" value="Name" required="required">
+                            <input type="text" name="name" placeholder="Name" required="required">
                         </div>
                     </td>
                 </tr>
                 <tr class="sign-in-up-content">
                     <td>
                         <div class="sign-in-up-content-input-container">
-                            <i class="fa fa-unlock-alt"></i>
-                            <i class="fa fa-eye-slash eye-icon"></i>
-                            <input type="password" name="pw" value="password" required="required">
+                            <i class="fa fa-unlock-alt register-pw-input-green"></i>
+                            <input id="register-pw-input1" class="register-pw-input sign-in-up-content-input" type="password" name="pw" placeholder="••••••••" required="required">
                         </div>
                     </td>
-                </tr>
-                <tr class="sign-in-up-content">
                     <td>
                         <div class="sign-in-up-content-input-container">
-                            <i class="fa fa-unlock-alt"></i>
+                            <input id="register-pw-input2" class="register-pw-input" type="password" name="pc" placeholder="••••••••" required="required">
                             <i class="fa fa-eye-slash eye-icon"></i>
-                            <input type="password" name="pc" value="password" required="required">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="2">
+                        <div class="sign-in-up-content-input-msg">
+                            <div>Use 8 or more characters with a mix of letters, numbers & symbols </div>
+                        </div>
+                        <div id="sign-in-up-content-input-pw-msg">
+                            <div>Passwords are incorrect</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
                         <div class="sign-in-up-content-button">
                             <button type="submit">Register</button>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><br>or</td>
+                    <td colspan="2"><br>or</td>
                 </tr>
                 <tr>
-                    <td><br>Have an account? <a href="/login">login</a></td>
+                    <td colspan="2"><br>Have an account? <a href="/login">login</a></td>
                 </tr>
             </table>
         </form>

@@ -27,6 +27,7 @@ form {
 #sign-in-up-table-container {
 	width: 300px;
 	margin: 0 auto;
+	padding: 10px 0;
 }
 
 .sign-in-up-content-input-container {
@@ -38,6 +39,7 @@ form {
 #sign-in-up-table-container input{
 	border: 0;
 	width: 220px;
+	background-color: transparent;
 }
 
 #sign-in-up-table-container input:focus{
@@ -72,11 +74,6 @@ form {
 	margin: 0;
 }
 
-.eye-icon {
-	position: absolute;
-	right: 0;
-}
-
 .sign-in-up-content-error {
 	display: none;
 }
@@ -88,4 +85,31 @@ form {
 	border: 1px solid black;
 	border-radius: 31px;
 	height: 60px;
+}
+
+#sign-in-up-table-container .register-pw-input {
+	width: 50%;
+}
+
+.register-pw-input-red {
+	background-color: red;
+	border: 1px solid red;
+}
+
+
+.register-pw-input-green {
+	background-color: green;
+	border: 1px solid green;
+}
+
+#register-pw-input2 {
+	text-align: right;
+}
+
+.sign-in-up-content-input-msg {
+	display: none;
+}
+
+#sign-in-up-content-input-pw-msg {
+	display: none;
 }
