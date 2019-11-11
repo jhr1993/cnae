@@ -122,6 +122,8 @@ form {
 	height: 30px;
 	width: 30px;
 	border-radius: 100%;
+	border: 1px solid snow;
+	overflow: hidden;
 }
 
 .animated-icon2 .profile-img-container img{
