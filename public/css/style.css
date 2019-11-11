@@ -126,6 +126,33 @@ form {
 	overflow: hidden;
 }
 
-.animated-icon2 .profile-img-container img{
+.animated-icon2 .profile-img-container img {
 	width: 100%;
+}
+
+#profile-container {
+	position: relative;
+	max-width: 880px;
+	width: 80%;
+	margin: 0 auto;
+	padding: 60px 0;
+	height: calc(100% - 182px);
+}
+
+.profile-img {
+	position: absolute;
+	background-color: blue;
+	width: 250px;
+	height: 400px;
+}
+
+.profile-main-container {
+	padding-left: 150px;
+	padding-top: 100px;
+	height: 100%;
+}
+
+.profile-main {
+	background-color: yellow;
+	height: 100%;
 }
