@@ -11,7 +11,6 @@ $(document).on('click','.sign-in-up-content-input-container .eye-icon',function(
 })
 
 $(document).on('keyup keydown','.register-pw-input',function(){
-    console.log('working')
     if($('#register-pw-input1').val()!=$('#register-pw-input2').val()){
         if($('.fa-unlock-alt').hasClass('register-pw-input-green')){
             $('.fa-unlock-alt').removeClass('register-pw-input-green');
@@ -37,4 +36,17 @@ $(document).on('focusin focusout', ".sign-in-up-content-input", function(e){
         $(this).parent().parent().find('.sign-in-up-content-input-msg').slideDown()
     else
         $(this).parent().parent().find('.sign-in-up-content-input-msg').slideUp()
+})
+
+$(document).on('mouseenter mouseleave', '.profile-img-menu1 i' ,function(e){
+    $(this).parent().find('.profile-img-menu1-content').animate({width:'toggle'});
+    if(e.type == 'mouseenter'){
+        const color = $(this).css('color');
+        $(this).css('color','white');
+        $(this).css('background-color',color);
+    }else {
+        const color = $(this).css('background-color');
+        $(this).css('color',color);
+        $(this).css('background-color','white');
+    }
 })

@@ -48,10 +48,11 @@ module.exports = function(app){
         });
     });
 
-    app.get('/userprofile' ,checkAuthenticated ,(req,res)=>{
-        res.render('userprofile',{
+    app.get('/profile/:id' ,(req,res)=>{
+        res.render('profile',{
             title: 'CNAE - Profile',
-            user: (req.user) ? req.user : false
+            user: (req.user) ? req.user : false,
+            id: req.params.id
         });
     });
 

@@ -27,7 +27,7 @@ form {
 
 .sign-in-up-content-input-container {
 	margin: 10px 0;
-	border: 1px solid black;
+	border: 1px solid tomato;
 	border-radius: 31px;
 }
 
@@ -77,7 +77,7 @@ form {
 	background-color: white;
 	width: 100%;
 	margin: 10px 0;
-	border: 1px solid black;
+	border: 1px solid tomato;
 	border-radius: 31px;
 	height: 60px;
 }
@@ -143,19 +143,105 @@ form {
 	position: absolute;
 	width: 250px;
 	height: auto;
-	border-radius: 15px 0;
-	overflow: hidden;
 }
 
 .profile-img-background {
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	z-index: -1;
 	opacity: 0.8;
+	z-index: -2;
+	display: none;
 }
 
+.profile-img-menu {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.profile-img-menu ul{
+	padding: 0;
+	margin: 0;
+}
+
+.profile-img-menu li{
+	list-style: none;
+}
+
+.profile-img-menu1 {
+	margin-left: 100%;
+	margin-top: 50px;
+	height: calc(100% - 50px);
+	width: 50px;
+	border-right: 1px solid tomato;
+	background-color: white;
+	/*background-color: #EF594A;*/
+}
+
+.profile-img-menu1 li{
+	margin: 5px;
+}
+
+.profile-img-menu1 i {
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid tomato;
+	border-radius: 20px;
+	padding:10px;
+	margin: 5px 0;
+	width:40px;
+	height: 40px;
+	z-index: 1;
+}
+
+.profile-img-menu1-content {
+	width:200px;
+	text-align: center;
+	position: absolute;
+	padding: 8px 20px;
+	margin: 5px 5px 5px 20px;
+	background-color: tomato;
+	color: white;
+	border-radius: 0 20px 20px 0;
+	white-space: nowrap; 
+	display: none;
+}
+
+.profile-img-menu2 {
+	margin-left: 50px;
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid tomato;
+	border-right: 1px solid tomato;
+	border-radius: 0 0 15px 0;
+	background-color: white;
+	padding-right:50px;
+}
+
+.profile-img-menu2 li{
+	width: 30%;
+	height: 40px;
+	border-radius: 20px;
+	float: left;
+	margin: 5px 2px;
+	text-align: center;
+}
+
+.profile-img-menu2-title i {
+	font-size: smaller;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+
+.profile-img-menu2-content {
+}
+
+
 .profile-img {
+	overflow: hidden;
+	border-radius: 15px 0;
 	width: 100%;
 }
 
@@ -171,6 +257,8 @@ form {
 	text-shadow: -2px -2px #ffffff;
 	background-color: white;
 	padding: 10px;
+	border-radius: 15px;
+	color: tomato;
 }
 
 .profile-title {
@@ -183,9 +271,13 @@ form {
 }
 
 .profile-main {
-	border: 1px solid black;
+	border: 1px solid tomato;
 	height: 100%;
 	border-radius: 0 20px ;
+}
+
+.profile-about {
+	padding: 10px 10px 10px 260px;
 }
 
 
@@ -197,8 +289,16 @@ form {
 		max-width: 100%;
 	}
 
-	.profile-img-container {
+	.profile-img-background {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		opacity: 0.8;
 		z-index: -2;
+		display: block;
+	}
+
+	.profile-img-container {
 		position: relative;
 		width: 100%;
 		background-position: center;
@@ -207,6 +307,7 @@ form {
 	.profile-img {
 		width: 250px;
 		margin: 0 auto;
+		border-radius: 0;
 	}
 
 	.profile-title-container {
