@@ -51,11 +51,3 @@ $(document).on('mouseenter mouseleave', '.profile-img-menu1 i' ,function(e){
         $(this).css('background-color','white');
     }
 });
-
-$(document).ready(function(){
-    $('.profile-about').height($('.profile-img').height()-30);
-})
-
-$('.profile-img-menu').resize(function(){
-    console.log('working');
-});

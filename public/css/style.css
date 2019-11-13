@@ -27,7 +27,7 @@ form {
 
 .sign-in-up-content-input-container {
 	margin: 10px 0;
-	border: 1px solid tomato;
+	border: 1px solid grey;
 	border-radius: 31px;
 }
 
@@ -77,7 +77,7 @@ form {
 	background-color: white;
 	width: 100%;
 	margin: 10px 0;
-	border: 1px solid tomato;
+	border: 1px solid grey;
 	border-radius: 31px;
 	height: 60px;
 }
@@ -150,9 +150,11 @@ form {
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	opacity: 0.8;
+	opacity: 0.5;
 	z-index: -2;
 	display: none;
+	filter: blur(8px);
+	-webkit-filter: blur(8px);
 }
 
 .profile-img-menu {
@@ -258,7 +260,7 @@ form {
 	bottom: 60px;
 	text-shadow: -2px -2px #ffffff;
 	background-color: white;
-	padding: 10px;
+	padding: 0 10px;
 	border-radius: 15px;
 	color: tomato;
 }
@@ -285,12 +287,13 @@ form {
 
 .profile-about {
 	padding: 15px 15px 15px 265px;
+	height: calc(100% - 180px);
 }
 
 .profile-about-title {
 	padding: 5px 0;
 	color: tomato;
-	font-size: larger;
+	font-size: x-large;
 }
 
 .profile-about-content::first-letter {
@@ -304,20 +307,71 @@ form {
 
 .profile-list-container {
 	bottom: 0;
-	padding: 15px;
+	padding: 0 15px 15px 15px ;
+	float: left;
+	width: 100%;
+	height: 180px;
 }
 
 .profile-list-container ul {
-	width: 50%;
+	width: 100%;
 	margin: 0;
 	padding: 0;
+	float: left;
+	height: 100%;
 }
 
 .profile-list-container li {
 	list-style: none;
+	width: 150px;
 	float: left;
-	height: 170px;
-	width: 300px;
+	padding: 0 10px;
+	height: 100%;
+}
+
+.profile-list-img-container {
+	height: 70%;
+	width: 100%;
+	position: relative;
+	z-index: -1;
+	background-color: white;
+}
+
+.profile-list-img-background {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: -1;
+	opacity: 0.5;
+	/* Add the blur effect */
+	filter: blur(4px);
+	-webkit-filter: blur(4px);
+	overflow: hidden;
+}
+
+.profile-list-img {
+	height: 100%;
+	width: 100%;
+}
+
+.profile-list-content {
+	height: 30%;
+	width: 100%;
+	font-size: xx-small;
+}
+
+.profile-list-content-title {
+	font-weight: 700;
+}
+
+.profile-list-content-date {
+	font-weight: 600;
+	position: absolute;
+}
+
+.profile-list-content-cost {
+	font-weight: 600;
+	text-align: right;
 }
 
 @media only screen and (max-width: 850px) {
@@ -341,6 +395,7 @@ form {
 		position: relative;
 		width: 100%;
 		background-position: center;
+		padding-bottom: 50px;
 	}
 
 	.profile-img-menu1 {
@@ -392,6 +447,12 @@ form {
 
 	.profile-about {
 		padding: 15px;
+		height: auto;
+	}
+
+	.profile-about-title {
+		font-size: xx-large;
+		text-align: center;
 	}
 	
 }
