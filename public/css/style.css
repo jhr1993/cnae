@@ -196,7 +196,7 @@ form {
 	z-index: 1;
 }
 
-.profile-img-menu1-content {
+.profile-img-menu1 .profile-img-menu-content {
 	width:200px;
 	text-align: center;
 	position: absolute;
@@ -229,16 +229,16 @@ form {
 	text-align: center;
 }
 
-.profile-img-menu2-title i {
+.profile-img-menu2 .profile-img-menu-title i {
 	font-size: smaller;
 	height: auto;
 	margin: 0;
 	padding: 0;
+	pointer-events:none;
 }
 
-.profile-img-menu2-content {
+.profile-img-menu2 .profile-img-menu-content {
 }
-
 
 .profile-img {
 	overflow: hidden;
@@ -279,11 +279,16 @@ form {
 	position: relative;
 }
 
+.profile-img-menu-mobile {
+	display:none
+}
+
 .profile-about {
 	padding: 15px 15px 15px 265px;
 }
 
 .profile-about-title {
+	padding: 5px 0;
 	color: tomato;
 	font-size: larger;
 }
@@ -298,7 +303,6 @@ form {
 }
 
 .profile-list-container {
-	position: absolute;
 	bottom: 0;
 	padding: 15px;
 }
@@ -339,6 +343,25 @@ form {
 		background-position: center;
 	}
 
+	.profile-img-menu1 {
+		margin-left: 0;
+		margin-top: 0;
+		border-right: none;
+	}
+
+	.profile-img-menu2 {
+		margin-left: 0;
+		padding-right:0;
+		border-radius: 0;
+		border-right: none;
+		padding-left: 50px;
+	}
+
+	.profile-img-menu2 li {
+		width: 33%;
+		margin: 5px auto;
+	}
+
 	.profile-img {
 		width: 250px;
 		margin: 0 auto;
@@ -359,9 +382,16 @@ form {
 	}
 	
 	.profile-main {
+		border-left: none;
+		border-right: none;
+		border-bottom: none;
 		height: auto;
 		border-radius: 0;
 		overflow: hidden;
+	}
+
+	.profile-about {
+		padding: 15px;
 	}
 	
 }
