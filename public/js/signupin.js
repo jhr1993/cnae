@@ -8,7 +8,7 @@ $(document).on('click','.sign-in-up-content-input-container .eye-icon',function(
         $('.register-pw-input').addClass('fa-eye')
         $('.register-pw-input').parent().find('input').attr('type','text');
     }
-})
+});
 
 $(document).on('keyup keydown','.register-pw-input',function(){
     if($('#register-pw-input1').val()!=$('#register-pw-input2').val()){
@@ -28,7 +28,7 @@ $(document).on('keyup keydown','.register-pw-input',function(){
             $('#sign-in-up-content-input-pw-msg').slideUp()
         }
     }
-})
+});
 
 $(document).on('focusin focusout', ".sign-in-up-content-input", function(e){
     console.log($(this).parent().parent());
@@ -36,7 +36,7 @@ $(document).on('focusin focusout', ".sign-in-up-content-input", function(e){
         $(this).parent().parent().find('.sign-in-up-content-input-msg').slideDown()
     else
         $(this).parent().parent().find('.sign-in-up-content-input-msg').slideUp()
-})
+});
 
 $(document).on('mouseenter mouseleave', '.profile-img-menu1 i' ,function(e){
     $(this).parent().find('.profile-img-menu1-content').stop();
@@ -50,4 +50,12 @@ $(document).on('mouseenter mouseleave', '.profile-img-menu1 i' ,function(e){
         $(this).css('color',color);
         $(this).css('background-color','white');
     }
+});
+
+$(document).ready(function(){
+    $('.profile-about').height($('.profile-img').height()-30);
 })
+
+$('.profile-img-menu').resize(function(){
+    console.log('working');
+});
