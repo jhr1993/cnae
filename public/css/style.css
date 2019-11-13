@@ -180,7 +180,7 @@ form {
 }
 
 .profile-img-menu1 li{
-	margin: 5px;
+	padding: 5px;
 }
 
 .profile-img-menu1 i {
@@ -277,11 +277,22 @@ form {
 }
 
 .profile-about {
-	padding: 10px 10px 10px 260px;
-	font-size: larger;
-	color: tomato;
+	padding: 15px 15px 15px 265px;
 }
 
+.profile-about-title {
+	color: tomato;
+	font-size: larger;
+}
+
+.profile-about-content::first-letter {
+    font-size: 3.1em;
+    float: left;
+	line-height: 0.9em;
+	font-weight: bold;
+	margin-right: 4px;
+	color: tomato;
+}
 
 @media only screen and (max-width: 850px) {
     #profile-container {
