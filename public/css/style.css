@@ -143,6 +143,7 @@ form {
 	position: absolute;
 	width: 250px;
 	height: auto;
+	z-index: 1;
 }
 
 .profile-img-background {
@@ -250,6 +251,7 @@ form {
 }
 
 .profile-title-container {
+	z-index: 1;
 	position: absolute;
 	text-align: right;
 	right: 0;
@@ -274,6 +276,7 @@ form {
 	border: 1px solid tomato;
 	height: 100%;
 	border-radius: 0 20px ;
+	position: relative;
 }
 
 .profile-about {
@@ -292,6 +295,25 @@ form {
 	font-weight: bold;
 	margin-right: 4px;
 	color: tomato;
+}
+
+.profile-list-container {
+	position: absolute;
+	bottom: 0;
+	padding: 15px;
+}
+
+.profile-list-container ul {
+	width: 50%;
+	margin: 0;
+	padding: 0;
+}
+
+.profile-list-container li {
+	list-style: none;
+	float: left;
+	height: 170px;
+	width: 300px;
 }
 
 @media only screen and (max-width: 850px) {

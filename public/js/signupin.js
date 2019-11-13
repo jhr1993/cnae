@@ -39,6 +39,7 @@ $(document).on('focusin focusout', ".sign-in-up-content-input", function(e){
 })
 
 $(document).on('mouseenter mouseleave', '.profile-img-menu1 i' ,function(e){
+    $(this).parent().find('.profile-img-menu1-content').stop();
     $(this).parent().find('.profile-img-menu1-content').animate({width:'toggle'});
     if(e.type == 'mouseenter'){
         const color = $(this).css('color');
