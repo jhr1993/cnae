@@ -153,8 +153,8 @@ form {
 	opacity: 0.5;
 	z-index: -2;
 	display: none;
-	filter: blur(8px);
-	-webkit-filter: blur(8px);
+	filter: blur(4px);
+	-webkit-filter: blur(4px);
 }
 
 .profile-img-menu {
@@ -279,6 +279,7 @@ form {
 	height: 100%;
 	border-radius: 0 20px ;
 	position: relative;
+	padding: 15px;
 }
 
 .profile-img-menu-mobile {
@@ -286,7 +287,7 @@ form {
 }
 
 .profile-about {
-	padding: 15px 15px 15px 265px;
+	padding-left: 265px;
 	height: calc(100% - 180px);
 }
 
@@ -307,10 +308,21 @@ form {
 
 .profile-list-container {
 	bottom: 0;
-	padding: 0 15px 15px 15px ;
 	float: left;
 	width: 100%;
 	height: 180px;
+	overflow: hidden;
+	position: relative;
+}
+
+.profile-list-to-direction {
+	position: absolute;
+	height: 100%;
+	font-size: 2em;
+}
+
+.profile-list-to-right {
+	right: 0;
 }
 
 .profile-list-container ul {
@@ -327,6 +339,14 @@ form {
 	float: left;
 	padding: 0 10px;
 	height: 100%;
+}
+
+.profile-list-container .profile-list-start {
+	width: 235px;
+}
+
+.profile-list-container .profile-list-start .profile-list-content {
+	font-size: 2em;
 }
 
 .profile-list-img-container {
@@ -367,6 +387,7 @@ form {
 .profile-list-content-date {
 	font-weight: 600;
 	position: absolute;
+	z-index: -1;
 }
 
 .profile-list-content-cost {
@@ -448,6 +469,7 @@ form {
 	.profile-about {
 		padding: 15px;
 		height: auto;
+		border-radius: 0;
 	}
 
 	.profile-about-title {

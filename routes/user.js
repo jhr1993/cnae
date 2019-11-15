@@ -162,6 +162,14 @@ module.exports = (app, User, Event, passport) => {
         });
     });
 
+    app.get('/db/get_own_event/:id', (req,res) => {
+        const id = req.params.id;
+        User.findById(id).select('own_event').exec((err, data)=>{
+            if(err) return res.status(500).json({error: err});
+            if(!data) return res.status(404).json({error: 'data not found'});
+        });
+    })
+
     function authenticateRedirect(req, res, next) {
         if (req.isAuthenticated()) {
             next();
