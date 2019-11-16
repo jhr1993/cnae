@@ -83,10 +83,10 @@ $(document).ready(function(){
             const end = $('.profile-list-container').width() - $(this).width()
             const id = $('.profile-id').attr('id');
             console.log(id);
-            /*if($(this).position().left<end){
+            if($(this).position().left<end){
                 fetch(`/db/get_own_event/${id}`,{method: 'get'}).then((res)=>{
                     return res.json()
-                }).then((res)=>{*/
+                }).then((res)=>{
                     
                     const data = testdata;
                     console.log(data);
@@ -108,8 +108,8 @@ $(document).ready(function(){
                         $(this).width(235 + (150 * ($('.profile-events-list').children().length-1)))
                     }
                     
-                /*})
-            }*/
+                })
+            }
         }
     })
 })
