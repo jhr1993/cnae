@@ -81,17 +81,19 @@ $(document).ready(function(){
                 $(this).animate({left:0})
         },drag: function(){
             const end = $('.profile-list-container').width() - $(this).width()
-            if($(this).position().left<end){
+            const id = $('.profile-id').attr('id');
+            console.log(id);
+            /*if($(this).position().left<end){
                 fetch(`/db/get_own_event/${id}`,{method: 'get'}).then((res)=>{
                     return res.json()
-                }).then((res)=>{
+                }).then((res)=>{*/
                     
-                    const data = res.data;
+                    const data = testdata;
+                    console.log(data);
                     if($(this).children().length-1 < data.length) {
                         const data_start = $(this).children().length -1;
                         
-                        console.log(data_start);
-                        const date = (data[data_start].date.length>1) ? data[data_start].date[0]+'+' : data[data_start].date[0]
+                        //const date = (data[data_start].date.length>1) ? data[data_start].date[0]+'+' : data[data_start].date[0]
                         $(this).append(`<li class="profile-list">
                             <div class="profile-list-img-container">
                                 <div class="profile-list-img-background" style="background: url(${data[data_start].img});background-size: cover;"></div>
@@ -99,15 +101,15 @@ $(document).ready(function(){
                             </div>
                             <div class="profile-list-content">
                                 <div class="profile-list-content-title">${data[data_start].title}</div>
-                                <div class="profile-list-content-date">${date}</div>
+                                <div class="profile-list-content-date">01 11 2019</div>
                                 <div class="profile-list-content-cost">PAID</div>
                             </div>
                         </li>`)
                         $(this).width(235 + (150 * ($('.profile-events-list').children().length-1)))
                     }
                     
-                })
-            }
+                /*})
+            }*/
         }
     })
 })
