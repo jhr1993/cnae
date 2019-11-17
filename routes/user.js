@@ -164,7 +164,7 @@ module.exports = (app, User, Event, passport) => {
 
     app.get('/db/get_own_event/:id', (req,res) => {
         const id = req.params.id;
-        Event.find({user:req.params.id},'title title_img',(err,data)=>{
+        Event.find({user:id},'title title_img date',(err,data)=>{
             if(err) return res.status(500).json({error: err});
             if(!data) return res.status(404).json({error: 'data not found'});
             res.json({error:false,data:data})
