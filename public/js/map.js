@@ -188,7 +188,6 @@ function initMap() {
                     infoWindow.open(map, marker);
                     activeInfoWindow = infoWindow;
                     map.panTo(pos);
-                    map.setZoom(13);
                 });
             }
 
