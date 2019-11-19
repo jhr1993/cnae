@@ -82,6 +82,13 @@ form {
 	border-radius: 31px;
 }
 
+.event-add-content-category-parent {
+	font-size: smaller;
+	color: gray;
+	position: absolute;
+	padding: 18px 0 0 19px;
+}
+
 .event-add-content-list-container ul {
 	margin: 0;
 	padding: 0;
@@ -91,7 +98,7 @@ form {
 	list-style: none;
 }
 
-.event-add-content-list-parent {
+.event-add-content-category-list-parent {
 	font-size: smaller;
 	color: grey;
 }

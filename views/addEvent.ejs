@@ -21,7 +21,9 @@
                 <div class="event-add event-add-new">
                     <div class="event-add-content event-add-content-text">
                         <i class="fa fa-close"></i>
-                        <input type="text" name="category[]" placeholder="Search Event Category"> 
+                        <div class="event-add-content-category-parent"></div>
+                        <input type="text" class="event-add-content-category-title" name="category[]" placeholder="Search Event Category"> 
+                        <input type="hidden" class="event-add-content-category-id" name="categoryId[]">
                         <div class="event-add-content-list-container">
                             <ul class="event-add-content-list"></ul>
                         </div>
@@ -32,14 +34,14 @@
                     Add Category
                 </div>
             </div>
-            <div class="event-add-sector">
+            <div class="event-add-sector" id="event-add-date">
                 <div class="event-add-title">
                     <label>Event Date</label>
                 </div>
                 <div class="event-add event-add-new">
                     <div class="event-add-sub-title">Date</div> 
                     <div class="event-add-content event-add-content-text event-add-content-text-half">
-                        <input type="text" placeholder="Start date"><input type="text" placeholder="End Date">
+                        <input type="text" class="event-add-date-input start-calendar"placeholder="Start date"><input type="text" class="event-add-date-input end-calendar" placeholder="End Date">
                         <div class="event-add-error">error</div>
                     </div>
                     <div class="event-add-sub-title">Time</div> 

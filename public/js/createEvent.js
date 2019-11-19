@@ -3,7 +3,9 @@ $(document).on('click','#event-add-category .event-add-content-button',function(
     container.append(`
     <div class="event-add-content event-add-content-text">
         <i class="fa fa-close"></i>
-        <input type="text" name="category[]" placeholder="Search Event Category">
+        <div class="event-add-content-category-parent"></div>
+        <input type="text" class="event-add-content-category-title" name="category[]" placeholder="Search Event Category"> 
+        <input type="hidden" class="event-add-content-category-id" name="categoryId[]">
         <div class="event-add-content-list-container">
             <ul class="event-add-content-list"></ul>
         </div>
@@ -42,8 +44,8 @@ $(document).on('keyup focuson','#event-add-category input',function(){
         let list = '';
         for(let i = 0; i < data.length; i++) {
             list += `<li id="${data[i].origin._id}">
-                <div class="event-add-content-list-parent">${data[i].parent}</div>
-                <div class="event-add-content-list-title">${data[i].origin.title}</div>
+                <div class="event-add-content-category-list-parent">${data[i].parent}</div>
+                <div class="event-add-content-category-list-title">${data[i].origin.title}</div>
             </li>`;
         }
         console.log(list);
@@ -52,6 +54,49 @@ $(document).on('keyup focuson','#event-add-category input',function(){
 })
 
 $(document).on('focusout','#event-add-category input',function(){
-    $(this).parent().find('.event-add-content-list-container').hide();
-    $(this).parent().find('.event-add-content-list').html('');
+    $(this).parent().find('.event-add-content-category-list-container').hide();
+    $(this).parent().find('.event-add-content-category-list').html('');
+})
+
+$(document).on('click','.event-add-content-list-container li', function(){
+    const id = $(this).attr('id');
+    const title = $(this).find('.event-add-content-category-list-title').html();
+    const parent = $(this).find('.event-add-content-category-list-parent').html();
+    $(this).parent().parent().parent().find('.event-add-content-category-parent').html(parent);
+    $(this).parent().parent().parent().find('.event-add-content-category-title').val(title);
+    $(this).parent().parent().parent().find('.event-add-content-category-id').val(id);
+    $(this).parent().parent().hide()
+    $(this).parent().html('')
+})
+
+$(document).ready(function(){
+    $( function() {
+        var dateFormat = "mm/dd/yy",
+        from = $( ".start-calendar" )
+        .datepicker({
+            defaultDate: "+1w",
+            changeMonth: true
+        })
+        .on( "change", function() {
+            to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+            to = $( ".end-calendar" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true
+        })
+        .on( "change", function() {
+            from.datepicker( "option", "maxDate", getDate( this ) );
+        });
+
+        function getDate( element ) {
+            var date;
+            try {
+                date = $.datepicker.parseDate( dateFormat, element.value );
+            } catch( error ) {
+                date = null;
+            }
+
+            return date;
+        }
+    } );
 })
