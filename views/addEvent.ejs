@@ -7,7 +7,7 @@
                 <div class="event-add-title">
                     <label>Event Title</label>
                 </div>
-                <div class="event-add">
+                <div class="event-add-content-container">
                     <div class="event-add-content event-add-content-text">
                         <input type="text" name="title" placeholder="Event Title">
                         <div class="event-add-error">error</div>
@@ -18,14 +18,14 @@
                 <div class="event-add-title">
                     <label>Event Category</label>
                 </div>
-                <div class="event-add event-add-new">
+                <div class="event-add-content-container event-add-new">
                     <div class="event-add-content event-add-content-text">
                         <i class="fa fa-close"></i>
                         <div class="event-add-content-category-parent"></div>
                         <input type="text" class="event-add-content-category-title" name="category[]" placeholder="Search Event Category"> 
                         <input type="hidden" class="event-add-content-category-id" name="categoryId[]">
-                        <div class="event-add-content-list-container">
-                            <ul class="event-add-content-list"></ul>
+                        <div class="event-add-content-search-container">
+                            <ul class="event-add-content-search"></ul>
                         </div>
                         <div class="event-add-error">error</div>
                     </div>
@@ -38,21 +38,24 @@
                 <div class="event-add-title">
                     <label>Event Date</label>
                 </div>
-                <div class="event-add event-add-new">
-                    <div class="event-add-sub-title">Date</div> 
-                    <div class="event-add-content event-add-content-text event-add-content-text-half">
-                        <input type="text" class="event-add-date-input start-calendar"placeholder="Start date"><input type="text" class="event-add-date-input end-calendar" placeholder="End Date">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-sub-title">Time</div> 
-                    <div class="event-add-content event-add-content-text event-add-content-text-half">
-                        <input type="text" placeholder="ex)09:00AM"><input type="text" placeholder="ex)20:00PM">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-sub-title">Description</div> 
-                    <div class="event-add-content event-add-content-text">
-                        <input type="text"  placeholder="Event Description">
-                        <div class="event-add-error">error</div>
+                <div class="event-add-content-container event-add-new">
+                    <div class="event-add-content">
+                        <i class="fa fa-close"></i>
+                        <div class="event-add-sub-title">Date</div> 
+                        <div class="event-add-content-text event-add-content-text-half">
+                            <input type="text" class="event-add-date-input start-calendar"placeholder="Start date"><input type="text" class="event-add-date-input end-calendar" placeholder="End Date">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Time</div> 
+                        <div class="event-add-content-text event-add-content-text-half">
+                            <input type="text" placeholder="ex)09:00AM"><input type="text" placeholder="ex)20:00PM">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Description</div> 
+                        <div class="event-add-content-text">
+                            <input type="text"  placeholder="Event Description">
+                            <div class="event-add-error">error</div>
+                        </div>
                     </div>
                 </div>
                 <div class="event-add-content event-add-content-button">
@@ -60,13 +63,18 @@
                 </div>
             </div>
         </div>
-        <div class="event-add-sector">
+        <div class="event-add-sector" id="event-add-artist">
             <div class="event-add-title">
                 <label>Artists</label>
             </div>
-            <div class="event-add">
+            <div class="event-add-content-container event-add-new">
                 <div class="event-add-content event-add-content-text">
-                    <input type="text" placeholder="Search Event Category">
+                    <i class="fa fa-close"></i>
+                    <input type="text" class="event-add-content-artist-name" name="artistName[]" placeholder="Search Artist">
+                    <input type="hidden" class="event-add-content-artist-id" name="artistId[]">
+                    <div class="event-add-content-search-container">
+                        <ul class="event-add-content-search"></ul>
+                    </div>
                     <div class="event-add-error">error</div>
                 </div>
             </div>
@@ -78,36 +86,38 @@
             <div class="event-add-title">
                 <label>Place</label>
             </div>
-            <div class="event-add">
-                <div class="event-add-sub-title">Place Name</div> 
+            <div class="event-add-content-container event-add-new">
                 <div class="event-add-content event-add-content-text">
-                    <input type="text" placeholder="Plcae Name">
-                    <div class="event-add-error">error</div>
-                </div>
-                <div class="event-add-sub-title">Address</div> 
-                <div class="event-add-content event-add-content-text">
-                    <input type="text" placeholder="Address 1">
-                    <div class="event-add-error">error</div>
-                </div>
-                <div class="event-add-content event-add-content-text">
-                    <input type="text" placeholder="Address 2">
-                    <div class="event-add-error">error</div>
-                </div>
-                <div class="event-add-content event-add-content-text">
-                    <input type="text" placeholder="City">
-                    <div class="event-add-error">error</div>
-                </div>
-                <div class="event-add-content event-add-content-text">
-                    <input type="text" placeholder="State/Province">
-                    <div class="event-add-error">error</div>
-                </div>
-                <div class="event-add-content event-add-content-text">
-                    <input type="text" placeholder="Zip Code/Post Code">
-                    <div class="event-add-error">error</div>
-                </div>
-                <div class="event-add-content event-add-content-serch">
-                    <input type="text" placeholder="Country">
-                    <div class="event-add-error">error</div>
+                    <div class="event-add-sub-title">Place Name</div> 
+                    <div class="event-add-content-text">
+                        <input type="text" placeholder="Plcae Name">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-sub-title">Address</div> 
+                    <div class="event-add-content-text">
+                        <input type="text" placeholder="Address 1">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-content-text">
+                        <input type="text" placeholder="Address 2">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-content-text">
+                        <input type="text" placeholder="City">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-content-text">
+                        <input type="text" placeholder="State/Province">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-content-text">
+                        <input type="text" placeholder="Zip Code/Post Code">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-content-serch">
+                        <input type="text" placeholder="Country">
+                        <div class="event-add-error">error</div>
+                    </div>
                 </div>
             </div>
             <div class="event-add-content event-add-content-button">

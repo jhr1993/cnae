@@ -29,7 +29,7 @@ form {
 	position: relative;
 }
 
-.event-add-content .fa-close {
+.event-add-content-container .fa-close {
 	margin: 1px;
 	position: absolute;
 	right: 0;
@@ -101,4 +101,29 @@ form {
 .event-add-content-category-list-parent {
 	font-size: smaller;
 	color: grey;
+}
+
+.ui-datepicker-title {
+	text-align: center;
+}
+
+.ui-datepicker {
+	background-color: white; 
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+	width: 1.5em;
+	height: 1.5em;
+	position: absolute;
+}
+
+.ui-datepicker-prev .ui-icon, .ui-datepicker-next .ui-icon {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+ .ui-datepicker-next {
+	right: 0;
 }

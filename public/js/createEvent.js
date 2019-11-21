@@ -1,4 +1,4 @@
-$(document).on('click','#event-add-category .event-add-content-button',function(){
+/*$(document).on('click','#event-add-category .event-add-content-button',function(){
     const container = $('#event-add-category .event-add-new');
     container.append(`
     <div class="event-add-content event-add-content-text">
@@ -75,14 +75,16 @@ $(document).ready(function(){
         from = $( ".start-calendar" )
         .datepicker({
             defaultDate: "+1w",
-            changeMonth: true
+            nextText: "&gt;",
+            prevText: "&lt;"
         })
         .on( "change", function() {
             to.datepicker( "option", "minDate", getDate( this ) );
         }),
             to = $( ".end-calendar" ).datepicker({
             defaultDate: "+1w",
-            changeMonth: true
+            nextText: "&gt;",
+            prevText: "&lt;"
         })
         .on( "change", function() {
             from.datepicker( "option", "maxDate", getDate( this ) );
@@ -99,4 +101,24 @@ $(document).ready(function(){
             return date;
         }
     } );
+})*/
+
+$(document).on('click','.event-add-content-button',function(){ 
+    const container = $(this).parent().find('.event-add-content-container');
+    const cloneString = $(this).parent().find('.event-add-content:first');
+    const test = cloneString.clone().appendTo(container).find('input').val('')
+    if(container.children().length>1){
+        container.find('.fa-close').show();
+    }
+})
+
+$(document).on('click','.fa-close',function(){
+    const container = $(this).parent().parent();
+    console.log(container.children());
+    if(container.children().length>1){
+        $(this).parent().remove();
+    }
+    if(container.children().length<=1){
+        container.find('.fa-close').hide();
+    }
 })
