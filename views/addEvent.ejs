@@ -3,14 +3,32 @@
 <div class="event-add-container">
     <form method="POST" action="/db/add_event">
         <div class="event-add-sector-container">
-            <div class="event-add-sector">
+            <div class="event-add-sector" id="event-add-title">
                 <div class="event-add-title">
-                    <label>Event Title</label>
+                    <label>Event Detail</label>
                 </div>
                 <div class="event-add-content-container">
-                    <div class="event-add-content event-add-content-text">
-                        <input type="text" name="title" placeholder="Event Title">
-                        <div class="event-add-error">error</div>
+                    <div class="event-add-content">
+                        <div class="event-add-sub-title">Event Title</div> 
+                        <div class="event-add-content-text">
+                            <input type="text" name="title" placeholder="Event Title">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Event Title Image</div> 
+                        <div class="event-add-content-img">
+                            <input type="file" name="event_title_img">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Event Summary</div> 
+                        <div class="event-add-content-textarea">
+                            <textarea class="event-add-content-textarea-message" name="event_summary" placeholder="Event summary"></textarea>
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Event Description</div> 
+                        <div class="event-add-content-textarea">
+                            <textarea class="event-add-content-textarea-message" name="event_summary" placeholder="Event Description"></textarea>
+                            <div class="event-add-error">error</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -19,11 +37,13 @@
                     <label>Event Category</label>
                 </div>
                 <div class="event-add-content-container event-add-new">
-                    <div class="event-add-content event-add-content-text">
+                    <div class="event-add-content">
                         <i class="fa fa-close"></i>
                         <div class="event-add-content-category-parent"></div>
-                        <input type="text" class="event-add-content-category-title" name="category[]" placeholder="Search Event Category"> 
-                        <input type="hidden" class="event-add-content-category-id" name="categoryId[]">
+                        <div class="event-add-content-text">
+                            <input type="text" class="event-add-content-category-title" name="category_title[]" placeholder="Search Event Category"> 
+                            <input type="hidden" class="event-add-content-category-id" name="category_id[]">
+                        </div>
                         <div class="event-add-content-search-container">
                             <ul class="event-add-content-search"></ul>
                         </div>
@@ -43,17 +63,19 @@
                         <i class="fa fa-close"></i>
                         <div class="event-add-sub-title">Date</div> 
                         <div class="event-add-content-text event-add-content-text-half">
-                            <input type="text" class="event-add-date-input start-calendar"placeholder="Start date"><input type="text" class="event-add-date-input end-calendar" placeholder="End Date">
+                            <input type="text" name="date_start[]" class="event-add-date-input start-calendar"placeholder="Start date">
+                            <input type="text" name="date_end[]"class="event-add-date-input end-calendar" placeholder="End Date">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-sub-title">Time</div> 
                         <div class="event-add-content-text event-add-content-text-half">
-                            <input type="text" placeholder="ex)09:00AM"><input type="text" placeholder="ex)20:00PM">
+                            <input type="text" name="time_start[]" placeholder="ex)09:00AM">
+                            <input type="text" name="time_end[]" placeholder="ex)20:00PM">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-sub-title">Description</div> 
                         <div class="event-add-content-text">
-                            <input type="text"  placeholder="Event Description">
+                            <input type="text" name="date_description" placeholder="Event Description">
                             <div class="event-add-error">error</div>
                         </div>
                     </div>
@@ -62,182 +84,173 @@
                     Add Date
                 </div>
             </div>
-        </div>
-        <div class="event-add-sector" id="event-add-artist">
-            <div class="event-add-title">
-                <label>Artists</label>
-            </div>
-            <div class="event-add-content-container event-add-new">
-                <div class="event-add-content event-add-content-text">
-                    <i class="fa fa-close"></i>
-                    <input type="text" class="event-add-content-artist-name" name="artistName[]" placeholder="Search Artist">
-                    <input type="hidden" class="event-add-content-artist-id" name="artistId[]">
-                    <div class="event-add-content-search-container">
-                        <ul class="event-add-content-search"></ul>
-                    </div>
-                    <div class="event-add-error">error</div>
+            <div class="event-add-sector" id="event-add-artist">
+                <div class="event-add-title">
+                    <label>Artists</label>
                 </div>
-            </div>
-            <div class="event-add-content event-add-content-button">
-                Add Artist
-            </div>
-        </div>
-        <div class="event-add-sector">
-            <div class="event-add-title">
-                <label>Place</label>
-            </div>
-            <div class="event-add-content-container event-add-new">
-                <div class="event-add-content event-add-content-text">
-                    <div class="event-add-sub-title">Place Name</div> 
-                    <div class="event-add-content-text">
-                        <input type="text" placeholder="Plcae Name">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-sub-title">Address</div> 
-                    <div class="event-add-content-text">
-                        <input type="text" placeholder="Address 1">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-content-text">
-                        <input type="text" placeholder="Address 2">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-content-text">
-                        <input type="text" placeholder="City">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-content-text">
-                        <input type="text" placeholder="State/Province">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-content-text">
-                        <input type="text" placeholder="Zip Code/Post Code">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-content-serch">
-                        <input type="text" placeholder="Country">
+                <div class="event-add-content-container event-add-new">
+                    <div class="event-add-content">
+                        <i class="fa fa-close"></i>
+                        <div class="event-add-content-text">
+                            <input type="text" class="event-add-content-artist-name" name="artist_name[]" placeholder="Search Artist">
+                            <input type="hidden" class="event-add-content-artist-id" name="artist_id[]">
+                        </div>
+                        <div class="event-add-content-search-container">
+                            <ul class="event-add-content-search"></ul>
+                        </div>
                         <div class="event-add-error">error</div>
                     </div>
                 </div>
-            </div>
-            <div class="event-add-content event-add-content-button">
-                Add Place
-            </div>
-        </div>
-        <div class="event-add-sector">
-            <div class="event-add-title">
-                <label>Event Details</label>
-            </div>
-            <div class="event-add">
-                <div class="event-add-sub-title">Title Image</div> 
-                <div class="event-add-content event-add-content-file">
-                    <input type="text">
-                    <div class="event-add-error">error</div>
-                </div>
-            </div>
-            <div class="event-add">
-                <div class="event-add-sub-title">Event Summary</div> 
-                <div class="event-add-content event-add-content-textarea">
-                    <textarea placeholder="Event Summary for "></textarea>
-                    <div class="event-add-error">error</div>
-                </div>
-            </div>
-            <div class="event-add">
-                <div class="event-add-sub-title">Event Description</div> 
-                <div class="event-add-content event-add-content-textarea">
-                    <textarea placeholder="Event Summary for "></textarea>
-                    <div class="event-add-error">error</div>
+                <div class="event-add-content event-add-content-button">
+                    Add Artist
                 </div>
             </div>
         </div>
-        <div class="event-add-sector">
-            <div class="event-add-title">
-                <label>Event Tickets</label>
-            </div>
-            <div class="event-add-sub-title">Ticket Type</div> 
-            <div class="event-add-content event-add-content-radio">
-                <div class="event-add-content event-add-content-radio-content">
-                    <input type="radio" value="paid" checked="checked"><label>Paid</label>
+        <div class="event-section-container">
+            <div class="event-add-sector" id="event-add-place">
+                <div class="event-add-title">
+                    <label>Place</label>
                 </div>
-                <div class="event-add-content event-add-content-radio-content">
-                    <input type="radio" value="Free"><label>Free - Ticketing Rquired but free</label>
+                <div class="event-add-content-container event-add-new">
+                    <div class="event-add-content">
+                        <i class="fa fa-close"></i>
+                        <div class="event-add-sub-title">Place Name</div> 
+                        <div class="event-add-content-text">
+                            <input type="text" name="place_name[]" placeholder="Plcae Name">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Address</div> 
+                        <div class="event-add-content-text">
+                            <input type="text" name="place_address1[]" placeholder="Address 1">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-content-text">
+                            <input type="text" name="place_address2[]" placeholder="Address 2">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-content-text">
+                            <input type="text" name="place_city[]" placeholder="City">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-content-text">
+                            <input type="text" name="place_state[]" placeholder="State/Province">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-content-text">
+                            <input type="text" name="place_zip[]" placeholder="Zip Code/Post Code">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-content-serch">
+                            <input type="text" name="place_country[]" placeholder="Country">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Place Description</div> 
+                        <div class="event-add-content-textarea">
+                            <textarea class="event-add-content-textarea-message" name="palce_description[]" placeholder="Event place summary"></textarea>
+                            <div class="event-add-error">error</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="event-add-content event-add-content-radio-content">
-                    <input type="radio" value="Open"><label>Open - No Ticketing for the event</label>
+                <div class="event-add-content-button">
+                    Add Place
                 </div>
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-sub-title">Ticket Description</div> 
-            <div class="event-add-content event-add-content-text">
-                <input type="text" placeholder="General Admission">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">Price</div> 
-                <input type="text" placeholder="0.00">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">Currency</div> 
-                <input type="text">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">Capacity</div> 
-                <input type="text" placeholder="Enter The Number of Seats">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-button">
-                Add Ticket
             </div>
         </div>
-        <div class="event-add-sector">
+        <div class="event-add-sector-container">
+            <div class="event-add-sector" id="event-add-ticket">
+                <div class="event-add-title">
+                    <label>Event Tickets</label>
+                </div>
+                <div class="event-add-content-container">
+                    <div class="event-add-sub-title">Ticket Type</div> 
+                    <div class="event-add-content-radio">
+                        <div class="event-add-content-radio-container">
+                            <input type="radio" value="paid" checked="checked"><label>Paid</label>
+                        </div>
+                        <div class="event-add-content-radio-container">
+                            <input type="radio" value="Free"><label>Free - Ticketing Rquired but free</label>
+                        </div>
+                        <div class="event-add-content-radio-container">
+                            <input type="radio" value="Open"><label>Open - No Ticketing for the event</label>
+                        </div>
+                        <div class="event-add-error">error</div>
+                    </div>
+                </div>
+                <div class="event-add-content-container event-add-new">
+                    <div class="event-add-content">
+                        <i class="fa fa-close"></i>
+                        <div class="event-add-sub-title">Ticket Type</div> 
+                        <div class="event-add-content-text">
+                            <input type="text" name="ticket_type[]" placeholder="Plcae Name">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Ticket Price</div> 
+                        <div class="event-add-content-text event-add-content-text-half">
+                            <input type="text" name="ticket_currency[]" class="event-add-date-input start-calendar"placeholder="currency">
+                            <input type="text" name="ticket_price[]"class="event-add-date-input end-calendar" value="0.00">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Capacity</div> 
+                        <div class="event-add-content-text">
+                            <input type="text" name="ticket_capacity[]" placeholder="Plcae Name">
+                            <div class="event-add-error">error</div>
+                        </div>
+                        <div class="event-add-sub-title">Event Description</div> 
+                        <div class="event-add-content-textarea">
+                            <textarea class="event-add-content-textarea-message" name="ticket_desc[]" placeholder="Event Description"></textarea>
+                            <div class="event-add-error">error</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-add-content-button">
+                    Add Ticket
+                </div>
+            </div>
+        </div>
+        <div class="event-add-sector" id="event-add-url">
             <div class="event-add-title">
                 <label>URLs</label>
             </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">URL</div> 
-                <input type="text" placeholder="URL">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">URL Type</div> 
-                <input type="text">
-                <div class="event-add-error">error</div>
+            <div class="event-add-content-container event-add-new">
+                <div class="event-add-content">
+                    <i class="fa fa-close"></i>
+                    <div class="event-add-sub-title">Url</div>
+                    <div class="event-add-content-text">
+                        <input type="text" name="url[]" placeholder="Url">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-sub-title">Url Type</div>
+                    <div class="event-add-content-text">
+                        <input type="text" name="type[]" placeholder="Url Type">
+                        <div class="event-add-error">error</div>
+                    </div>
+                </div>
             </div>
             <div class="event-add-content event-add-content-button">
-                Add URL
+                Add Url
             </div>
         </div>
-        <div class="event-add-sector">
+        <div class="event-add-sector" id="event-add-contact">
             <div class="event-add-title">
-                <label>Contats</label>
+                <label>Contacts</label>
             </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">Event Organizer Name</div> 
-                <input type="text" placeholder="Company, Organization or Person Name">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">Event Contact Name</div> 
-                <input type="text" placeholder="Name of Contact Person">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">Email</div> 
-                <input type="text" placeholder="example@example.com">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-text">
-                <div class="event-add-sub-title">Phone</div> 
-                <input type="text" placeholder="Telephone Number">
-                <div class="event-add-error">error</div>
-            </div>
-            <div class="event-add-content event-add-content-button-half">
-                Add Contact
+            <div class="event-add-content-container event-add-new">
+                <div class="event-add-content">
+                    <i class="fa fa-close"></i>
+                    <div class="event-add-sub-title">Contact Name</div>
+                    <div class="event-add-content-text">
+                        <input type="text" name="contact_name[]" placeholder="Nmae of Company, Organization or Person">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-sub-title">Contact Description</div>
+                    <div class="event-add-content-text">
+                        <input type="text" name="contact_desc[]" placeholder="Description of Contact">
+                        <div class="event-add-error">error</div>
+                    </div>
+                </div>
             </div>
             <div class="event-add-content event-add-content-button">
-                Add More Contact
+                Add Contact
             </div>
         </div>
     </form>

@@ -104,21 +104,23 @@ $(document).ready(function(){
 })*/
 
 $(document).on('click','.event-add-content-button',function(){ 
-    const container = $(this).parent().find('.event-add-content-container');
+    const container = $(this).parent().find('.event-add-new');
     const cloneString = $(this).parent().find('.event-add-content:first');
-    const test = cloneString.clone().appendTo(container).find('input').val('')
+    const test = cloneString.clone();
+    test.find('input').val('');
+    test.find('textarea.event-add-content-textarea-message').val('');
+    test.appendTo(container);
     if(container.children().length>1){
         container.find('.fa-close').show();
     }
-})
+});
 
 $(document).on('click','.fa-close',function(){
     const container = $(this).parent().parent();
-    console.log(container.children());
     if(container.children().length>1){
         $(this).parent().remove();
     }
     if(container.children().length<=1){
         container.find('.fa-close').hide();
     }
-})
+});

@@ -56,6 +56,7 @@ form {
 
 .event-add-content-text-half input {
 	width: 50%;
+	float: left;
 }
 
 .event-add-sector {
