@@ -78,7 +78,8 @@ module.exports = function(app, Event, User){
 
     /* Event add */
     app.post('/db/add_event',(req,res)=>{
-        const event = new Event();
+        console.log(req.body.title)
+        /*const event = new Event();
         event.title = req.body.name;
         event.lat = req.body.lat;
         event.lng = req.body.lng;
@@ -90,7 +91,7 @@ module.exports = function(app, Event, User){
                 return;
             }
             res.json({error:0})
-        })
+        })*/
     })
 
     // Get subed 

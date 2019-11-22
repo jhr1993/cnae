@@ -1,7 +1,7 @@
 <% include ./header.ejs %>
     
 <div class="event-add-container">
-    <form method="POST" action="/db/add_event">
+    <form method="POST" action="/db/add_event" enctype="multipart/form-data">
         <div class="event-add-sector-container">
             <div class="event-add-sector" id="event-add-title">
                 <div class="event-add-title">
@@ -16,7 +16,8 @@
                         </div>
                         <div class="event-add-sub-title">Event Title Image</div> 
                         <div class="event-add-content-img">
-                            <input type="file" name="event_title_img">
+                            <input class="event-add-content-title-image" accept="image/*" type="file" name="event_title_img">
+                            <div class="event-add-content-title-image-preview" style="background-position: center;background-size:contain;"></div>
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-sub-title">Event Summary</div> 
@@ -165,13 +166,13 @@
                     <div class="event-add-sub-title">Ticket Type</div> 
                     <div class="event-add-content-radio">
                         <div class="event-add-content-radio-container">
-                            <input type="radio" value="paid" checked="checked"><label>Paid</label>
+                            <input class="event-add-content-radio" name="ticket_option" type="radio" value="paid" checked="checked"><label>Paid</label>
                         </div>
                         <div class="event-add-content-radio-container">
-                            <input type="radio" value="Free"><label>Free - Ticketing Rquired but free</label>
+                            <input class="event-add-content-radio" name="ticket_option" type="radio" value="free"><label>Free - Ticketing Rquired but free</label>
                         </div>
                         <div class="event-add-content-radio-container">
-                            <input type="radio" value="Open"><label>Open - No Ticketing for the event</label>
+                            <input class="event-add-content-radio" name="ticket_option" type="radio" value="open"><label>Open - No Ticketing for the event</label>
                         </div>
                         <div class="event-add-error">error</div>
                     </div>
@@ -184,8 +185,8 @@
                             <input type="text" name="ticket_type[]" placeholder="Plcae Name">
                             <div class="event-add-error">error</div>
                         </div>
-                        <div class="event-add-sub-title">Ticket Price</div> 
-                        <div class="event-add-content-text event-add-content-text-half">
+                        <div class="event-add-sub-title event-add-content-ticket-price">Ticket Price</div> 
+                        <div class="event-add-content-text event-add-content-text-half event-add-content-ticket-price">
                             <input type="text" name="ticket_currency[]" class="event-add-date-input start-calendar"placeholder="currency">
                             <input type="text" name="ticket_price[]"class="event-add-date-input end-calendar" value="0.00">
                             <div class="event-add-error">error</div>
@@ -247,12 +248,23 @@
                         <input type="text" name="contact_desc[]" placeholder="Description of Contact">
                         <div class="event-add-error">error</div>
                     </div>
+                    <div class="event-add-sub-title">Email</div>
+                    <div class="event-add-content-text">
+                        <input type="text" name="contact_desc[]" placeholder="Description of Contact">
+                        <div class="event-add-error">error</div>
+                    </div>
+                    <div class="event-add-sub-title">Phone</div>
+                    <div class="event-add-content-text">
+                        <input type="text" name="contact_desc[]" placeholder="Description of Contact">
+                        <div class="event-add-error">error</div>
+                    </div>
                 </div>
             </div>
             <div class="event-add-content event-add-content-button">
                 Add Contact
             </div>
         </div>
+        <button type="submit">submit</button>
     </form>
 </div>
 

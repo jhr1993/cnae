@@ -63,6 +63,11 @@ form {
 	padding: 10px;
 }
 
+.event-add-content-title-image-preview {
+	width: 200px;
+	height: 100px;
+}
+
 .event-add-title {
 	font-weight: bold;
 }
@@ -94,6 +99,7 @@ form {
 	margin: 0;
 	padding: 0;
 }
+
 
 .event-add-content-list-container li {
 	list-style: none;

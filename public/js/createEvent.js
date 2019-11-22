@@ -124,3 +124,37 @@ $(document).on('click','.fa-close',function(){
         container.find('.fa-close').hide();
     }
 });
+
+$(document).on('change','.event-add-content-title-image',function(e){
+    output = $(this).parent().find('.event-add-content-title-image-preview');
+    output.css('background',`url(${URL.createObjectURL(e.target.files[0])})`);
+    output.css('background-size','contain');
+    output.css('background-position','center');
+    output.css('background-repeat','no-repeat');
+})
+
+$(document).on('change','#event-add-ticket .event-add-content-radio',function(){
+    const value = $('input:checked').val();
+    console.log(value)
+    switch(value){
+        case 'paid':
+            $('#event-add-ticket .event-add-content-button').show();
+            $('#event-add-ticket .event-add-new').show();
+            $('#event-add-ticket .event-add-content-ticket-price').show();
+            $('#event-add-ticket .event-add-new input').prop("disabled",false);
+            break;
+        case 'free':
+            $('#event-add-ticket .event-add-content-button').show();
+            $('#event-add-ticket .event-add-new').show();
+            $('#event-add-ticket .event-add-content-ticket-price').hide();
+            $('#event-add-ticket .event-add-new input').prop("disabled",false);
+            break;
+        default:
+            $('#event-add-ticket .event-add-content-button').hide()
+            $('#event-add-ticket .event-add-new').hide();
+            $('#event-add-ticket .event-add-content-ticket-price').hide();
+            $('#event-add-ticket .event-add-new input').prop("disabled",true);
+            break;
+
+    }
+})
