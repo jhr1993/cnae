@@ -8,6 +8,7 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const flash = require('express-flash');
 const passport = require('passport');
+const multer = require('multer');
 //const fs = require('fs');
 
 
@@ -80,3 +81,11 @@ const validate = (email) => {
 
     return expression.test(String(email).toLowerCase());
 }
+
+// [Set Storage Engine]
+const storage = multer.diskStorage({
+    destination: './public/uploads/',
+    filename: function(req, file, callback){
+        callback(null, file.fieldname + '-'+ Date.now() + Path2D.extname(file.originalname));
+    }
+});
