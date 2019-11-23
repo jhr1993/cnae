@@ -20,6 +20,42 @@ form {
 	margin: 0;
 }
 
+.event-add-content-title-upload {
+	width: 180px;
+	margin: 0 auto;
+	border-radius: 15px;
+	color: grey;
+	text-align: center;
+	border: 1px solid grey;
+}
+
+.event-add-content-title-upload:hover {
+	color: white;
+	background-color: grey;
+}
+
+.event-add-content-title-upload i{
+	padding: 0;
+	margin: 0;
+	margin-right: 10px;
+	height: auto;
+	width: auto;
+	font-size: 1em;
+}
+
+
+
+.event-add-content-title-upload label{
+	width: 100%;
+	margin: 0;
+	padding: 5px;
+	cursor: pointer;
+}
+.event-add-content-title-upload input[type="file"] { 
+	display: none
+}
+
+
 .event-add-container {
 	width: 80%;
 	margin: 0 auto;
@@ -63,9 +99,43 @@ form {
 	padding: 10px;
 }
 
+.event-add-content-title-image-preview-container {
+	padding: 15px 0;
+}
+
 .event-add-content-title-image-preview {
 	width: 200px;
-	height: 100px;
+	height: 150px;
+	float: left;
+}
+
+.event-add-content-title-image-preview-desc {
+	padding-left: 10px;
+	display: none;
+	width: calc(100% - 200px);
+	float: left;
+}
+
+.event-add-content-title-image-preview-title {
+	font-weight: bold;
+}
+
+.event-add-content-title-image-preview-content {
+	word-break:break-all;
+}
+
+
+@media only screen and (max-width: 500px) {
+	.event-add-content-title-image-preview {
+		width: 100%;
+		float: none;
+		height: 200px;
+	}
+
+	.event-add-content-title-image-preview-desc {
+		width: 100%;
+		float: none;
+	}
 }
 
 .event-add-title {
@@ -89,23 +159,23 @@ form {
 }
 
 .event-add-content-category-parent {
-	font-size: smaller;
+	font-size: x-small;
 	color: gray;
 	position: absolute;
 	padding: 18px 0 0 19px;
 }
 
-.event-add-content-list-container ul {
+.event-add-content-search-container ul {
 	margin: 0;
 	padding: 0;
 }
 
 
-.event-add-content-list-container li {
+.event-add-content-search-container li {
 	list-style: none;
 }
 
-.event-add-content-category-list-parent {
+.event-add-content-category-search-parent {
 	font-size: smaller;
 	color: grey;
 }
@@ -133,4 +203,42 @@ form {
 
  .ui-datepicker-next {
 	right: 0;
+}
+
+.event-add-required::after {
+	content:'*';
+	color: #e86100;
+}
+
+.event-add-content-img {
+	padding: 18px;
+	border: 1px solid grey;
+	border-radius: 31px;
+}
+
+.note-frame {
+	border-radius: 31px;
+	padding: 0 18px;
+}
+
+.note-toolbar {
+	border-bottom: 1px solid grey;
+}
+
+.note-toolbar, .panel-heading, .note-editable {
+	padding: 0 !important;
+}
+
+.note-editing-area {
+	position: relative;
+	min-height: 200px;
+	padding: 10px 0;
+}
+
+.note-editable {
+	min-height: 200px;
+}
+
+.note-statusbar {
+	background-color: transparent !important;
 }

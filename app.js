@@ -151,9 +151,13 @@ const upload = multer({
   fileFilter: function(req, file, cb){
     checkFileType(file, cb);
   }
-}).single('avatar');
+}).single('event_title_img');
 
 function checkFileType(file, cb){
+  if(!file){
+    console.log('no file')
+  }
+  console.log(file)
   // Allowed ext
   const filetypes = /jpeg|jpg|png|gif/;
   // Check ext
@@ -169,6 +173,12 @@ function checkFileType(file, cb){
 }
 
 app.post('/test/upload', upload, function (req, res, next) {
-  console.log(req.file)
-  console.log(req.body.text)
+  if(!req.body.title){
+    console.log('no title')
+  }
+  if(!req.file){
+    console.log('no file')
+  }
+  /*console.log(req.file)
+  console.log(req.body)*/
 })
