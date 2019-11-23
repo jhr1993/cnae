@@ -85,7 +85,7 @@ const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-
 
 // [IMAGE UPLOADER]
 // Set The Storage Engine
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
     destination: './public/uploads/',
     filename: function(req, file, cb){
       cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -119,6 +119,7 @@ function checkFileType(file, cb){
 
 app.post('/upload', (req, res) => {
   upload(req, res, (err) => {
+    console.log(req.body)
     if(err){
       res.render('test', {
         msg: err
@@ -136,4 +137,38 @@ app.post('/upload', (req, res) => {
       }
     }
   });
+});*/
+const storage = multer.diskStorage({
+  destination: './public/uploads/',
+  filename: function(req, file, cb){
+    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
 });
+
+const upload = multer({
+  storage: storage,
+  limits:{fileSize: 1000000},
+  fileFilter: function(req, file, cb){
+    checkFileType(file, cb);
+  }
+}).single('avatar');
+
+function checkFileType(file, cb){
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if(mimetype && extname){
+    return cb(null,true);
+  } else {
+    cb('Error: Images Only!');
+  }
+}
+
+app.post('/test/upload', upload, function (req, res, next) {
+  console.log(req.file)
+  console.log(req.body.text)
+})

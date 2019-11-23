@@ -1,5 +1,5 @@
 //routes/db.js
-module.exports = function(app, Event, User){
+module.exports = function(app, Event, User, Multer){
     //GET ALL DATA
     app.get('/db/get_event', (req,res)=>{
         Event.find(function(err,data){

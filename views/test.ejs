@@ -14,14 +14,10 @@
   <script src="/js/test.js"></script>
 </head>
 <body>
-  <input type="file" accept="image/*">
-<img id="output"/>
-<script>
-  $(document).on('change','input',function(e){
-      output = $("#output");
-      console.log(output.attr('src'))
-      output.attr('src',URL.createObjectURL(e.target.files[0]));
-  })
-</script>
+  <form action="/test/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="avatar" />
+    <input type="text" name="text" />
+    <button type="submit">button</button>
+  </form>
 </body>
 </html>
