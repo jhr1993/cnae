@@ -219,6 +219,7 @@ form {
 .note-frame {
 	border-radius: 31px;
 	padding: 0 18px;
+	background-color: white;
 }
 
 .note-toolbar {
@@ -237,6 +238,10 @@ form {
 
 .note-editable {
 	min-height: 200px;
+}
+
+.note-editable img {
+	width: 100% !important;
 }
 
 .note-statusbar {

@@ -176,14 +176,17 @@ $(document).on('change','#event-add-ticket .event-add-content-radio',function(){
 $(document).ready(function(){
     $('.textarea-editor').summernote({
         toolbar: [
-          // [groupName, [list of button]]
-          ['style', ['bold', 'italic', 'underline', 'clear']],
-          ['font', ['strikethrough', 'superscript', 'subscript']],
-          ['fontsize', ['fontsize']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['height', ['height']],
-          ['misc', ['fullscreen','undo','redo']]
+            ['misc', ['undo','redo']],
+            ['zoom', ['fullscreen','codeview']],
+            ['hr',['hr']],
+            ['font_name',['fontname']],
+            ['font_size',['fontsize']],
+            ['font',['bold', 'italic', 'underline','strikethrough','forecolor','backcolor']],
+            ['para', ['paragraph']],
+            ['height', ['height']],
+            ['sequ',['ul', 'ol']],
+            ['clear',['clear']],
+            ['insert',['picture','link','video','table']]
         ]
     });
 })
