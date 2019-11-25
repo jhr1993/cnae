@@ -32,10 +32,9 @@ $(document).ready(function(){
         $('##event-add-category').find('.fa-close').show();
     }
 })*/
-
 let typingTimer
 
-$(document).on('keyup focusin keydown','#event-add-category .event-add-content-category-title',function(e){
+$(document).on('keyup focusin keydown','#event-category .event-add-content-category-title',function(e){
     if(e.type == 'keyup' || e.type == 'focusin'){
         clearTimeout(typingTimer);
         typingTimer = setTimeout(()=>{
@@ -64,7 +63,48 @@ $(document).on('click','.event-add-content-search-container li', function(){
     const id = $(this).attr('id');
     const title = $(this).find('.event-add-content-category-search-title').html();
     const parent = $(this).find('.event-add-content-category-search-parent').html();
-    console.log(`${id} ${title} ${parent}`)
+    $(this).parent().parent().parent().find('.event-add-content-category-parent').html(parent);
+    $(this).parent().parent().parent().find('.event-add-content-category-title').val(title);
+    $(this).parent().parent().parent().find('.event-add-content-category-id').val(id);
+    $(this).parent().parent().hide()
+    $(this).parent().html('')
+})
+
+$(document).on('focusout','#event-add-category .event-add-content-category-title',function(){
+    $(this).parent().parent().find('.event-add-content-search-container').hide();
+    $(this).parent().parent().find('.event-add-content-search').html('');
+})
+
+$(document).on('keyup focusin keydown','#event-artist .event-add-content-artist-name',function(e){
+    if(e.type == 'keyup' || e.type == 'focusin'){
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(()=>{
+            const value = $(this).val();
+            fetch(`/db/get_users/${value}`,{method:'get'}).then((res)=>{
+                return res.json();
+            }).then((res)=>{
+                console.log(res.data);
+                /*$(this).parent().parent().find('.event-add-content-search-container').show();
+                const data = res.data;
+                let list = '';
+                for(let i = 0; i < data.length; i++) {
+                    list += `<li id="${data[i].origin._id}">
+                        <div class="event-add-content-artist-search-parent">${data[i].parent}</div>
+                        <div class="event-add-content-artist-search-title">${data[i].origin.title}</div>
+                    </li>`;
+                }
+                $(this).parent().parent().find('.event-add-content-search').html(list)*/
+            })
+        }, 2000)
+    } else {
+        clearTimeout(typingTimer);
+    }
+})
+
+$(document).on('click','.event-add-content-search-container li', function(){
+    const id = $(this).attr('id');
+    const title = $(this).find('.event-add-content-category-search-title').html();
+    const parent = $(this).find('.event-add-content-category-search-parent').html();
     $(this).parent().parent().parent().find('.event-add-content-category-parent').html(parent);
     $(this).parent().parent().parent().find('.event-add-content-category-title').val(title);
     $(this).parent().parent().parent().find('.event-add-content-category-id').val(id);
@@ -116,14 +156,49 @@ $(document).on('click','.event-add-content-button',function(){
     const cloneString = $(this).parent().find('.event-add-content:first');
     const test = cloneString.clone();
     test.find('.event-add-content-category-parent').html('');
-    console.log(test.find('.event-add-content-category-parent').html());
     test.find('input').val('');
-    console.log(test.find('input').val())
     test.find('textarea.event-add-content-textarea-message').val('');
+    test.find('.event-add-error').html('');
+    test.find('.event-add-error').hide();
     test.appendTo(container);
     if(container.children().length>1){
         container.find('.fa-close').show();
     }
+});
+
+$(document).on('click','#event-date-button',function(){ 
+    console.log('work')
+    $( function() {
+        var dateFormat = "mm/dd/yy",
+        from = $( ".start-calendar" )
+        .datepicker({
+            defaultDate: "+1w",
+            nextText: "&gt;",
+            prevText: "&lt;"
+        })
+        .on( "change", function() {
+            to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+            to = $( ".end-calendar" ).datepicker({
+            defaultDate: "+1w",
+            nextText: "&gt;",
+            prevText: "&lt;"
+        })
+        .on( "change", function() {
+            from.datepicker( "option", "maxDate", getDate( this ) );
+        });
+
+        function getDate( element ) {
+            var date;
+            try {
+                date = $.datepicker.parseDate( dateFormat, element.value );
+            } catch( error ) {
+                date = null;
+            }
+
+            return date;
+        }
+    });
 });
 
 $(document).on('click','.fa-close',function(){
@@ -174,19 +249,45 @@ $(document).on('change','#event-add-ticket .event-add-content-radio',function(){
 })
 
 $(document).ready(function(){
-    $('.textarea-editor').summernote({
-        toolbar: [
-            ['misc', ['undo','redo']],
-            ['zoom', ['fullscreen','codeview']],
-            ['hr',['hr']],
-            ['font_name',['fontname']],
-            ['font_size',['fontsize']],
-            ['font',['bold', 'italic', 'underline','strikethrough','forecolor','backcolor']],
-            ['para', ['paragraph']],
-            ['height', ['height']],
-            ['sequ',['ul', 'ol']],
-            ['clear',['clear']],
-            ['insert',['picture','link','video','table']]
-        ]
-    });
+    $('.textarea-editor').summernote();
 })
+
+$(document).on('click','.event-add-submit',function(e){
+    e.preventDefault();
+    if($('#event-title input').val()=='' || $('#event-title input').val()==' '){
+        noEmptySpace($('#event-title'),'Title must not be empty')
+    }
+    if($('#event-summary textarea').html()=='' || $('#event-summary textarea').html()==' '){
+        noEmptySpace($('#event-summary'),'Summary must not be empty')
+    }
+    if($('#event-desc textarea').html()=='' || $('#event-desc textarea').html()==' '){
+        noEmptySpace($('#event-desc'),'Description must not be empty')
+    }
+
+    let categories = $("#event-category").children();
+    for(let i = 0;i < categories.length; i++) {
+        if($(categories[i]).find('.event-add-content-category-title').val()=='' || $(categories[i]).find('.event-add-content-category-title').val()==' ' || $(categories[i]).find('.event-add-content-category-id').val()=='' || $(categories[i]).find('.event-add-content-category-id').val()==' '){
+            noEmptySpace($(categories[i]),'Category must not be empty or must be selected')
+        }
+    }
+
+    let dates = $("#event-date").children();
+    for(let i = 0;i < dates.length; i++) {
+        if($(dates[i]).find('.start-calendar').val()=='' || $(dates[i]).find('start-calendar').val()==' ' || $(dates[i]).find('.end-calendar').val()=='' || $(dates[i]).find('end-calendar').val()==' ' || $(dates[i]).find('.start-time').val()=='' || $(dates[i]).find('start-time').val()==' ' || $(dates[i]).find('.end-time').val()=='' || $(dates[i]).find('end-time').val()==' '){
+            noEmptySpace($(dates[i]),'All required input must not be empty')
+        }
+    }
+
+    let artists = $("#event-category").children();
+    for(let i = 0;i < artists.length; i++) {
+        if($(artists[i]).find('.event-add-content-artist-name').val()=='' || $(artists[i]).find('.event-add-content-artist-name').val()==' ' || $(artists[i]).find('.event-add-content-artist-id').val()=='' || $(artists[i]).find('.event-add-content-artist-id').val()==' '){
+            noEmptySpace($(artists[i]),'Artists must not be empty or must be selected')
+        }
+    }
+})
+
+function noEmptySpace(element, msg){
+    element.find('.event-add-error').html(msg);
+    element.find('.event-add-error').show()
+    window.scrollTo(0,element.offset().top-88)
+}

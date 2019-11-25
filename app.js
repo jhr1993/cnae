@@ -173,6 +173,7 @@ function checkFileType(file, cb){
 }
 
 app.post('/test/upload', upload, function (req, res, next) {
+  console.log(req.body)
   if(!req.body.title){
     console.log('no title')
   }

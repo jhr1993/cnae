@@ -1,7 +1,7 @@
 <% include ./header.ejs %>
     
 <div class="event-add-container">
-    <form method="POST" action="/test/upload" enctype="multipart/form-data">
+    <form class="" method="POST" action="/test/upload" enctype="multipart/form-data">
         <div class="event-add-sector-container">
             <div class="event-add-sector" id="event-add-title">
                 <div class="event-add-title">
@@ -9,52 +9,60 @@
                 </div>
                 <div class="event-add-content-container">
                     <div class="event-add-content">
-                        <div class="event-add-sub-title event-add-required">Event Title</div> 
-                        <div class="event-add-content-text">
-                            <input type="text" name="title" placeholder="Event Title">
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div class="event-add-sub-title">Event Title Image</div> 
-                        <div class="event-add-content-img">
-                            <div class="event-add-content-title-upload">
-                                <label><i class="fa fa fa-upload"></i>Choose File...
-                                    <input class="event-add-content-title-image file-upload-input" accept="image/*" type="file" name="event_title_img">
-                                </label>
+                        <div id="event-title" class="event-add-content-child">
+                            <div class="event-add-sub-title event-add-required">Event Title</div> 
+                            <div class="event-add-content-text">
+                                <input type="text" name="title" placeholder="Event Title">
+                                <div class="event-add-error">error</div>
                             </div>
-                            <div class="event-add-content-title-image-preview-container">
-                                <div class="event-add-content-title-image-preview" style="background-position: center;background-size:contain;"></div>
-                                <div class="event-add-content-title-image-preview-desc">
-                                    <div class="event-add-content-title-image-preview-name">
-                                        <div class="event-add-content-title-image-preview-title">File Name</div>
-                                        <div class="event-add-content-title-image-preview-content"></div>
-                                    </div>
-                                    <div class="event-add-content-title-image-preview-size">
-                                        <div class="event-add-content-title-image-preview-title">File Size</div>
-                                        <div class="event-add-content-title-image-preview-content"></div>
-                                    </div>
+                        </div>
+                        <div class="event-add-content-child">
+                            <div class="event-add-sub-title">Event Title Image</div> 
+                            <div class="event-add-content-img">
+                                <div class="event-add-content-title-upload">
+                                    <label><i class="fa fa-upload"></i>Choose File...
+                                        <input class="event-add-content-title-image file-upload-input" accept="image/*" type="file" name="event_title_img">
+                                    </label>
                                 </div>
-                                <div class="float-clear-both"></div>
+                                <div class="event-add-content-title-image-preview-container">
+                                    <div class="event-add-content-title-image-preview" style="background-position: center;background-size:contain;"></div>
+                                    <div class="event-add-content-title-image-preview-desc">
+                                        <div class="event-add-content-title-image-preview-name">
+                                            <div class="event-add-content-title-image-preview-title">File Name</div>
+                                            <div class="event-add-content-title-image-preview-content"></div>
+                                        </div>
+                                        <div class="event-add-content-title-image-preview-size">
+                                            <div class="event-add-content-title-image-preview-title">File Size</div>
+                                            <div class="event-add-content-title-image-preview-content"></div>
+                                        </div>
+                                    </div>
+                                    <div class="float-clear-both"></div>
+                                </div>
+                                <div class="event-add-error">error</div>
                             </div>
-                            <div class="event-add-error">error</div>
                         </div>
-                        <div class="event-add-sub-title event-add-required">Event Summary</div> 
-                        <div class="event-add-content-textarea">
-                            <textarea class="event-add-content-textarea-message" name="event_summary" placeholder="Event summary"></textarea>
-                            <div class="event-add-error">error</div>
+                        <div id="event-summary" class="event-add-content-child">
+                            <div class="event-add-sub-title event-add-required">Event Summary</div> 
+                            <div class="event-add-content-textarea">
+                                <textarea class="event-add-content-textarea-message" name="event_summary" placeholder="Event summary"></textarea>
+                                <div class="event-add-error">error</div>
+                            </div>
                         </div>
-                        <div class="event-add-sub-title event-add-required">Event Description</div> 
-                        <div class="event-add-content-textarea">
-                            <textarea class="event-add-content-textarea-message textarea-editor" name="event_summary" placeholder="Event Description"></textarea>
-                            <div class="event-add-error">error</div>
+                        <div id="event-desc" class="event-add-content-child">
+                            <div class="event-add-sub-title event-add-required">Event Description</div> 
+                            <div class="event-add-content-textarea">
+                                <textarea class="event-add-content-textarea-message textarea-editor" name="event_description" placeholder="Event Description"></textarea>
+                                <div class="event-add-error">error</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="event-add-sector" id="event-add-category">
+            <div class="event-add-sector">
                 <div class="event-add-title event-add-required">
                     <label>Event Category</label>
                 </div>
-                <div class="event-add-content-container event-add-new">
+                <div class="event-add-content-container event-add-new" id="event-category">
                     <div class="event-add-content">
                         <i class="fa fa-close"></i>
                         <div class="event-add-content-category-parent"></div>
@@ -72,41 +80,57 @@
                     Add Category
                 </div>
             </div>
-            <div class="event-add-sector" id="event-add-date">
+            <div class="event-add-sector">
                 <div class="event-add-title">
                     <label>Event Date</label>
                 </div>
-                <div class="event-add-content-container event-add-new">
+                <div id="event-date" class="event-add-content-container event-add-new">
                     <div class="event-add-content">
                         <i class="fa fa-close"></i>
                         <div class="event-add-sub-title event-add-required">Date</div> 
                         <div class="event-add-content-text event-add-content-text-half">
-                            <input type="text" autocomplete="off" name="date_start[]" class="event-add-date-input start-calendar"placeholder="Start date">
+                            <input type="text" autocomplete="off" name="date_start[]" class="event-add-date-input start-calendar" placeholder="Start date">
                             <input type="text" autocomplete="off" name="date_end[]"class="event-add-date-input end-calendar" placeholder="End Date">
-                            <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-sub-title event-add-required">Time</div> 
                         <div class="event-add-content-text event-add-content-text-half">
-                            <input type="text" autocomplete="off" name="time_start[]" placeholder="ex)09:00AM">
-                            <input type="text" autocomplete="off" name="time_end[]" placeholder="ex)20:00PM">
+                            <input type="text" class="start-time" autocomplete="off" name="time_start[]" placeholder="ex)09:00AM">
+                            <input type="text" class="end-time" autocomplete="off" name="time_end[]" placeholder="ex)20:00PM">
+                        </div>
+                        <div class="event-add-sub-title">Description</div> 
+                        <div class="event-add-content-text">
+                            <input type="text" name="date_description" placeholder="Event Description">
                             <div class="event-add-error">error</div>
                         </div>
-                        <div class="event-add-sub-title event-add-required">Description</div> 
+                    </div>
+                    <div class="event-add-content">
+                        <i class="fa fa-close"></i>
+                        <div class="event-add-sub-title event-add-required">Date</div> 
+                        <div class="event-add-content-text event-add-content-text-half">
+                            <input type="text" autocomplete="off" name="date_start[]" class="event-add-date-input start-calendar" placeholder="Start date">
+                            <input type="text" autocomplete="off" name="date_end[]"class="event-add-date-input end-calendar" placeholder="End Date">
+                        </div>
+                        <div class="event-add-sub-title event-add-required">Time</div> 
+                        <div class="event-add-content-text event-add-content-text-half">
+                            <input type="text" class="start-time" autocomplete="off" name="time_start[]" placeholder="ex)09:00AM">
+                            <input type="text" class="end-time" autocomplete="off" name="time_end[]" placeholder="ex)20:00PM">
+                        </div>
+                        <div class="event-add-sub-title">Description</div> 
                         <div class="event-add-content-text">
                             <input type="text" name="date_description" placeholder="Event Description">
                             <div class="event-add-error">error</div>
                         </div>
                     </div>
                 </div>
-                <div class="event-add-content event-add-content-button">
+                <div id="event-date-button" class="event-add-content event-add-content-button">
                     Add Date
                 </div>
             </div>
-            <div class="event-add-sector" id="event-add-artist">
+            <div class="event-add-sector">
                 <div class="event-add-title">
                     <label>Artists</label>
                 </div>
-                <div class="event-add-content-container event-add-new">
+                <div class="event-add-content-container event-add-new" id="event-artist">
                     <div class="event-add-content">
                         <i class="fa fa-close"></i>
                         <div class="event-add-content-text">
@@ -281,7 +305,7 @@
                 Add Contact
             </div>
         </div>
-        <button type="submit">submit</button>
+        <button class="event-add-submit" type="submit">submit</button>
     </form>
 </div>
 

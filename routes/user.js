@@ -171,6 +171,15 @@ module.exports = (app, User, Event, passport) => {
         });
     })
 
+    app.get('/db/get_users/:value', (req,res) => {
+        const value = req.params.value;
+        User.find({$or:[{name:{ "$regex": value, "$options": "i" }},{email:{ "$regex": value, "$options": "i" }}]}, 'name',(err,data)=>{
+            if(err) return console.log(err);
+            if(!data) return console.log('404');
+            res.json({error:false,data:data})
+        })
+    })
+
     function authenticateRedirect(req, res, next) {
         if (req.isAuthenticated()) {
             next();
