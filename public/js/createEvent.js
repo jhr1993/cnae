@@ -77,7 +77,7 @@ $(document).on('focusout','#event-add-category .event-add-content-category-title
     $(this).parent().parent().find('.event-add-content-search').html('');
 })
 
-/*$(document).ready(function(){
+$(document).ready(function(){
     $( function() {
         var dateFormat = "mm/dd/yy",
         from = $( ".start-calendar" )
@@ -109,7 +109,7 @@ $(document).on('focusout','#event-add-category .event-add-content-category-title
             return date;
         }
     } );
-})*/
+})
 
 $(document).on('click','.event-add-content-button',function(){ 
     const container = $(this).parent().find('.event-add-new');
