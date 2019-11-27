@@ -149,6 +149,14 @@ form {
 
 .event-add-error {
 	display: none;
+	background-color: #ff4444;
+	color: white;
+	margin: 5px 18px;
+	padding: 18px 10px;
+}
+
+.event-add-error-active {
+	border-color: #ff4444 !important;
 }
 
 .event-add-content-button {
@@ -220,6 +228,7 @@ form {
 	border-radius: 31px;
 	padding: 0 18px;
 	background-color: white;
+	margin: 10px 0;
 }
 
 .note-toolbar {
@@ -246,4 +255,9 @@ form {
 
 .note-statusbar {
 	background-color: transparent !important;
+}
+
+.event-add-content-place-map {
+	width: 100%;
+	height: 300px;
 }

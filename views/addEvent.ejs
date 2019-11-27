@@ -1,7 +1,7 @@
 <% include ./header.ejs %>
     
 <div class="event-add-container">
-    <form class="" method="POST" action="/test/upload" enctype="multipart/form-data">
+    <form class="event-add-form" method="POST" action="/test/upload" enctype="multipart/form-data">
         <div class="event-add-sector-container">
             <div class="event-add-sector" id="event-add-title">
                 <div class="event-add-title">
@@ -103,24 +103,6 @@
                             <div class="event-add-error">error</div>
                         </div>
                     </div>
-                    <div class="event-add-content">
-                        <i class="fa fa-close"></i>
-                        <div class="event-add-sub-title event-add-required">Date</div> 
-                        <div class="event-add-content-text event-add-content-text-half">
-                            <input type="text" autocomplete="off" name="date_start[]" class="event-add-date-input start-calendar" placeholder="Start date">
-                            <input type="text" autocomplete="off" name="date_end[]"class="event-add-date-input end-calendar" placeholder="End Date">
-                        </div>
-                        <div class="event-add-sub-title event-add-required">Time</div> 
-                        <div class="event-add-content-text event-add-content-text-half">
-                            <input type="text" class="start-time" autocomplete="off" name="time_start[]" placeholder="ex)09:00AM">
-                            <input type="text" class="end-time" autocomplete="off" name="time_end[]" placeholder="ex)20:00PM">
-                        </div>
-                        <div class="event-add-sub-title">Description</div> 
-                        <div class="event-add-content-text">
-                            <input type="text" name="date_description" placeholder="Event Description">
-                            <div class="event-add-error">error</div>
-                        </div>
-                    </div>
                 </div>
                 <div id="event-date-button" class="event-add-content event-add-content-button">
                     Add Date
@@ -149,41 +131,42 @@
             </div>
         </div>
         <div class="event-section-container">
-            <div class="event-add-sector" id="event-add-place">
+            <div class="event-add-sector">
                 <div class="event-add-title">
                     <label>Place</label>
                 </div>
-                <div class="event-add-content-container event-add-new">
+                <div class="event-add-content-container event-add-new" id="event-place">
                     <div class="event-add-content">
                         <i class="fa fa-close"></i>
+                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                         <div class="event-add-sub-title event-add-required">Place Name</div> 
                         <div class="event-add-content-text">
-                            <input type="text" name="place_name[]" placeholder="Plcae Name">
+                            <input class="place_name" type="text" name="place_name[]" placeholder="Plcae Name">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-sub-title event-add-required">Address</div> 
                         <div class="event-add-content-text">
-                            <input type="text" name="place_address1[]" placeholder="Address 1">
+                            <input class="place_address1" type="text" name="place_address1[]" placeholder="Address 1">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-content-text">
-                            <input type="text" name="place_address2[]" placeholder="Address 2">
+                            <input type="text" class="place_address2" name="place_address2[]" placeholder="Address 2">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-content-text">
-                            <input type="text" name="place_city[]" placeholder="City">
+                            <input type="text" class="place_city" name="place_city[]" placeholder="City">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-content-text">
-                            <input type="text" name="place_state[]" placeholder="State/Province">
+                            <input type="text" class="place_state" name="place_state[]" placeholder="State/Province">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-content-text">
-                            <input type="text" name="place_zip[]" placeholder="Zip Code/Post Code">
+                            <input type="text" class="place_zip" name="place_zip[]" placeholder="Zip Code/Post Code">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-content-serch">
-                            <input type="text" name="place_country[]" placeholder="Country">
+                            <input type="text" class="place_search" name="place_country[]" placeholder="Country">
                             <div class="event-add-error">error</div>
                         </div>
                         <div class="event-add-sub-title">Place Description</div> 
@@ -191,6 +174,7 @@
                             <textarea class="event-add-content-textarea-message" name="palce_description[]" placeholder="Event place summary"></textarea>
                             <div class="event-add-error">error</div>
                         </div>
+                        <div id="event-add-content-place-map1" class="event-add-content-place-map"></div>
                     </div>
                 </div>
                 <div class="event-add-content-button">
@@ -223,19 +207,16 @@
                         <i class="fa fa-close"></i>
                         <div class="event-add-sub-title event-add-required">Ticket Type</div> 
                         <div class="event-add-content-text">
-                            <input type="text" name="ticket_type[]" placeholder="Plcae Name">
-                            <div class="event-add-error">error</div>
+                            <input class="event-add-content-ticket-type" type="text" name="ticket_type[]" placeholder="Plcae Name">
                         </div>
-                        <div class="event-add-sub-title event-add-content-ticket-price">Ticket Price</div> 
-                        <div class="event-add-content-text event-add-content-text-half event-add-content-ticket-price">
-                            <input type="text" name="ticket_currency[]" class="event-add-date-input start-calendar"placeholder="currency">
-                            <input type="text" name="ticket_price[]"class="event-add-date-input end-calendar" value="0.00">
-                            <div class="event-add-error">error</div>
+                        <div class="event-add-sub-title event-add-content-ticket-price-container event-add-required">Ticket Price</div> 
+                        <div class="event-add-content-text event-add-content-text-half event-add-content-ticket-price-container">
+                            <input class="event-add-content-ticket-currency" type="text" name="ticket_currency[]" placeholder="currency">
+                            <input class="event-add-content-ticket-price" type="text" name="ticket_price[]">
                         </div>
                         <div class="event-add-sub-title event-add-required">Capacity</div> 
                         <div class="event-add-content-text">
-                            <input type="text" name="ticket_capacity[]" placeholder="Plcae Name">
-                            <div class="event-add-error">error</div>
+                            <input class="event-add-content-ticket-capacity" type="text" name="ticket_capacity[]" placeholder="Plcae Name">
                         </div>
                         <div class="event-add-sub-title">Ticket Description</div> 
                         <div class="event-add-content-textarea">
@@ -281,22 +262,19 @@
                     <i class="fa fa-close"></i>
                     <div class="event-add-sub-title event-add-required">Contact Name</div>
                     <div class="event-add-content-text">
-                        <input type="text" name="contact_name[]" placeholder="Nmae of Company, Organization or Person">
-                        <div class="event-add-error">error</div>
+                        <input class="event-add-content-contact-name" type="text" name="contact_name[]" placeholder="Nmae of Company, Organization or Person">
                     </div>
-                    <div class="event-add-sub-title event-add-required">Contact Description</div>
+                    <div class="event-add-sub-title">Contact Description</div>
                     <div class="event-add-content-text">
-                        <input type="text" name="contact_desc[]" placeholder="Description of Contact">
-                        <div class="event-add-error">error</div>
+                        <input class="event-add-content-contact-desc" type="text" name="contact_desc[]" placeholder="Description of Contact">
                     </div>
                     <div class="event-add-sub-title event-add-required">Phone</div>
                     <div class="event-add-content-text">
-                        <input type="text" name="contact_desc[]" placeholder="Description of Contact">
-                        <div class="event-add-error">error</div>
+                        <input class="event-add-content-contact-phone" type="text" name="contact_desc[]" placeholder="Description of Contact">
                     </div>
                     <div class="event-add-sub-title event-add-required">Email</div>
                     <div class="event-add-content-text">
-                        <input type="text" name="contact_desc[]" placeholder="Description of Contact">
+                        <input class="event-add-content-contact-email" type="text" name="contact_desc[]" placeholder="Description of Contact">
                         <div class="event-add-error">error</div>
                     </div>
                 </div>
@@ -307,6 +285,8 @@
         </div>
         <button class="event-add-submit" type="submit">submit</button>
     </form>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEpEB7aKAhd1FwGykhkQgGWnRKRntZ3ro&callback=initMap&libraries=places"
+    async defer></script>
 </div>
 
 <% include ./footer.ejs %>

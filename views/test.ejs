@@ -12,12 +12,38 @@
   <script src="/js/library/jquery-ui.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="/js/test.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/test.css" />
 </head>
 <body>
-  <form action="/test/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="avatar" />
-    <input type="text" name="text" />
-    <button type="submit">button</button>
-  </form>
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+    <form id="myForm">
+      <fieldset>
+        <label>Name:</label>
+        <input type="text" name="name" id="name" />
+      </fieldset>
+      <fieldset>
+        <label>Formatted address:</label>
+        <input type="text" name="formatted_address" id="formatted_address" />
+      </fieldset>
+      <fieldset>
+        <label>URL to Google Maps:</label>
+        <input type="text" name="url" id="url" />
+      </fieldset>
+      <fieldset>
+        <label>Latitude:</label>
+        <input type="text" name="lat" id="lat" />
+      </fieldset>
+      <fieldset>
+        <label>Longitude:</label>
+        <input type="text" name="lng" id="lng" />
+      </fieldset>
+       <fieldset>
+        <label>Website:</label>
+        <input type="text" name="website" id="website" />
+      </fieldset>     
+    </form>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEpEB7aKAhd1FwGykhkQgGWnRKRntZ3ro&libraries=places&callback=initAutocomplete"
+         async defer></script>
 </body>
 </html>
