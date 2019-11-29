@@ -249,26 +249,26 @@ $(document).ready(function(){
 })
 
 $(document).on('click','.event-add-submit',function(e){
-    const submit = true
+    let submit = true;
     e.preventDefault();
     if($('#event-title input').val()=='' || $('#event-title input').val()==' '){
         if(!$('#event-title input').hasClass('event-add-error-active')){
             $('#event-title input').addClass('event-add-error-active');
-            noEmptySpace($('#event-title'),'[WARNING] Title must not be empty')
+            errorDisplay($('#event-title'),'[WARNING] Title must not be empty')
             submit = false;
         }
     }
     if($('#event-summary textarea').val()=='' || $('#event-summary textarea').val()==' '){
         if(!$('#event-summary textarea').hasClass('event-add-error-active')){
             $('#event-summary textarea').addClass('event-add-error-active');
-            noEmptySpace($('#event-summary'),'[WARNING] Summary must not be empty')
+            errorDisplay($('#event-summary'),'[WARNING] Summary must not be empty')
             submit = false;
         }
     }
     if($('#event-desc textarea').val()=='' || $('#event-desc textarea').val()==' '){
         if(!$('#event-desc .note-frame').hasClass('event-add-error-active')){
             $('#event-desc .note-frame').addClass('event-add-error-active');
-            noEmptySpace($('#event-desc'),'[WARNING] Description must not be empty')
+            errorDisplay($('#event-desc'),'[WARNING] Description must not be empty')
             submit = false;
         }
     }
@@ -279,14 +279,14 @@ $(document).on('click','.event-add-submit',function(e){
             if(!$(categories[i]).find('.event-add-content-category-title').hasClass('event-add-error-active')){
                 $(categories[i]).find('.event-add-content-category-title').addClass('event-add-error-active');
             }
-            noEmptySpace($(categories[i]),'[WARNING] Category must not be empty')
+            errorDisplay($(categories[i]),'[WARNING] Category must not be empty')
             submit = false;
         }
         if($(categories[i]).find('.event-add-content-category-id').val()=='' || $(categories[i]).find('.event-add-content-category-id').val()==' '){
             if(!$(categories[i]).find('.event-add-content-category-id').hasClass('event-add-error-active')){
                 $(categories[i]).find('.event-add-content-category-id').addClass('event-add-error-active');
             }
-            noEmptySpace($(categories[i]),'[WARNING] Category must be selected')
+            errorDisplay($(categories[i]),'[WARNING] Category must be selected')
             submit = false;
         }
     }
@@ -297,28 +297,28 @@ $(document).on('click','.event-add-submit',function(e){
             if(!$(dates[i]).find('.start-calendar').hasClass('event-add-error-active')){
                 $(dates[i]).find('.start-calendar').addClass('event-add-error-active');
             }
-            noEmptySpace($(dates[i]),'[WARNING] Start date required input must not be empty')
+            errorDisplay($(dates[i]),'[WARNING] Start date required input must not be empty')
             submit = false;
         }
         if($(dates[i]).find('.end-calendar').val()=='' || $(dates[i]).find('end-calendar').val()==' '){
             if(!$(dates[i]).find('.end-calendar').hasClass('event-add-error-active')){
                 $(dates[i]).find('.end-calendar').addClass('event-add-error-active');
             }
-            noEmptySpace($(dates[i]),'[WARNING] End date required input must not be empty')
+            errorDisplay($(dates[i]),'[WARNING] End date required input must not be empty')
             submit = false;
         }
         if($(dates[i]).find('.start-time').val()=='' || $(dates[i]).find('start-time').val()==' '){
             if(!$(dates[i]).find('.start-time').hasClass('event-add-error-active')){
                 $(dates[i]).find('.start-time').addClass('event-add-error-active');
             }
-            noEmptySpace($(dates[i]),'[WARNING] Start time required input must not be empty')
+            errorDisplay($(dates[i]),'[WARNING] Start time required input must not be empty')
             submit = false;
         }
         if($(dates[i]).find('.end-time').val()=='' || $(dates[i]).find('end-time').val()==' '){
             if(!$(dates[i]).find('.end-time').hasClass('event-add-error-active')){
                 $(dates[i]).find('.end-time').addClass('event-add-error-active');
             }
-            noEmptySpace($(dates[i]),'[WARNING] End time required input must not be empty')
+            errorDisplay($(dates[i]),'[WARNING] End time required input must not be empty')
             submit = false;
         }
     }
@@ -329,14 +329,14 @@ $(document).on('click','.event-add-submit',function(e){
             if(!$(artists[i]).find('.event-add-content-artist-name').hasClass('event-add-error-active')){
                 $(artists[i]).find('.event-add-content-artist-name').addClass('event-add-error-active');
             }
-            noEmptySpace($(artists[i]),'[WARNING] Artists must not be empty')
+            errorDisplay($(artists[i]),'[WARNING] Artists must not be empty')
             submit = false;
         }
         if($(artists[i]).find('.event-add-content-artist-id').val()=='' || $(artists[i]).find('.event-add-content-artist-id').val()==' '){
             if(!$(artists[i]).find('.event-add-content-artist-id').hasClass('event-add-error-active')){
                 $(artists[i]).find('.event-add-content-artist-id').addClass('event-add-error-active');
             }
-            noEmptySpace($(artists[i]),'[WARNING] Artists must be selected')
+            errorDisplay($(artists[i]),'[WARNING] Artists must be selected')
             submit = false;
         }
     }
@@ -347,28 +347,28 @@ $(document).on('click','.event-add-submit',function(e){
             if($(tickets[i]).find('.event-add-content-ticket-type').val()=='' || $(tickets[i]).find('.event-add-content-ticket-type').val()==' '){
                 if(!$(tickets[i]).find('.event-add-content-ticket-type').hasClass('event-add-error-active')){
                     $(tickets[i]).find('.event-add-content-ticket-type').addClass('event-add-error-active');
-                    noEmptySpace($(tickets[i]),'[WARNING] Ticekt type must not be empty')
+                    errorDisplay($(tickets[i]),'[WARNING] Ticekt type must not be empty')
                 }
                 submit = false;
             }
             if($(tickets[i]).find('.event-add-content-ticket-currency').val()=='' || $(tickets[i]).find('.event-add-content-ticket-currency').val()==' '){
                 if(!$(tickets[i]).find('.event-add-content-ticket-currency').hasClass('event-add-error-active')){
                     $(tickets[i]).find('.event-add-content-ticket-currency').addClass('event-add-error-active');
-                    noEmptySpace($(tickets[i]),'[WARNING] Ticekt currency must not be empty')
+                    errorDisplay($(tickets[i]),'[WARNING] Ticekt currency must not be empty')
                 }
                 submit = false;
             }
             if($(tickets[i]).find('.event-add-content-ticket-price').val()=='' || $(tickets[i]).find('.event-add-content-ticket-price').val()==' '){
                 if(!$(tickets[i]).find('.event-add-content-ticket-price').hasClass('event-add-error-active')){
                     $(tickets[i]).find('.event-add-content-ticket-price').addClass('event-add-error-active');
-                    noEmptySpace($(tickets[i]),'[WARNING] Ticekt price must not be empty')
+                    errorDisplay($(tickets[i]),'[WARNING] Ticekt price must not be empty')
                 }
                 submit = false;
             }
             if($(tickets[i]).find('.event-add-content-ticket-capacity').val()=='' || $(tickets[i]).find('.event-add-content-ticket-capacity').val()==' '){
                 if(!$(tickets[i]).find('.event-add-content-ticket-capacity').hasClass('event-add-error-active')){
                     $(tickets[i]).find('.event-add-content-ticket-capacity').addClass('event-add-error-active');
-                    noEmptySpace($(tickets[i]),'[WARNING] Ticekt capacity must not be empty')
+                    errorDisplay($(tickets[i]),'[WARNING] Ticekt capacity must not be empty')
                 }
                 submit = false;
             }
@@ -378,14 +378,14 @@ $(document).on('click','.event-add-submit',function(e){
             if($(tickets[i]).find('.event-add-content-ticket-type').val()=='' || $(tickets[i]).find('.event-add-content-ticket-type').val()==' '){
                 if(!$(tickets[i]).find('.event-add-content-ticket-type').hasClass('event-add-error-active')){
                     $(tickets[i]).find('.event-add-content-ticket-type').addClass('event-add-error-active');
-                    noEmptySpace($(tickets[i]),'[WARNING] Ticekt type must not be empty')
+                    errorDisplay($(tickets[i]),'[WARNING] Ticekt type must not be empty')
                 }
                 submit = false;
             }
             if($(tickets[i]).find('.event-add-content-ticket-capacity').val()=='' || $(tickets[i]).find('.event-add-content-ticket-capacity').val()==' '){
                 if(!$(tickets[i]).find('.event-add-content-ticket-capacity').hasClass('event-add-error-active')){
                     $(tickets[i]).find('.event-add-content-ticket-capacity').addClass('event-add-error-active');
-                    noEmptySpace($(tickets[i]),'[WARNING] Ticekt capacity must not be empty')
+                    errorDisplay($(tickets[i]),'[WARNING] Ticekt capacity must not be empty')
                 }
                 submit = false;
             }
@@ -397,21 +397,21 @@ $(document).on('click','.event-add-submit',function(e){
         if($(contacts[i]).find('.event-add-content-contact-name').val()=='' || $(tickets[i]).find('.event-add-content-contact-name').val()==' '){
             if(!$(contacts[i]).find('.event-add-content-contact-name').hasClass('event-add-error-active')){
                 $(contacts[i]).find('.event-add-content-contact-name').addClass('event-add-error-active');
-                noEmptySpace($(contacts[i]),'[WARNING] Name must not be empty')
+                errorDisplay($(contacts[i]),'[WARNING] Name must not be empty')
             }
             submit = false;
         }
         if($(contacts[i]).find('.event-add-content-contact-phone').val()=='' || $(tickets[i]).find('.event-add-content-contact-phone').val()==' '){
             if(!$(contacts[i]).find('.event-add-content-contact-phone').hasClass('event-add-error-active')){
                 $(contacts[i]).find('.event-add-content-contact-phone').addClass('event-add-error-active');
-                noEmptySpace($(contacts[i]),'[WARNING]  Phone must not be empty')
+                errorDisplay($(contacts[i]),'[WARNING]  Phone must not be empty')
             }
             submit = false;
         }
         if($(contacts[i]).find('.event-add-content-contact-email').val()=='' || $(tickets[i]).find('.event-add-content-ticket-email').val()==' '){
             if(!$(contacts[i]).find('.event-add-content-contact-email').hasClass('event-add-error-active')){
                 $(contacts[i]).find('.event-add-content-contact-email').addClass('event-add-error-active');
-                noEmptySpace($(contacts[i]),'[WARNING] Email must not be empty')
+                errorDisplay($(contacts[i]),'[WARNING] Email must not be empty')
             }
             submit = false;
         }
@@ -420,12 +420,14 @@ $(document).on('click','.event-add-submit',function(e){
         $('.event-add-form').submit();
 })
 
-function noEmptySpace(element, msg, bool){
-    element.find('.event-add-error').html(msg);
-    if(bool)
+function errorDisplay(element, bool, msg = "[WARNING] We got some problems I guess..."){
+    if(bool){
         element.find('.event-add-error').show();
-    else
+        element.find('.event-add-error').html(msg);
+    }else{
         element.find('.event-add-error').hide();
+        element.find('.event-add-error').html('');
+    }
     window.scrollTo(0,element.offset().top-88)
 }
 

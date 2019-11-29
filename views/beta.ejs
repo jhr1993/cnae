@@ -5,42 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Beta</title>
+
+    <!-- CSS -->
+    <!-- Library -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Awesome icon css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom css -->
     <link rel="stylesheet" type="text/css" href="/css/beta.css" />
+
+    <!-- JS -->
+    <!-- Library -->
+    <!-- Jquery -->
     <script src="/js/library/jquery-3.4.1.min.js"></script>
     <script src="/js/library/jquery-ui.min.js"></script>
+
+    <!-- Custom js -->
+    <script src="/js/beta.js"></script>
 </head>
 <body>
-    <div class="event-add-sector">
-        <div class="event-add-sector-content-container">
-            <div class="event-add-sector-main-title">Main Title</div>
-            <div class="event-add-sector-content">
-                <div class="event-add-sector-sub-content-container event-add-required">
-                    <div class="event-add-sector-sub-title">Sub Title</div>
-                    <div class="event-add-sector-sub-content event-add-addable">
-                        <div class="event-add-sector-sub-list">
-                            <input class="event-add-input-text" type="text" name="">
+    <div class="event-add-container">
+        <form class="event-add-form" method="POST" action="/test/upload" enctype="multipart/form-data">
+            <div class="event-add-sector-container">
+                <div class="event-add-sector">
+                    <div class="event-add-sector-main-title">Main Title 1</div>
+                    <div class="event-add-sector-content">
+                        <div class="event-add-sector-sub-content-container event-add-required event-add-addable">
+                            <div class="event-add-sector-sub-title">Sub Title 1-1</div>
+                            <div class="event-add-sector-sub-content-container">
+                                <div class="event-add-sector-sub-content">
+                                    <div class="event-add-sector-sub-content-input-container">
+                                        <input class="event-add-sector-sub-content-input event-add-input-text-input-text" type="text" name="texttpyemultipleinput1">
+                                        <input class="event-add-sector-sub-content-input event-add-input-text-input-hidden" type="hidden" name="hiddentpyemultipleinput1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-type-error">Event title must not be empty or must be selected</div>
+                                    </div>
+                                    <div class="event-add-sector-sub-content-input-container">
+                                        <input class="event-add-sector-sub-content-input event-add-input-text-input-text" type="text" name="texttpyemultipleinput1">
+                                        <input class="event-add-sector-sub-content-input event-add-input-text-input-hidden" type="hidden" name="hiddentpyemultipleinput1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-type-error">Event title must not be empty or must be selected</div>
+                                    </div>
+                                    <div class="event-add-sector-sub-content-input-container">
+                                        <input class="event-add-sector-sub-content-input event-add-input-text-input-text" type="text" name="texttpyemultipleinput1">
+                                        <input class="event-add-sector-sub-content-input event-add-input-text-input-hidden" type="hidden" name="hiddentpyemultipleinput1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-type-error">Event title must not be empty or must be selected</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sector-sub-content-button">add button</div>
+                            </div>
                         </div>
-                        <button>add button</button>
                     </div>
                 </div>
-                <div class="event-add-sector-sub-content-container">
-                    <div class="event-add-sector-sub-title">Sub Title</div>
-                    <div class="event-add-sector-sub-content event-add-single">
-                        <div class="event-add-sector-sub-list event-add-error-active">
-                            <input class="event-add-input-text" type="text" name="">
+                <div class="event-add-sector">
+                        <div class="event-add-sector-main-title">Main Title 2</div>
+                        <div class="event-add-sector-content">
+                            <div class="event-add-sector-sub-content-container event-add-required event-add-addable">
+                                <div class="event-add-sector-sub-title">Sub Title 2-1</div>
+                                <div class="event-add-sector-sub-content-container">
+                                    <div class="event-add-sector-sub-content">
+                                        <div class="event-add-sector-sub-content-input-container">
+                                            <input class="event-add-sector-sub-content-input event-add-input-text" type="text" name="texttpyemultipleinput1">
+                                            <input class="event-add-sector-sub-content-input event-add-input-hidden" type="hidden" name="hiddentpyemultipleinput1">
+                                        </div>
+                                        <div class="alert-msg-container">
+                                            <div class="alert-msg alert-msg-type-error">Event title must not be empty or must be selected</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event-add-sector-sub-content-container event-add-required event-add-addable">
+                                <div class="event-add-sector-sub-title">Sub Title 2-2</div>
+                                <div class="event-add-sector-sub-content-container">
+                                    <div class="event-add-sector-sub-content">
+                                        <div class="event-add-sector-sub-content-input-container">
+                                            <textarea class="event-add-sector-sub-content-input event-add-input-textarea" type="text" name="texttpyemultipleinput1"></textarea>
+                                        </div>
+                                        <div class="alert-msg-container">
+                                            <div class="alert-msg alert-msg-type-error">Event title must not be empty or must be selected</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event-add-sector-sub-content-container event-add-addable">
+                                <div class="event-add-sector-sub-title">Sub Title 2-3</div>
+                                <div class="event-add-sector-sub-content-container">
+                                    <div class="event-add-sector-sub-content">
+                                        <div class="event-add-sector-sub-content-input-container">
+                                            <input class="event-add-sector-sub-content-input event-add-input-text-input-text" type="text" name="texttpyemultipleinput1">
+                                            <input class="event-add-sector-sub-content-input event-add-input-text-input-hidden" type="hidden" name="hiddentpyemultipleinput1">
+                                        </div>
+                                        <div class="alert-msg-container">
+                                            <div class="alert-msg alert-msg-type-error">Event title must not be empty or must be selected</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="event-add-sector-sub-content-container">
-                    <div class="event-add-sector-sub-title">Sub Title</div>
-                    <div class="event-add-sector-sub-content event-add-with-contecnt">
-                        <div class="event-add-sector-sub-list">
-                            <input class="event-add-input-text" type="text" name="">
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
+            <div><button class="form-submit event-add-form-submit" type="submit">Submit</button></div>
+        </form>
     </div>
 </body>
 </html>

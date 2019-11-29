@@ -1,17 +1,66 @@
-.event-add-sector-sub-list {
-    border: 1px solid grey
+.event-add-sector-main-title, .event-add-sector-sub-title {
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
-.event-add-sector-sub-list input{
+.event-add-required .event-add-sector-sub-title::after {
+    content: '*';
+    color: #ff4444;
+}
+
+.event-add-sector-sub-title {
+    padding: 10px 20px;
+}
+
+.event-add-sector-sub-content-input-container {
+    border: 1px solid grey;
+    padding: 18px;
+    border-radius: 32px;
+}
+
+.event-add-sector-sub-content-input-container input{
     width: 100%;
     border: none;
 }
 
-.event-add-sector-sub-list input:hover{
+.event-add-sector-sub-content-input-container input:focus{
+    outline: none;
+}
+
+.event-add-sector-sub-content-input-container textarea{
     width: 100%;
     border: none;
 }
 
-.event-add-error-active {
-    border-color: red;
+.event-add-sector-sub-content-input-container textarea:focus{
+    outline: none;
+}
+
+.alert-msg {
+	display: none;
+	color: white;
+	margin: 5px 18px;
+    padding: 18px 10px;
+    border-radius: 5px;
+}
+
+.alert-msg-active-error {
+    border-color: #ff4444;
+}
+
+.alert-msg-type-error {
+	background-color: #ff4444;
+}
+
+.alert-msg-type-error::before {
+    content: '[WARNING] ';
+}
+
+.event-add-sector-sub-content-button {
+    border: 1px solid grey;
+    padding: 18px;
+    border-radius: 32px;
+    display: inline-block;
+    margin: 10px auto;
+    cursor: pointer;
 }
