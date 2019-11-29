@@ -56,6 +56,14 @@ module.exports = function(app){
         });
     });
 
+    app.get('/beta' ,(req,res)=>{
+        res.render('beta',{
+            title: 'CNAE - beta',
+            user: (req.user) ? req.user : false,
+            id: req.params.id
+        });
+    });
+
     function checkAuthenticated(req, res, next) {
         if (req.isAuthenticated()) {
             next();

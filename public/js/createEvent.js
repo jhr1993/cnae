@@ -490,33 +490,29 @@ function initMap() {
                 bounds.extend(place.geometry.location);
             }
             const address = place.address_components;
+            const addressOutput = {};
+            let locality = false;
             console.log(address);
             for(let i = 0; i < address.length; i++){
+                if(address[i].types.includes('locality')){
+                    addressOutput.city = address[i].long_name;
+                    locality = true;
+                }
                 if(address[i].types.includes('postal_code'))
-                    console.log(address[i].long_name);
+                    addressOutput.postal_code = address[i].long_name;
                 if(address[i].types.includes('country'))
-                    console.log(address[i].long_name);
+                    addressOutput.country = address[i].long_name;
                 if(address[i].types.includes('administrative_area_level_1'))
-                    console.log(address[i].long_name);
+                    addressOutput.state = address[i].long_name;
                 if(address[i].types.includes('administrative_area_level_2'))
-                    console.log(address[i].long_name);
-                if(address[i].types.includes('locality'))
-                    console.log(address[i].long_name);
-                if(address[i].types.includes('sublocality_level_1'))
-                    console.log(address[i].long_name);
-                if(address[i].types.includes('sublocality_level_2'))
-                    console.log(address[i].long_name);
-                if(address[i].types.includes('sublocality_level_3'))
-                    console.log(address[i].long_name);
-                if(address[i].types.includes('sublocality_level_4'))
-                    console.log(address[i].long_name);
-                if(address[i].types.includes('route'))
-                    console.log(address[i].long_name);
-                if(address[i].types.includes('street_number'))
-                    console.log(address[i].long_name);
-                if(address[i].types.includes('floor'))
-                    console.log(address[i].long_name);
+                    addressOutput.province = address[i].long_name;
             }
+            console.log(addressOutput);
+            $(input).parent().find('.place-state').val(addressOutput.state);
+            $(input).parent().find('.place-zip').val(addressOutput.postal_code);
+            $(input).parent().find('.place-state').val(addressOutput.state);
+            $(input).parent().find('.place-city').val(addressOutput.city);
+            $(input).parent().find('.place-country').val(addressOutput.country);
         });
         map.fitBounds(bounds);
     });

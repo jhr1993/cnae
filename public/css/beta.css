@@ -1,0 +1,17 @@
+.event-add-sector-sub-list {
+    border: 1px solid grey
+}
+
+.event-add-sector-sub-list input{
+    width: 100%;
+    border: none;
+}
+
+.event-add-sector-sub-list input:hover{
+    width: 100%;
+    border: none;
+}
+
+.event-add-error-active {
+    border-color: red;
+}
