@@ -16,6 +16,13 @@ $(document).on('click','.event-add-form-submit',function(e){
         $('.event-add-form').submit();
 });
 
+$(document).on('keyup keydown change','.event-add-required .event-add-sector-sub-content-input',function(){
+    if($(this).val() != '' || $(this).val() !=' '){
+        $(this).parent().parent().find('.alert-msg-error-type-empty').hide();
+        $(this).parent().removeClass('alert-msg-active-error');
+    }
+});
+
 $(document).on('click','.event-add-addable .event-add-sector-sub-content-button',function(){ 
     const container = $(this).parent().find('.event-add-sector-sub-content-container');
     const cloneString = container.find('.event-add-sector-sub-content:first');
@@ -54,3 +61,32 @@ $(document).on('click','.event-add-addable .fa-close',function(){
 $(document).on('keyup focusin keydown', '.event-add-searchable-content .event-add-sector-sub-content-input',function(){
 
 })
+
+/*$(document).on('change','.event-add-input-text-input-img',function(e){
+    output = $(this).parent().parent().parent().find('.event-add-title-image-preview');
+    output.css('background',`url(${URL.createObjectURL(e.target.files[0])})`);
+    $(this).parent().parent().parent().find('.event-add-title-image-preview-name').find('.event-add-title-image-preview-content').text(e.target.files[0].name);
+    $(this).parent().parent().parent().find('.event-add-title-image-preview-size').find('.event-add-title-image-preview-content').text(`${e.target.files[0].size} B`);
+    $(this).parent().parent().parent().find('.event-add-title-image-preview-desc').show()
+    output.css('background-size','contain');
+    output.css('background-position','center');
+    output.css('background-repeat','no-repeat');
+    console.log($(this).val());
+})*/
+
+$(document).on('change','.event-add-input-text-input-img',function(e){
+    let container = document.createElement("div");
+    $(container).addClass('event-add-title-image-preview-container');
+    const image = $(this).clone();
+    const preview = `<div style="background-position:center;background-size:contain;background:url(${URL.createObjectURL(e.target.files[0])})"></div>`;
+    /*output = $(this).parent().parent().parent().find('.event-add-title-image-preview');
+    output.css('background',`url(${URL.createObjectURL(e.target.files[0])})`);
+    $(this).parent().parent().parent().find('.event-add-title-image-preview-name').find('.event-add-title-image-preview-content').text(e.target.files[0].name);
+    $(this).parent().parent().parent().find('.event-add-title-image-preview-size').find('.event-add-title-image-preview-content').text(`${e.target.files[0].size} B`);
+    $(this).parent().parent().parent().find('.event-add-title-image-preview-desc').show()
+    output.css('background-size','contain');
+    output.css('background-position','center');
+    output.css('background-repeat','no-repeat');
+    console.log($(this).val());*/
+})
+
