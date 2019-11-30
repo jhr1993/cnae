@@ -1,4 +1,32 @@
+.event-add-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.event-add-sector {
+    margin: 30px 0;
+    border: 1px solid grey;
+    padding: 20px;
+    border-radius: 30px;
+    position: relative;
+}
+
 .event-add-sector-main-title, .event-add-sector-sub-title {
+    font-weight: bold;
+}
+
+.event-add-sector-main-title {
+    color: grey;
+    background-color: white;
+    padding: 0 10px;
+    top: -20px;
+    position: absolute;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.event-add-sector-sub-title {
     font-size: 1.2em;
     font-weight: bold;
 }
@@ -12,15 +40,39 @@
     padding: 10px 20px;
 }
 
+.event-add-addable .fa-close{
+    margin: 4px;
+    position: absolute;
+    padding-right: 20px;
+    right: 0;
+    cursor: pointer;
+    display: none;
+}
+
+.event-add-addable .fa-close:hover{
+    color: grey;
+}
+
+.event-add-sector-sub-content {
+    margin: 10px 0;
+    position: relative;
+}
+
 .event-add-sector-sub-content-input-container {
+    width: 100%;
     border: 1px solid grey;
     padding: 18px;
     border-radius: 32px;
+    position: relative;
 }
 
 .event-add-sector-sub-content-input-container input{
     width: 100%;
     border: none;
+}
+
+.event-add-addable input {
+    width: calc(100% - 30px);
 }
 
 .event-add-sector-sub-content-input-container input:focus{
@@ -36,6 +88,33 @@
     outline: none;
 }
 
+.event-add-sector-sub-content-search-box {
+    z-index: 1;
+    padding: 0 30px;
+    position: absolute;
+    width: 100%;
+    display: none;
+}
+.event-add-sector-sub-content-search-ul{
+    border: 1px solid gray;
+    border-top: none;
+    background-color: white;
+    padding: 0;
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.event-add-sector-sub-content-search-li{
+    list-style: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.event-add-sector-sub-content-search-li:hover{
+    background-color: #ececec;
+}
+
+
 .alert-msg {
 	display: none;
 	color: white;
@@ -48,11 +127,11 @@
     border-color: #ff4444;
 }
 
-.alert-msg-type-error {
+.alert-msg-error {
 	background-color: #ff4444;
 }
 
-.alert-msg-type-error::before {
+.alert-msg-error::before {
     content: '[WARNING] ';
 }
 
