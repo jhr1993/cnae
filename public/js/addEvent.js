@@ -1,38 +1,4 @@
-/*$(document).on('click','#event-add-category .event-add-content-button',function(){
-    const container = $('#event-add-category .event-add-new');
-    container.append(`
-    <div class="event-add-content event-add-content-text">
-        <i class="fa fa-close"></i>
-        <div class="event-add-content-category-parent"></div>
-        <input type="text" class="event-add-content-category-title" name="category[]" placeholder="Search Event Category"> 
-        <input type="hidden" class="event-add-content-category-id" name="categoryId[]">
-        <div class="event-add-content-list-container">
-            <ul class="event-add-content-list"></ul>
-        </div>
-        <div class="event-add-error">error</div>
-    </div>
-    `)
-    if(container.children().length>1){
-        container.find('.fa-close').show();
-    }
-});
-
-$(document).on('click','#event-add-category .event-add-content .fa-close',function(){
-    const container = $('#event-add-category .event-add-new');
-    if(container.children().length>1){
-        $(this).parent().remove()
-        if(container.children().length<=1){
-            container.find('.fa-close').hide();
-        }
-    }
-});
-
-$(document).ready(function(){
-    if($('#event-add-category .event-add-new').children().length>1){
-        $('##event-add-category').find('.fa-close').show();
-    }
-})*/
-let typingTimer
+/*let typingTimer
 
 $(document).on('keyup focusin keydown','#event-category .event-add-content-category-title',function(e){
     if(e.type == 'keyup' || e.type == 'focusin'){
@@ -70,10 +36,10 @@ $(document).on('click','#event-category .event-add-content-search-container li',
     $(this).parent().html('')
 })
 
-/*$(document).on('focusout','#event-category .event-add-content-category-title',function(){
+$(document).on('focusout','#event-category .event-add-content-category-title',function(){
     $(this).parent().parent().find('.event-add-content-search-container').hide();
     $(this).parent().parent().find('.event-add-content-search').html('');
-})*/
+})
 
 $(document).on('keyup focusin keydown','#event-artist .event-add-content-artist-name',function(e){
     if(e.type == 'keyup' || e.type == 'focusin'){
@@ -109,10 +75,10 @@ $(document).on('click','#event-artist .event-add-content-search-container li', f
     $(this).parent().html('')
 })
 
-/*$(document).on('focusout','#event-artist .event-add-content-artist-name',function(){
+$(document).on('focusout','#event-artist .event-add-content-artist-name',function(){
     $(this).parent().parent().find('.event-add-content-search-container').hide();
     $(this).parent().parent().find('.event-add-content-search').html('');
-})*/
+})
 
 $(document).ready(function(){
     $( function() {
@@ -438,7 +404,7 @@ function initMap() {
         zoom: 8
     });
 
-    /* Map function customise */
+    // Map function customise 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -518,4 +484,204 @@ function initMap() {
         });
         map.fitBounds(bounds);
     });
-}
+}*/
+
+$(document).on('click','.event-add-form-submit',function(e){
+    let all_clear = true;
+    e.preventDefault();
+    $('.event-add-required .event-add-sub-content-input').val(function(i, origValue){
+        console.log($(this).parent().parent().find('.event-add-sub-title').html())
+        if(!$(this).prop('disabled')){
+            if(origValue == '' || origValue == ' '){
+                $(this).parent().parent().find('.alert-msg-error-type-empty').show();
+                $(this).parent().addClass('alert-msg-active-error');
+                all_clear = false;
+                if(!all_clear)
+                    console.log('ha')
+            }else{
+                $(this).parent().parent().find('.alert-msg-error-type-empty').hide();
+                $(this).parent().removeClass('alert-msg-active-error');
+            }
+            return origValue;
+        }
+    }); 
+    if(all_clear)
+        $('.event-add-form').submit();
+});
+
+$(document).on('keyup keydown change','.event-add-required .event-add-sub-content-input',function(){
+    if($(this).val() != '' || $(this).val() !=' '){
+        $(this).parent().parent().find('.alert-msg-error-type-empty').hide();
+        $(this).parent().removeClass('alert-msg-active-error');
+    }
+});
+
+$(document).on('click','.event-add-addable .event-add-sub-sector-content-button',function(){ 
+    const container = $(this).parent().find('.event-add-content-container');
+    const cloneString = container.find('.event-add-content:first');
+    const clone = cloneString.clone();
+    const cloneChildrenInput = clone.find('.event-add-sub-content-input')
+    for(let i = 0; i< cloneChildrenInput.length;i++){
+        const namefront = $(cloneChildrenInput[i]).prop('name').split('_content');
+        const nameback = namefront[1].split('_subContent')[1];
+        const index = `${namefront[0]}_content${container.children().length+1}_subContent${nameback}`;
+        $(cloneChildrenInput[i]).prop('name',index);
+    }
+    clone.find('.event-add-content-input-top').html('');
+    clone.find('.event-add-sub-content-input').val('');
+    clone.find('.event-add-sub-content-input').html('');
+    clone.find('.event-add-sub-content-search-ul').html('');
+    clone.find('.event-add-image-preview-list').html('');
+    clone.find('.alert-msg-error').hide();
+    clone.find('.event-add-sub-content-input-container').removeClass('alert-msg-active-error');
+    clone.appendTo(container);
+    if(container.children().length>1){
+        container.find('.fa-close').show();
+    }
+});
+
+$(document).ready(function(){
+    container = $('.event-add-addable event-add-addable-content');
+    if(container.children().length > 1){
+        container.find('.fa-close').show();
+    }
+})
+
+$(document).on('click','.event-add-addable .fa-close',function(){ 
+    container = $(this).parent().parent();
+    if(container.children().length > 1){
+        if (confirm('Are you sure you want to remove this?')) {
+            $(this).parent().remove();
+        }
+    }
+    if(container.children().length <= 1){
+        container.find('.fa-close').hide();
+    }
+});
+
+$(document).on('keyup focusin keydown', '.event-add-searchable-content .event-add-sector-sub-content-input',function(){
+
+})
+
+$(document).on('change','.event-add-input-img',function(e){
+    const container = $(this).parent().parent().parent().find('.event-add-image-preview-list')
+    let eleContainer = document.createElement("div");
+    $(eleContainer).addClass('event-add-image-preview-container');
+    let index = (container.hasClass('image-single')) ? 1 : container.children().length+1;
+    let img = $(this).clone().prop('name',`secotr1_subSector2_content${index}_subContent1_input1`)
+    img.appendTo(eleContainer);
+    const content = `<div class="fa fa-close"></div>
+    <div class="event-add-image-preview" style="background:url(${URL.createObjectURL(e.target.files[0])}) center/contain no-repeat !important"></div>
+    <div class="event-add-image-preview-desc">
+        <div class="event-add-image-preview-name">
+            <div class="event-add-image-preview-title">File Name</div>
+            <div class="event-add-image-preview-content">${e.target.files[0].name}</div>
+        </div>
+        <div class="event-add-image-preview-size">
+            <div class="event-add-image-preview-title">File Size</div>
+            <div class="event-add-image-preview-content">${e.target.files[0].size} B</div>
+        </div>
+    </div>
+    <div class="float-clear-both"></div>`
+    $(content).appendTo(eleContainer);
+    if(container.hasClass('image-single'))
+        container.html(eleContainer);
+    else
+        container.append(eleContainer);
+})
+
+$(document).on('click','.event-add-image-preview-container .fa-close', function(){
+    if (confirm('Are you sure you want to remove this?')) {
+        $(this).parent().remove();
+    }
+})
+
+$(document).on('change','.event-add-input-radio',function(){
+    const addable = $(this).parent().parent().parent().parent().parent().parent().parent().parent()
+    if($(this).val() == 'open') {
+        addable.find('.event-add-addable').hide();
+        addable.find('.event-add-addable').find('input').prop('disabled',true);
+    }else if($(this).val() == 'paid') {
+        addable.find('.event-add-addable').show();
+        addable.find('.event-add-ticket-price').show();
+        addable.find('.event-add-addable').find('input').prop('disabled',false);
+    }else{
+        addable.find('.event-add-addable').show();
+        addable.find('.event-add-addable').find('input').prop('disabled',false);
+        addable.find('.event-add-ticket-price').hide();
+        addable.find('.event-add-ticket-price').find('input').prop('disabled',true);
+    }
+})
+
+let typingTimer1;
+
+$(document).on('keyup focusin keydown','#event_add_category .event-add-searchable-content .event-add-input-text',function(e){
+    if(e.type == 'keyup' || e.type == 'focusin'){
+        clearTimeout(typingTimer1);
+        typingTimer1 = setTimeout(()=>{
+            const title = $(this).val();
+            fetch(`/db/get_categories/${title}`,{method:'get'}).then((res)=>{
+                return res.json();
+            }).then((res)=>{
+                $(this).parent().parent().find('.event-add-search-box').show();
+                const data = res.data;
+                let list = '';
+                for(let i = 0; i < data.length; i++) {
+                    list += `<li id="${data[i].origin._id}" class="event-add-search-li">
+                        <div class="event-add-search-content">
+                            <div class="event-add-search-content-parent">${data[i].parent}</div>
+                            <div class="event-add-search-content-title">${data[i].origin.title}</div>
+                        </div>
+                    </li>`;
+                }
+                $(this).parent().parent().find('.event-add-search-ul').html(list)
+            })
+        }, 2000)  
+    } else {
+        clearTimeout(typingTimer1);
+    }
+})
+
+let typingTimer2;
+
+$(document).on('keyup focusin keydown','#event_add_artist .event-add-searchable-content .event-add-input-text',function(e){
+    if(e.type == 'keyup' || e.type == 'focusin'){
+        clearTimeout(typingTimer2);
+        typingTimer2 = setTimeout(()=>{
+            const value = $(this).val();
+            fetch(`/db/get_users/${value}`,{method:'get'}).then((res)=>{
+                return res.json();
+            }).then((res)=>{
+                $(this).parent().parent().find('.event-add-search-box').show();
+                const data = res.data;
+                let list = '';
+                for(let i = 0; i < data.length; i++) {
+                    list += `<li id="${data[i]._id}" class="event-add-search-li">
+                        <div class="event-add-search-content">
+                            <div class="event-add-search-content-title">${data[i].name}</div>
+                        </div>
+                    </li>`;
+                }
+                $(this).parent().parent().find('.event-add-search-ul').html(list)
+            })
+        }, 2000)
+    } else {
+        clearTimeout(typingTimer2);
+    }
+})
+
+$(document).on('click','.event-add-search-li', function(){
+    const id = $(this).attr('id');
+    const parent = $(this).find('.event-add-search-content-parent').html();
+    const title = $(this).find('.event-add-search-content-title').html();
+    $(this).parent().parent().parent().find('.event-add-content-input-parent').html(parent);
+    $(this).parent().parent().parent().find('.event-add-input-text').val(title);
+    $(this).parent().parent().parent().find('.event-add-input-hidden').val(id);
+    $(this).parent().parent().hide();
+    $(this).parent().html('');
+})
+
+$(document).on('focusout','#event-category .event-add-content-category-title',function(){
+    $(this).parent().parent().find('.event-add-content-search-container').hide();
+    $(this).parent().parent().find('.event-add-content-search').html('');
+})

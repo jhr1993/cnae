@@ -8,7 +8,8 @@ const eventSchema = new Schema({
     user: { type: String, required: true },
     users: { type: Array },
     title_img: { type: String, default: "/img/noImg.png"},
-    content: { type: String, default: "No contents" },
+    content: { type: String, required: true },
+    summary: { type: String, required: true },
     published_date: { type: Date, default: Date.now },
     edited_date: { type: Date, default: Date.now },
     date:{ type:Array, required: true }

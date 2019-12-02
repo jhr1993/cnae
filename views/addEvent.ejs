@@ -1,292 +1,416 @@
 <% include ./header.ejs %>
-    
+
 <div class="event-add-container">
     <form class="event-add-form" method="POST" action="/test/upload" enctype="multipart/form-data">
         <div class="event-add-sector-container">
-            <div class="event-add-sector" id="event-add-title">
-                <div class="event-add-title">
-                    <label>Event Detail</label>
-                </div>
-                <div class="event-add-content-container">
-                    <div class="event-add-content">
-                        <div id="event-title" class="event-add-content-child">
-                            <div class="event-add-sub-title event-add-required">Event Title</div> 
-                            <div class="event-add-content-text">
-                                <input type="text" name="title" placeholder="Event Title">
-                                <div class="event-add-error">error</div>
-                            </div>
-                        </div>
-                        <div class="event-add-content-child">
-                            <div class="event-add-sub-title">Event Title Image</div> 
-                            <div class="event-add-content-img">
-                                <div class="event-add-content-title-upload">
-                                    <label><i class="fa fa-upload"></i>Choose File...
-                                        <input class="event-add-content-title-image file-upload-input" accept="image/*" type="file" name="event_title_img">
-                                    </label>
+            <div class="event-add-sector">
+                <div class="event-add-main-title">Event Detail</div>
+                <div class="event-add-sector-body">
+                    <div class="event-add-sub-sector-container">
+                        <div id="event_add_detail" class="event-add-content-container">
+                            <div id="event_add_detail_event_title" class="event-add-content">
+                                <div class="event-add-sub-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Event Title</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector1_subSector1_content1_subContent1_input1'>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event title must not be empty</div>
+                                    </div>
                                 </div>
-                                <div class="event-add-content-title-image-preview-container">
-                                    <div class="event-add-content-title-image-preview" style="background-position: center;background-size:contain;"></div>
-                                    <div class="event-add-content-title-image-preview-desc">
-                                        <div class="event-add-content-title-image-preview-name">
-                                            <div class="event-add-content-title-image-preview-title">File Name</div>
-                                            <div class="event-add-content-title-image-preview-content"></div>
+                            </div>
+                            <div id="event_add_detail_event_image" class="event-add-content">
+                                <div class="event-add-sub-content">
+                                    <div class="event-add-sub-title">Event Image</div>
+                                    <div class="event-add-sub-content event-add-searchable-content">
+                                        <div class="event-add-sub-content-input-container">       
+                                            <div class="event-add-upload">
+                                                <div class="event-add-upload-label-container">
+                                                    <label><i class="fa fa-upload"></i>Choose File...
+                                                        <input class="event-add-sub-content-input event-add-input-img" accept="image/*" type="file">
+                                                    </label>
+                                                </div>
+                                                <div class="event-add-image-preview-list"></div>
+                                            </div>
                                         </div>
-                                        <div class="event-add-content-title-image-preview-size">
-                                            <div class="event-add-content-title-image-preview-title">File Size</div>
-                                            <div class="event-add-content-title-image-preview-content"></div>
+                                        <div class="alert-msg-container">
+                                            <div class="alert-msg alert-msg-error alert-msg-error-type-file">Event title must not be empty or must be selected</div>
                                         </div>
                                     </div>
-                                    <div class="float-clear-both"></div>
                                 </div>
-                                <div class="event-add-error">error</div>
+                            </div>
+                            <div id="event_add_detail_event_summary" class="event-add-content">
+                                <div class="event-add-sub-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Event Summary</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector1_subSector3_content1_subContent1_input1'>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event summary must not be empty</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="event_add_detail_event_description" class="event-add-content">
+                                <div class="event-add-sub-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Event Description</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <textarea class="event-add-sub-content-input event-add-input-text" name='_sector1_subSector4_content1_subContent1_input1'></textarea>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event description must not be empty</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div id="event-summary" class="event-add-content-child">
-                            <div class="event-add-sub-title event-add-required">Event Summary</div> 
-                            <div class="event-add-content-textarea">
-                                <textarea class="event-add-content-textarea-message" name="event_summary" placeholder="Event summary"></textarea>
-                                <div class="event-add-error">error</div>
+                    </div>
+                </div>
+            </div>
+            <div class="event-add-sector">
+                <div class="event-add-main-title event-add-required-title">Category</div>
+                <div class="event-add-sector-body">
+                    <div class="event-add-sub-sector-container event-add-addable">
+                        <div id="event_add_category" class="event-add-content-container">
+                            <div class="event-add-content">
+                                <div class="fa fa-close"></div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-content-input-container">
+                                        <div class="event-add-content-input-parent"></div>
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector2_subSector1_content1_subContent1_input1'>
+                                        <input class="event-add-sub-content-input event-add-input-hidden" type="hidden" name='_sector2_subSector1_content1_subContent1_input2'>
+                                    </div>
+                                    <div class="event-add-search-box">
+                                        <ul class="event-add-search-ul"></ul>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Category must not be empty and must be selected</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div id="event-desc" class="event-add-content-child">
-                            <div class="event-add-sub-title event-add-required">Event Description</div> 
-                            <div class="event-add-content-textarea">
-                                <textarea class="event-add-content-textarea-message textarea-editor" name="event_description" placeholder="Event Description"></textarea>
-                                <div class="event-add-error">error</div>
+                        <div class="event-add-sub-sector-content-button">add button</div>
+                    </div>
+                </div>
+            </div>
+            <div class="event-add-sector">
+                <div class="event-add-main-title event-add-required-title">Artist</div>
+                <div class="event-add-sector-body">
+                    <div class="event-add-sub-sector-container event-add-addable">
+                        <div id="event_add_artist" class="event-add-content-container">
+                            <div class="event-add-content">
+                                <div class="fa fa-close"></div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector3_subSector1_content1_subContent1_input1'>
+                                        <input class="event-add-sub-content-input event-add-input-hidden" type="hidden" name='_sector3_subSector1_content1_subContent1_input2'>
+                                    </div>
+                                    <div class="event-add-search-box">
+                                        <ul class="event-add-search-ul">
+                                        </ul>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Artist must not be empty</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-add-sub-sector-content-button">add button</div>
+                    </div>
+                </div>
+            </div>
+            <div class="event-add-sector">
+                <div class="event-add-main-title">Date</div>
+                <div class="event-add-sector-body">
+                    <div class="event-add-sub-sector-container event-add-addable">
+                        <div id="category" class="event-add-content-container">
+                            <div class="event-add-content event-add-addable-multiple">
+                                <div class="fa fa-close"></div>
+                                <div class="event-add-sub-content event-add-required event-add-sub-half">
+                                    <div class="event-add-sub-title event-add-required-title">Start Date</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector4_subSector1_content1_subContent1_input1'>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Stat date must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-required event-add-sub-half">
+                                    <div class="event-add-sub-title event-add-required-title">End Date</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector4_subSector1_content1_subContent2_input1'>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">End date must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-required event-add-sub-half">
+                                    <div class="event-add-sub-title event-add-required-title">Start Time</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector4_subSector1_content1_subContent3_input1'>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Stat time must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-required event-add-sub-half">
+                                    <div class="event-add-sub-title event-add-required-title">End Time</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector4_subSector1_content1_subContent4_input1'>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">End time must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="clear-both"></div>
+                                <div class="event-add-sub-content">
+                                    <div class="event-add-sub-title">Place Description</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <textarea class="event-add-sub-content-input event-add-input-text" name='_sector4_subSector1_content1_subContent5_input1'></textarea>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event description must not be empty</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-add-sub-sector-content-button">add button</div>
+                    </div>
+                </div>
+            </div>
+            <div class="event-add-sector">
+                <div class="event-add-main-title">Place</div>
+                <div class="event-add-sector-body">
+                    <div class="event-add-sub-sector-container event-add-addable">
+                        <div id="category" class="event-add-content-container">
+                            <div class="event-add-content event-add-addable-multiple">
+                                <div class="fa fa-close"></div>
+                                <div class="event-add-sub-content event-add-searchable-content">
+                                    <div class="event-add-sub-title">Place Search</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event title must not be empty or must be selected</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Address</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector5_subSector1_content1_subContent1_input1' placeholder="Address1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Address must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector5_subSector1_content1_subContent2_input1' placeholder="Address2">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Address must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector5_subSector1_content1_subContent3_input1' placeholder="City">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">City must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector5_subSector1_content1_subContent4_input1' placeholder="State / Province">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">State / Province must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector5_subSector1_content1_subContent5_input1' placeholder=" Zip / Post code">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Zip / Post code must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='_sector5_subSector1_content1_subContent6_input1' placeholder="Country">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Country must not be empty</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-add-sub-sector-content-button">add button</div>
+                    </div>
+                </div>
+            </div>
+            <div class="event-add-sector">
+                <div class="event-add-main-title">Ticket</div>
+                <div class="event-add-sector-body">
+                    <div class="event-add-sub-sector-container">
+                        <div id="category" class="event-add-content-container">
+                            <div class="event-add-content">
+                                <div class="event-add-sub-content">
+                                    <div class="event-add-sub-title">Ticket Type</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <div class="event-add-input-radio-container">
+                                            <input class="event-add-sub-content-input event-add-input-radio" type="radio" name="_sector6_subSector1_content1_subContent1_input1" value="paid" checked><label>Paid</label>
+                                        </div>
+                                        <div class="event-add-input-radio-container">
+                                            <input class="event-add-sub-content-input event-add-input-radio" type="radio" name="_sector6_subSector1_content1_subContent1_input1" value="free"><label>Free - Ticketing Rquired but free</label>
+                                        </div>
+                                        <div class="event-add-input-radio-container">
+                                            <input class="event-add-sub-content-input event-add-input-radio" type="radio" name="_sector6_subSector1_content1_subContent1_input1" value="open"><label>Open - No Ticketing for the event</label>
+                                        </div>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event description must not be empty</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="event-add-sub-sector-container event-add-addable">
+                        <div id="category" class="event-add-content-container">
+                            <div class="event-add-content event-add-addable-multiple">
+                                <div class="fa fa-close"></div>
+                                <div class="event-add-sub-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Ticket Name</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector6_subSector2_content1_subContent1_input1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Ticket name must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-required event-add-sub-half event-add-ticket-price">
+                                    <div class="event-add-sub-title event-add-required-title">Currency</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector6_subSector2_content1_subContent2_input1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Currency must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-required event-add-sub-half event-add-ticket-price">
+                                    <div class="event-add-sub-title event-add-required-title">Price</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector6_subSector2_content1_subContent3_input1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Price must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="clear-both"></div>
+                                <div class="event-add-sub-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Ticket Capacity</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector6_subSector1_content1_subContent4_input1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Ticket Capacity must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content">
+                                    <div class="event-add-sub-title">Ticket Description</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <textarea class="event-add-sub-content-input event-add-input-text" name="_sector6_subSector1_content1_subContent5_input1"></textarea>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event description must not be empty</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-add-sub-sector-content-button">add button</div>
+                    </div>
                 </div>
             </div>
             <div class="event-add-sector">
-                <div class="event-add-title event-add-required">
-                    <label>Event Category</label>
-                </div>
-                <div class="event-add-content-container event-add-new" id="event-category">
-                    <div class="event-add-content">
-                        <i class="fa fa-close"></i>
-                        <div class="event-add-content-category-parent"></div>
-                        <div class="event-add-content-text">
-                            <input type="text" autocomplete="off" class="event-add-content-category-title" name="category_title1" placeholder="Search Event Category"> 
-                            <input type="hidden" class="event-add-content-category-id" name="category_id1">
+                <div class="event-add-main-title">URL</div>
+                <div class="event-add-sector-body">
+                    <div class="event-add-sub-sector-container event-add-addable">
+                        <div id="category" class="event-add-content-container">
+                            <div class="event-add-content event-add-addable-multiple">
+                                <div class="fa fa-close"></div>
+                                <div class="event-add-sub-content event-add-searchable-content">
+                                    <div class="event-add-sub-title">URL</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector7_subSector1_content1_subContent1_input1">
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content">
+                                    <div class="event-add-sub-title">URL Type</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector7_subSector1_content1_subContent2_input1">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector7_subSector1_content1_subContent2_input2">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="event-add-content-search-container">
-                            <ul class="event-add-content-search"></ul>
-                        </div>
-                        <div class="event-add-error">error</div>
+                        <div class="event-add-sub-sector-content-button">add button</div>
                     </div>
-                </div>
-                <div class="event-add-content event-add-content-button">
-                    Add Category
                 </div>
             </div>
             <div class="event-add-sector">
-                <div class="event-add-title">
-                    <label>Event Date</label>
-                </div>
-                <div id="event-date" class="event-add-content-container event-add-new">
-                    <div class="event-add-content">
-                        <i class="fa fa-close"></i>
-                        <div class="event-add-sub-title event-add-required">Date</div> 
-                        <div class="event-add-content-text event-add-content-text-half">
-                            <input type="text" autocomplete="off" name="date_start1" class="event-add-date-input start-calendar" placeholder="Start date">
-                            <input type="text" autocomplete="off" name="date_end1"class="event-add-date-input end-calendar" placeholder="End Date">
+                <div class="event-add-main-title">Contact</div>
+                <div class="event-add-sector-body">
+                    <div class="event-add-sub-sector-container event-add-addable">
+                        <div id="category" class="event-add-content-container">
+                            <div class="event-add-content event-add-addable-multiple">
+                                <div class="fa fa-close"></div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Contact Name</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector8_subSector1_content1_subContent1_input1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Contact name must not be empty or must be selected</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Contact Description</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector8_subSector1_content1_subContent2_input1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Contact description must not be empty or must be selected</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
+                                    <div class="event-add-sub-title event-add-required-title">Phone</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector8_subSector1_content1_subContent3_input1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Phone must not be empty or must be selected</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content event-add-searchable-content">
+                                    <div class="event-add-sub-title">Email</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name="_sector8_subSector1_content1_subContent4_input1">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Contact must not be empty or must be selected</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="event-add-sub-title event-add-required">Time</div> 
-                        <div class="event-add-content-text event-add-content-text-half">
-                            <input type="text" class="start-time" autocomplete="off" name="time_start1" placeholder="ex)09:00AM">
-                            <input type="text" class="end-time" autocomplete="off" name="time_end1" placeholder="ex)20:00PM">
-                        </div>
-                        <div class="event-add-sub-title">Description</div> 
-                        <div class="event-add-content-text">
-                            <input type="text" name="date_description1" placeholder="Event Description">
-                            <div class="event-add-error">error</div>
-                        </div>
+                        <div class="event-add-sub-sector-content-button">add button</div>
                     </div>
-                </div>
-                <div id="event-date-button" class="event-add-content event-add-content-button">
-                    Add Date
-                </div>
-            </div>
-            <div class="event-add-sector">
-                <div class="event-add-title">
-                    <label>Artists</label>
-                </div>
-                <div class="event-add-content-container event-add-new" id="event-artist">
-                    <div class="event-add-content">
-                        <i class="fa fa-close"></i>
-                        <div class="event-add-content-text">
-                            <input type="text" class="event-add-content-artist-name" name="artist_name1" placeholder="Search Artist">
-                            <input type="hidden" class="event-add-content-artist-id" name="artist_id1">
-                        </div>
-                        <div class="event-add-content-search-container">
-                            <ul class="event-add-content-search"></ul>
-                        </div>
-                        <div class="event-add-error">error</div>
-                    </div>
-                </div>
-                <div class="event-add-content event-add-content-button">
-                    Add Artist
                 </div>
             </div>
         </div>
-        <div class="event-section-container">
-            <div class="event-add-sector">
-                <div class="event-add-title">
-                    <label>Place</label>
-                </div>
-                <div class="event-add-content-container event-add-new" id="event-place">
-                    <div class="event-add-content">
-                        <i class="fa fa-close"></i>
-                        <input id="pac-input1" class="controls" type="text" placeholder="Search Box">
-                        <div class="event-add-sub-title event-add-required">Place Name</div> 
-                        <div class="event-add-content-text">
-                            <input class="place_name" type="text" name="place_name1" placeholder="Plcae Name">
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div class="event-add-sub-title event-add-required">Address</div> 
-                        <div class="event-add-content-text">
-                            <input class="place_address1" type="text" name="place_address_main1" placeholder="Address 1">
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div class="event-add-content-text">
-                            <input type="text" class="place_address2" name="place_address_sub1" placeholder="Address 2">
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div class="event-add-content-text">
-                            <input type="text" class="place-city" name="place_city1" placeholder="City">
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div class="event-add-content-text">
-                            <input type="text" class="place-state" name="place_state1" placeholder="State/Province">
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div class="event-add-content-text">
-                            <input type="text" class="place-zip" name="place_zip1" placeholder="Zip Code/Post Code">
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div class="event-add-content-text">
-                            <input type="text" class="place-country" name="place_country1" placeholder="Country">
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div class="event-add-sub-title">Place Description</div> 
-                        <div class="event-add-content-textarea">
-                            <textarea class="event-add-content-textarea-message" name="palce_description1" placeholder="Event place summary"></textarea>
-                            <div class="event-add-error">error</div>
-                        </div>
-                        <div id="event-add-content-place-map1" class="event-add-content-place-map"></div>
-                    </div>
-                </div>
-                <div class="event-add-content-button">
-                    Add Place
-                </div>
-            </div>
+        <div class="form-submit-container">
+            <button class="form-submit event-add-form-submit" type="submit">Submit</button>
         </div>
-        <div class="event-add-sector-container">
-            <div class="event-add-sector" id="event-add-ticket">
-                <div class="event-add-title">
-                    <label>Event Tickets</label>
-                </div>
-                <div class="event-add-content-container">
-                    <div class="event-add-sub-title">Ticket Typeevent-add-required</div> 
-                    <div class="event-add-content-radio">
-                        <div class="event-add-content-radio-container">
-                            <input class="event-add-content-radio" name="ticket_option" type="radio" value="paid" checked="checked"><label>Paid</label>
-                        </div>
-                        <div class="event-add-content-radio-container">
-                            <input class="event-add-content-radio" name="ticket_option" type="radio" value="free"><label>Free - Ticketing Rquired but free</label>
-                        </div>
-                        <div class="event-add-content-radio-container">
-                            <input class="event-add-content-radio" name="ticket_option" type="radio" value="open"><label>Open - No Ticketing for the event</label>
-                        </div>
-                        <div class="event-add-error">error</div>
-                    </div>
-                </div>
-                <div class="event-add-content-container event-add-new">
-                    <div class="event-add-content">
-                        <i class="fa fa-close"></i>
-                        <div class="event-add-sub-title event-add-required">Ticket Type</div> 
-                        <div class="event-add-content-text">
-                            <input class="event-add-content-ticket-type" type="text" name="ticket_type[]" placeholder="Plcae Name">
-                        </div>
-                        <div class="event-add-sub-title event-add-content-ticket-price-container event-add-required">Ticket Price</div> 
-                        <div class="event-add-content-text event-add-content-text-half event-add-content-ticket-price-container">
-                            <input class="event-add-content-ticket-currency" type="text" name="ticket_currency[]" placeholder="currency">
-                            <input class="event-add-content-ticket-price" type="text" name="ticket_price[]" value="0.00">
-                        </div>
-                        <div class="event-add-sub-title event-add-required">Capacity</div> 
-                        <div class="event-add-content-text">
-                            <input class="event-add-content-ticket-capacity" type="text" name="ticket_capacity[]" placeholder="Plcae Name">
-                        </div>
-                        <div class="event-add-sub-title">Ticket Description</div> 
-                        <div class="event-add-content-textarea">
-                            <textarea class="event-add-content-textarea-message" name="ticket_desc[]" placeholder="Event Description"></textarea>
-                            <div class="event-add-error">error</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="event-add-content-button">
-                    Add Ticket
-                </div>
-            </div>
-        </div>
-        <div class="event-add-sector" id="event-add-url">
-            <div class="event-add-title">
-                <label>URLs</label>
-            </div>
-            <div class="event-add-content-container event-add-new">
-                <div class="event-add-content">
-                    <i class="fa fa-close"></i>
-                    <div class="event-add-sub-title">Url</div>
-                    <div class="event-add-content-text">
-                        <input type="text" name="url[]" placeholder="Url">
-                        <div class="event-add-error">error</div>
-                    </div>
-                    <div class="event-add-sub-title">Url Type</div>
-                    <div class="event-add-content-text">
-                        <input type="text" name="type[]" placeholder="Url Type">
-                        <div class="event-add-error">error</div>
-                    </div>
-                </div>
-            </div>
-            <div class="event-add-content event-add-content-button">
-                Add Url
-            </div>
-        </div>
-        <div class="event-add-sector" id="event-add-contact">
-            <div class="event-add-title">
-                <label>Contacts</label>
-            </div>
-            <div class="event-add-content-container event-add-new">
-                <div class="event-add-content">
-                    <i class="fa fa-close"></i>
-                    <div class="event-add-sub-title event-add-required">Contact Name</div>
-                    <div class="event-add-content-text">
-                        <input class="event-add-content-contact-name" type="text" name="contact_name[]" placeholder="Nmae of Company, Organization or Person">
-                    </div>
-                    <div class="event-add-sub-title">Contact Description</div>
-                    <div class="event-add-content-text">
-                        <input class="event-add-content-contact-desc" type="text" name="contact_desc[]" placeholder="Description of Contact">
-                    </div>
-                    <div class="event-add-sub-title event-add-required">Phone</div>
-                    <div class="event-add-content-text">
-                        <input class="event-add-content-contact-phone" type="text" name="contact_desc[]" placeholder="Description of Contact">
-                    </div>
-                    <div class="event-add-sub-title event-add-required">Email</div>
-                    <div class="event-add-content-text">
-                        <input class="event-add-content-contact-email" type="text" name="contact_desc[]" placeholder="Description of Contact">
-                        <div class="event-add-error">error</div>
-                    </div>
-                </div>
-            </div>
-            <div class="event-add-content event-add-content-button">
-                Add Contact
-            </div>
-        </div>
-        <button class="event-add-submit" type="submit">submit</button>
     </form>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEpEB7aKAhd1FwGykhkQgGWnRKRntZ3ro&callback=initMap&libraries=places"
-    async defer></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEpEB7aKAhd1FwGykhkQgGWnRKRntZ3ro&callback=initMap&libraries=places"
+    async defer></script>-->
 </div>
 
 <% include ./footer.ejs %>

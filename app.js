@@ -72,8 +72,8 @@ const Category = require('./models/category');
 
 // [CONFIGURE ROUTER]
 const router = require('./routes/main')(app);
-const EventRouter = require('./routes/event')(app, Event, User);
-const UserRotuer = require('./routes/user')(app, User, Event, passport);
+const EventRouter = require('./routes/event')(app, Event, User, multer);
+const UserRotuer = require('./routes/user')(app, User, Event, passport, multer);
 const TeamRouter = require('./routes/team')(app, Team);
 const CategoryRouter = require('./routes/category')(app, Category);
 
@@ -138,48 +138,3 @@ app.post('/upload', (req, res) => {
     }
   });
 });*/
-const storage = multer.diskStorage({
-  destination: './public/uploads/',
-  filename: function(req, file, cb){
-    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({
-  storage: storage,
-  limits:{fileSize: 1000000},
-  fileFilter: function(req, file, cb){
-    checkFileType(file, cb);
-  }
-}).single('event_title_img');
-
-function checkFileType(file, cb){
-  if(!file){
-    console.log('no file')
-  }
-  console.log(file)
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-  // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  // Check mime
-  const mimetype = filetypes.test(file.mimetype);
-
-  if(mimetype && extname){
-    return cb(null,true);
-  } else {
-    cb('Error: Images Only!');
-  }
-}
-
-app.post('/test/upload', upload, function (req, res, next) {
-  console.log(req.body)
-  if(!req.body.title){
-    console.log('no title')
-  }
-  if(!req.file){
-    console.log('no file')
-  }
-  /*console.log(req.file)
-  console.log(req.body)*/
-})

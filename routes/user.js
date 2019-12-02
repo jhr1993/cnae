@@ -1,5 +1,5 @@
 //routes/users.js
-module.exports = (app, User, Event, passport) => {
+module.exports = (app, User, Event, passport, multer) => {
 
     /**
      * Register user
