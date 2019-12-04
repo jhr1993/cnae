@@ -138,3 +138,7 @@ app.post('/upload', (req, res) => {
     }
   });
 });*/
+
+app.get('/apptest', function (req, res) {
+  
+})

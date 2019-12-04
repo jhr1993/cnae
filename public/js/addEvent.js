@@ -490,7 +490,6 @@ $(document).on('click','.event-add-form-submit',function(e){
     let all_clear = true;
     e.preventDefault();
     $('.event-add-required .event-add-sub-content-input').val(function(i, origValue){
-        console.log($(this).parent().parent().find('.event-add-sub-title').html())
         if(!$(this).prop('disabled')){
             if(origValue == '' || origValue == ' '){
                 $(this).parent().parent().find('.alert-msg-error-type-empty').show();
@@ -523,8 +522,8 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
     const cloneChildrenInput = clone.find('.event-add-sub-content-input')
     for(let i = 0; i< cloneChildrenInput.length;i++){
         const namefront = $(cloneChildrenInput[i]).prop('name').split('_content');
-        const nameback = namefront[1].split('_subContent')[1];
-        const index = `${namefront[0]}_content${container.children().length+1}_subContent${nameback}`;
+        console.log(namefront)
+        const index = `${namefront[0]}_content${container.children().length+1}`;
         $(cloneChildrenInput[i]).prop('name',index);
     }
     clone.find('.event-add-content-input-top').html('');
@@ -532,6 +531,7 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
     clone.find('.event-add-sub-content-input').html('');
     clone.find('.event-add-sub-content-search-ul').html('');
     clone.find('.event-add-image-preview-list').html('');
+    clone.find('.event-add-content-input-parent').html('');
     clone.find('.alert-msg-error').hide();
     clone.find('.event-add-sub-content-input-container').removeClass('alert-msg-active-error');
     clone.appendTo(container);
@@ -636,7 +636,7 @@ $(document).on('keyup focusin keydown','#event_add_category .event-add-searchabl
                 }
                 $(this).parent().parent().find('.event-add-search-ul').html(list)
             })
-        }, 2000)  
+        }, 1000)  
     } else {
         clearTimeout(typingTimer1);
     }
@@ -664,7 +664,7 @@ $(document).on('keyup focusin keydown','#event_add_artist .event-add-searchable-
                 }
                 $(this).parent().parent().find('.event-add-search-ul').html(list)
             })
-        }, 2000)
+        }, 1000)
     } else {
         clearTimeout(typingTimer2);
     }
