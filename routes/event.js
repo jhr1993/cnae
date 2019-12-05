@@ -211,7 +211,132 @@ module.exports = function(app, Event, User, multer){
     }
     
     app.post('/test/upload', upload, function (req, res, next) {
-        console.log(req.body)
+        const event_title = req.body.event_title;
+        console.log(event_title)
+        const event_img = req.body.event_img;
+        console.log(event_img)
+        const event_summary = req.body.event_summary;
+        console.log(event_summary)
+        const event_desc = req.body.event_desc;
+        console.log(event_desc)
+        const event_cat = [];
+        let i = 1;
+        while(true){
+            if(req.body[`event_cat_id_content${i}`]){
+                event_cat.push(req.body[`event_cat_id_content${i}`])
+                i++;
+            }else{
+                break;
+            }
+        }
+        console.log(event_cat)
+        const event_artist = [];
+        i = 1;
+        while(true){
+            if(req.body[`event_artist_content${i}`]){
+                const artist = {}
+                if(req.body[`event_artist_id_content${i}`])
+                    artist.id = req.body[`event_artist_id_content${i}`]
+                if(req.body[`event_artist_content${i}`])
+                    artist.name = req.body[`event_artist_content${i}`]
+                event_artist.push(artist)
+                i++;
+            }else{
+                break;
+            }
+        }
+        console.log(event_artist)
+        const event_date = [];
+        i = 1;
+        while(true){
+            if(req.body[`event_start_date_content${i}`] && req.body[`event_end_date_content${i}`] && req.body[`event_start_time_content${i}`] && req.body[`event_end_time_content${i}`]){
+                const date = {}
+                date.start_date = req.body[`event_start_date_content${i}`];
+                date.end_date = req.body[`event_end_date_content${i}`];
+                date.start_time = req.body[`event_start_time_content${i}`];
+                date.end_time = req.body[`event_end_time_content${i}`];
+                if(req.body[`event_date_description_content${i}`])
+                    date.date_desc = req.body[`event_date_description_content${i}`];
+                event_date.push(date)
+                i++;
+            }else{
+                break;
+            }
+        }
+        console.log(event_date)
+        const event_place = [];
+        i = 1;
+        while(true){
+            if(req.body[`place_address2_content${i}`] && req.body[`place_city_content${i}`] && req.body[`place_state_content${i}`] && req.body[`place_zip_content${i}`]){
+                const place = {}
+                if(req.body[`place_description_content${i}`])
+                    place.place_address1 = req.body[`place_description_content${i}`];
+                place.place_address2 = req.body[`place_address2_content${i}`];
+                place.place_city = req.body[`place_city_content${i}`];
+                place.place_state = req.body[`place_state_content${i}`];
+                place.place_zip = req.body[`place_zip_content${i}`];
+                place.place_country = req.body[`place_country_content${i}`];
+                if(req.body[`place_description_content${i}`])
+                    place.place_desc = req.body[`place_description_content${i}`];
+                event_place.push(place)
+                i++;
+            }else{
+                break;
+            }
+        }
+        console.log(event_place)
+        const event_ticket = [];
+        if(!(req.body[`ticket_type`] == 'open')){  
+            i = 1;
+            while(true){
+                if((req.body[`ticket_type`] == 'free' && req.body[`ticket_name_content${i}`] && req.body[`ticket_capacity_content${i}`]) || (req.body[`ticket_type`] == 'paid' && req.body[`ticket_name_content${i}`] && req.body[`ticket_capacity_content${i}`] && req.body[`ticket_price_content${i}`] && req.body[`ticket_capacity_content${i}`])){
+                    const ticket = {}
+                    ticket.ticket_name = req.body[`ticket_name_content${i}`];
+                    if(req.body[`ticket_type`] == 'paid'){
+                        ticket.ticket_currency = req.body[`ticket_currency_content${i}`];
+                        ticket.ticket_price = req.body[`ticket_price_content${i}`];
+                    }
+                    ticket.ticket_cap = req.body[`ticket_capacity_content${i}`];
+                    if(req.body[`ticket_desc_content${i}`])
+                        ticket.ticket_price = req.body[`ticket_desc_content${i}`];
+                    event_ticket.push(ticket)
+                    i++;
+                }else{
+                    break;
+                }
+            }
+        }
+        console.log(event_ticket)
+        const event_url = [];
+        i = 1;
+        while(true){
+            if(req.body[`url_content${i}`] && req.body[`url_type_content${i}`]){
+                const url = {}
+                url.url_url = req.body[`url_content${i}`];
+                url.url_urlType = req.body[`url_type_content${i}`];
+                event_url.push(url)
+                i++;
+            }else{
+                break;
+            }
+        }
+        console.log(event_url)
+        const event_contact = [];
+        i = 1;
+        while(true){
+            if(req.body[`contact_name_content${i}`] && req.body[`contact_desc_content${i}`] && req.body[`contact_phone_content${i}`]){
+                const contact = {}
+                contact.contact_name = req.body[`contact_name_content${i}`];
+                contact.contact_desc = req.body[`contact_desc_content${i}`];
+                contact.contact_phone = req.body[`contact_phone_content${i}`];
+                contact.contact_contactType = req.body[`contact_desc_content${i}`];
+                event_contact.push(contact)
+                i++;
+            }else{
+                break;
+            }
+        }
+        console.log(event_contact)
     })
 
     function authenticateRedirect(req, res, next) {

@@ -522,7 +522,6 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
     const cloneChildrenInput = clone.find('.event-add-sub-content-input')
     for(let i = 0; i< cloneChildrenInput.length;i++){
         const namefront = $(cloneChildrenInput[i]).prop('name').split('_content');
-        console.log(namefront)
         const index = `${namefront[0]}_content${container.children().length+1}`;
         $(cloneChildrenInput[i]).prop('name',index);
     }
@@ -676,7 +675,7 @@ $(document).on('click','.event-add-search-li', function(){
     const title = $(this).find('.event-add-search-content-title').html();
     $(this).parent().parent().parent().find('.event-add-content-input-parent').html(parent);
     $(this).parent().parent().parent().find('.event-add-input-text').val(title);
-    $(this).parent().parent().parent().find('.event-add-input-hidden').val(id);
+    $(this).parent().parent().parent().parent().find('.event-add-input-hidden').val(id);
     $(this).parent().parent().hide();
     $(this).parent().html('');
 })

@@ -96,12 +96,31 @@
                 <div class="event-add-sector-body">
                     <div class="event-add-sub-sector-container event-add-addable">
                         <div id="event_add_artist" class="event-add-content-container">
-                            <div class="event-add-content">
+                            <div class="event-add-content event-add-addable-multiple">
                                 <div class="fa fa-close"></div>
+                                <div id="event_add_detail_event_image" class="event-add-content">
+                                    <div class="event-add-sub-content">
+                                        <div class="event-add-sub-title">Event Image</div>
+                                        <div class="event-add-sub-content event-add-searchable-content">
+                                            <div class="event-add-sub-content-input-container">       
+                                                <div class="event-add-upload">
+                                                    <div class="event-add-upload-label-container">
+                                                        <label><i class="fa fa-upload"></i>Choose File...
+                                                            <input class="event-add-sub-content-input event-add-input-img" accept="image/*" type="file">
+                                                        </label>
+                                                    </div>
+                                                    <div class="event-add-image-preview-list image-single"></div>
+                                                </div>
+                                            </div>
+                                            <div class="alert-msg-container">
+                                                <div class="alert-msg alert-msg-error alert-msg-error-type-file">Event title must not be empty or must be selected</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
                                         <input class="event-add-sub-content-input event-add-input-text" type="text" name='event_artist_content1'>
-                                        <input class="event-add-sub-content-input event-add-input-hidden" type="hidden" name='event_artist_id_content1'>
                                     </div>
                                     <div class="event-add-search-box">
                                         <ul class="event-add-search-ul">
@@ -111,6 +130,7 @@
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Artist must not be empty</div>
                                     </div>
                                 </div>
+                                <input id="test"class="event-add-sub-content-input event-add-input-hidden" type="hidden" name='event_artist_id_content1'>
                             </div>
                         </div>
                         <div class="event-add-sub-sector-content-button">add button</div>
@@ -192,10 +212,10 @@
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event title must not be empty or must be selected</div>
                                     </div>
                                 </div>
-                                <div class="event-add-sub-content event-add-searchable-content event-add-required">
-                                    <div class="event-add-sub-title event-add-required-title">Address</div>
+                                <div class="event-add-sub-content event-add-searchable-content">
+                                    <div class="event-add-sub-title">Address</div>
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Address1 1" type="text" name='address1_content1' placeholder="Address1">
+                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Address1 1" type="text" name='place_address1_content1' placeholder="Address1">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Address must not be empty</div>
@@ -203,7 +223,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Address2 1" type="text" name='address2_content1' placeholder="Address2">
+                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Address2 1" type="text" name='place_address2_content1' placeholder="Address2">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Address must not be empty</div>
@@ -211,7 +231,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test City1" type="text" name='city_content1' placeholder="City">
+                                        <input class="event-add-sub-content-input event-add-input-text" value="Test City1" type="text" name='place_city_content1' placeholder="City">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">City must not be empty</div>
@@ -219,7 +239,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test State1" type="text" name='state_content1' placeholder="State / Province">
+                                        <input class="event-add-sub-content-input event-add-input-text" value="Test State1" type="text" name='place_state_content1' placeholder="State / Province">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">State / Province must not be empty</div>
@@ -227,7 +247,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Zip1" type="text" name='zip_content1' placeholder=" Zip / Post code">
+                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Zip1" type="text" name='place_zip_content1' placeholder=" Zip / Post code">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Zip / Post code must not be empty</div>
@@ -235,10 +255,19 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Country1" type="text" name='country_content1' placeholder="Country">
+                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Country1" type="text" name='place_country_content1' placeholder="Country">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Country must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="event-add-sub-content">
+                                    <div class="event-add-sub-title">Place Description</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <textarea class="event-add-sub-content-input event-add-input-text" name='place_description_content1'></textarea>
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event description must not be empty</div>
                                     </div>
                                 </div>
                             </div>
