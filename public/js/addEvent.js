@@ -567,7 +567,9 @@ $(document).on('change','.event-add-input-img',function(e){
     let eleContainer = document.createElement("div");
     $(eleContainer).addClass('event-add-image-preview-container');
     let index = (container.hasClass('image-single')) ? 1 : container.children().length+1;
-    let img = $(this).clone().prop('name',`secotr1_subSector2_content${index}_subContent1_input1`)
+    let img = $(this).clone();
+    let img_name = img.prop('name')
+    img.prop('name', img_name+index)
     img.appendTo(eleContainer);
     const content = `<div class="fa fa-close"></div>
     <div class="event-add-image-preview" style="background:url(${URL.createObjectURL(e.target.files[0])}) center/contain no-repeat !important"></div>

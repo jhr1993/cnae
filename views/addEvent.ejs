@@ -1,7 +1,7 @@
 <% include ./header.ejs %>
 
 <div class="event-add-container">
-    <form class="event-add-form" method="POST" action="/test/upload" enctype="multipart/form-data">
+    <form class="event-add-form" method="POST" action="/upload" enctype="multipart/form-data">
         <div class="event-add-sector-container">
             <div class="event-add-sector">
                 <div class="event-add-main-title">Event Detail</div>
@@ -27,10 +27,10 @@
                                             <div class="event-add-upload">
                                                 <div class="event-add-upload-label-container">
                                                     <label><i class="fa fa-upload"></i>Choose File...
-                                                        <input class="event-add-sub-content-input event-add-input-img" accept="image/*" type="file">
+                                                        <input class="event-add-sub-content-input event-add-input-img" accept="image/*" type="file" name="myImage">
                                                     </label>
                                                 </div>
-                                                <div class="event-add-image-preview-list"></div>
+                                                <div class="event-add-image-preview-list image-single"></div>
                                             </div>
                                         </div>
                                         <div class="alert-msg-container">
@@ -54,7 +54,7 @@
                                 <div class="event-add-sub-content event-add-required">
                                     <div class="event-add-sub-title event-add-required-title">Event Description</div>
                                     <div class="event-add-sub-content-input-container">
-                                        <textarea class="event-add-sub-content-input event-add-input-text" name='event_desc' placeholder="Event Description"></textarea>
+                                        <textarea class="event-add-sub-content-input event-add-input-text" name='event_desc' placeholder="Event Description" disabled></textarea>
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event description must not be empty</div>
@@ -75,8 +75,8 @@
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
                                         <div class="event-add-content-input-parent"></div>
-                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='event_cat_content1' placeholder="Event Category">
-                                        <input class="event-add-sub-content-input event-add-input-hidden" type="hidden" name='event_cat_id_content1'>
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='event_cat_content1' placeholder="Event Category" disabled>
+                                        <input class="event-add-sub-content-input event-add-input-hidden" type="hidden" name='event_cat_id_content1' disabled>
                                     </div>
                                     <div class="event-add-search-box">
                                         <ul class="event-add-search-ul"></ul>
@@ -98,7 +98,7 @@
                         <div id="event_add_artist" class="event-add-content-container">
                             <div class="event-add-content event-add-addable-multiple">
                                 <div class="fa fa-close"></div>
-                                <div id="event_add_detail_event_image" class="event-add-content">
+                                <!--<div id="event_add_detail_event_image" class="event-add-content">
                                     <div class="event-add-sub-content">
                                         <div class="event-add-sub-title">Event Image</div>
                                         <div class="event-add-sub-content event-add-searchable-content">
@@ -117,10 +117,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='event_artist_content1' placeholder="Artist">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='event_artist_content1' placeholder="Artist" disabled>
                                     </div>
                                     <div class="event-add-search-box">
                                         <ul class="event-add-search-ul">

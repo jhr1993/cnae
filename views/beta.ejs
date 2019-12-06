@@ -1,145 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Beta</title>
-
-    <!-- CSS -->
-    <!-- Library -->
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <!-- Awesome icon css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Custom css -->
-    <link rel="stylesheet" type="text/css" href="/css/beta.css" />
-
-    <!-- JS -->
-    <!-- Library -->
-    <!-- Jquery -->
-    <script src="/js/library/jquery-3.4.1.min.js"></script>
-    <script src="/js/library/jquery-ui.min.js"></script>
-
-    <!-- Custom js -->
-    <script src="/js/beta.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  
+  <title>Node File Uploads</title>
 </head>
 <body>
-    <div class="event-add-container">
-        <form class="event-add-form" method="POST" action="/test/upload" enctype="multipart/form-data">
-            <div class="event-add-sector-container">
-                <div class="event-add-sector">
-                    <div class="event-add-main-title">Main Title 1</div>
-                    <div class="event-add-sector-body">
-                        <div class="event-add-sub-sector-container event-add-addable">
-                            <div id="category" class="event-add-content-container">
-                                <div class="event-add-content event-add-addable-multiple">
-                                    <div class="fa fa-close"></div>
-                                    <div class="event-add-sub-content event-add-searchable-content event-add-required">
-                                        <div class="event-add-sub-title event-add-required-title">Title 1-1</div>
-                                        <div class="event-add-sub-content-input-container">
-                                            <input class="event-add-sub-content-input event-add-input-text-input-text" type="text" name="subcontenttext1">
-                                            <input class="event-add-sub-content-input event-add-input-text-input-hidden" type="hidden" name="subcontenthidden1">
-                                        </div>
-                                        <div class="event-add-search-box">
-                                            <ul class="event-add-search-ul">
-                                                <li class="event-add-search-li">
-                                                    <div class="event-add-search-content">
-                                                        <div>This is option 1</div>
-                                                    </div>
-                                                </li>
-                                                <li class="event-add-search-li">
-                                                    <div class="event-add-search-content">
-                                                        <div>This is option 2</div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="alert-msg-container">
-                                            <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event title must not be empty or must be selected</div>
-                                            <div class="alert-msg alert-msg-error alert-msg-error-type-connection">Event title must not be empty or must be selected</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="event-add-sub-sector-content-button">add button</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="event-add-sector">
-                    <div class="event-add-main-title">Main Title 1</div>
-                    <div class="event-add-sector-body">
-                        <div class="event-add-sub-sector-container event-add-addable">
-                            <div id="category" class="event-add-content-container">
-                                <div class="event-add-content event-add-addable-multiple">
-                                    <div class="fa fa-close"></div>
-                                    <div class="event-add-sub-content event-add-searchable-content event-add-required">
-                                        <div class="event-add-sub-title event-add-required-title">Title 1-1</div>
-                                        <div class="event-add-sub-content-input-container">
-                                            <input class="event-add-sub-content-input event-add-input-text-input-text" type="text" name="subcontenttext1">
-                                            <input class="event-add-sub-content-input event-add-input-text-input-hidden" type="hidden" name="subcontenthidden1">
-                                        </div>
-                                        <div class="event-add-search-box">
-                                            <ul class="event-add-search-ul">
-                                                <li class="event-add-search-li">
-                                                    <div class="event-add-search-content">
-                                                        <div>This is option 1</div>
-                                                    </div>
-                                                </li>
-                                                <li class="event-add-search-li">
-                                                    <div class="event-add-search-content">
-                                                        <div>This is option 2</div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="alert-msg-container">
-                                            <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event title must not be empty or must be selected</div>
-                                            <div class="alert-msg alert-msg-error alert-msg-error-type-connection">Event title must not be empty or must be selected</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="event-add-sub-sector-content-button">add button</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="event-add-sector">
-                    <div class="event-add-main-title">Main Title 3</div>
-                    <div class="event-add-sector-body">
-                        <div class="event-add-sub-sector-container event-add-addable">
-                            <div id="category" class="event-add-content-container">
-                                <div class="event-add-content">
-                                    <div class="fa fa-close"></div>
-                                    <div class="event-add-sub-title">Sub Title 3-1</div>
-                                    <div class="event-add-sub-content event-add-searchable-content event-add-required">
-                                        <div class="event-add-sub-content-input-container">       
-                                            <div class="event-add-upload">
-                                                <div class="event-add-upload-label-container">
-                                                    <label><i class="fa fa-upload"></i>Choose File...
-                                                        <input class="event-add-sub-content-input event-add-input-text-input-img" accept="image/*" type="file" name="event_title_img">
-                                                    </label>
-                                                </div>
-                                                <div class="event-add-image-preview-list image-single">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="alert-msg-container">
-                                            <div class="alert-msg alert-msg-error alert-msg-error-type-file-ext">Event title must not be empty or must be selected</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-submit-container">
-                <button class="form-submit event-add-form-submit" type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
+  <div class="container">
+    <h1>File Upload</h1>
+    <%= typeof msg != 'undefined' ? msg : '' %>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <div class="file-field input-field">
+        <div class="btn grey">
+          <span>File</span>
+          <input name="myImage" type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+      <input name="msg" type="text">
+      <button type="submit" class="btn">Submit</button>
+    </form>
+    <br>
+    <img src="<%= typeof file != 'undefined' ? file : '' %>" class="responsive-img">
+  </div>
+
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>  
 </body>
 </html>

@@ -109,108 +109,9 @@ module.exports = function(app, Event, User, multer){
         });
     });
 
-    
-
-    /* Event add */
-    app.post('/db/add_event',(req,res)=>{
-        let event_title = req.body._sector1_subSector1_content1_subContent1_input1;
-        console.log(event_title);
-        /*let event_summary = req.body._sector1_subSector1_content1_subContent1_input1;
-        console.log(event_summary);
-        let event_desc = req.body._secotr1_subSector4_content1_subContent1_input1;
-        console.log(event_desc);
-        let event_categories = []
-        let i = 1
-        while(true){
-            let value = req.body[`_secotr2_subSector1_content${i}_subContent1_input2`];
-            if(value){
-                event_categories.unshift(value);
-                i++;
-            }else
-                break;
-        }
-        console.log(event_categories);
-        let event_artists = []
-        i = 1
-        while(true){
-            let value = req.body[`_secotr3_subSector1_content${i}_subContent1_input2`];
-            if(value){
-                event_artists.unshift(value);
-                i++;
-            }else
-                break;
-        }
-        let event_data = []
-        i = 1
-        while(true){
-            let value = req.body[`_secotr4_subSector1_content${i}_subContent1_input1`];
-            if(value){
-                event_artists[i-1] = [
-                    req.body[`_secotr4_subSector1_content${i}_subContent1_input1`],
-                    req.body[`_secotr4_subSector1_content${i}_subContent2_input1`],
-                    req.body[`_secotr4_subSector1_content${i}_subContent3_input1`],
-                    req.body[`_secotr4_subSector1_content${i}_subContent4_input1`],
-                ];
-                if(req.body[`_secotr4_subSector1_content${i}_subContent5_input1`])
-                    event_artists[i-1].push(req.body[`_secotr4_subSector1_content${i}_subContent5_input1`]);
-                i++;
-            }else
-                break;
-        }
-        
-
-        //console.log(req.body.title)
-        /*const event = new Event();
-        event.title = req.body.name;
-        event.lat = req.body.lat;
-        event.lng = req.body.lng;
-        event.user = req.user._id;
-
-        event.save((err)=>{
-            if(err){
-                res.json({error:err});
-                return;
-            }
-            res.json({error:0})
-        })*/
-    })
 
     
-    const storage = multer.diskStorage({
-        destination: './public/uploads/',
-        filename: function(req, file, cb){
-            cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-        }
-    });
-    
-    const upload = multer({
-        storage: storage,
-        limits:{fileSize: 1000000},
-        fileFilter: function(req, file, cb){
-            checkFileType(file, cb);
-        }
-    }).single('event_title_img');
-    
-    function checkFileType(file, cb){
-        if(!file){
-            console.log('no file')
-        }
-        console.log(file)
-        // Allowed ext
-        const filetypes = /jpeg|jpg|png|gif/;
-        // Check ext
-        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-        // Check mime
-        const mimetype = filetypes.test(file.mimetype);
-    
-        if(mimetype && extname){
-            return cb(null,true);
-        } else {
-            cb('Error: Images Only!');
-        }
-    }
-    
-    app.post('/test/upload', upload, function (req, res, next) {
+    /*app.post('/test/upload', function (req, res, next) {
         let text_upload= true;
         if(!req.body.event_title)
             text_upload = false;
@@ -348,32 +249,10 @@ module.exports = function(app, Event, User, multer){
                 break;
             }
         }
-        
-        if(text_upload){
-            console.log('ha')
-            console.log(req.file)
-            /*upload(req, res, (err) => {
-                console.log(req.body)
-                if(err){
-                    res.render('test', {
-                        msg: err
-                    });
-                } else {
-                    if(req.file == undefined){
-                        res.render('test', {
-                            msg: 'Error: No File Selected!'
-                        });
-                    } else {
-                        res.render('test', {
-                            msg: 'File Uploaded!',
-                            file: `uploads/${req.file.filename}`
-                        });
-                    }
-                }
-            });*/
-        }
+    })*/
 
-    })
+
+    
 
     function authenticateRedirect(req, res, next) {
         if (req.isAuthenticated()) {
