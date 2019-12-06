@@ -504,8 +504,10 @@ $(document).on('click','.event-add-form-submit',function(e){
             return origValue;
         }
     }); 
-    if(all_clear)
+    if(all_clear){
+        $('.event-add-input-button').prop('disabled',true)
         $('.event-add-form').submit();
+    }
 });
 
 $(document).on('keyup keydown change','.event-add-required .event-add-sub-content-input',function(){
@@ -570,6 +572,7 @@ $(document).on('change','.event-add-input-img',function(e){
     let img = $(this).clone();
     let img_name = img.prop('name')
     img.prop('name', img_name+index)
+    img.removeClass('event-add-input-button')
     img.appendTo(eleContainer);
     const content = `<div class="fa fa-close"></div>
     <div class="event-add-image-preview" style="background:url(${URL.createObjectURL(e.target.files[0])}) center/contain no-repeat !important"></div>
