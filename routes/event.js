@@ -211,14 +211,14 @@ module.exports = function(app, Event, User, multer){
     }
     
     app.post('/test/upload', upload, function (req, res, next) {
-        const event_title = req.body.event_title;
-        console.log(event_title)
-        const event_img = req.body.event_img;
-        console.log(event_img)
-        const event_summary = req.body.event_summary;
-        console.log(event_summary)
-        const event_desc = req.body.event_desc;
-        console.log(event_desc)
+        let text_upload= true;
+        if(!req.body.event_title)
+            text_upload = false;
+        if(!req.body.event_summary)
+            text_upload = false;
+        if(!req.body.event_desc)
+            text_upload = false;
+
         const event_cat = [];
         let i = 1;
         while(true){
@@ -226,10 +226,12 @@ module.exports = function(app, Event, User, multer){
                 event_cat.push(req.body[`event_cat_id_content${i}`])
                 i++;
             }else{
+                if(event_cat.length < 1)
+                    text_upload = false;
                 break;
             }
         }
-        console.log(event_cat)
+
         const event_artist = [];
         i = 1;
         while(true){
@@ -242,10 +244,12 @@ module.exports = function(app, Event, User, multer){
                 event_artist.push(artist)
                 i++;
             }else{
+                if(event_artist.length < 1)
+                    text_upload = false;
                 break;
             }
         }
-        console.log(event_artist)
+
         const event_date = [];
         i = 1;
         while(true){
@@ -260,10 +264,12 @@ module.exports = function(app, Event, User, multer){
                 event_date.push(date)
                 i++;
             }else{
+                if(event_date.length < 1)
+                    text_upload = false;
                 break;
             }
         }
-        console.log(event_date)
+
         const event_place = [];
         i = 1;
         while(true){
@@ -281,10 +287,12 @@ module.exports = function(app, Event, User, multer){
                 event_place.push(place)
                 i++;
             }else{
+                if(event_place.length < 1)
+                    text_upload = false;
                 break;
             }
         }
-        console.log(event_place)
+
         const event_ticket = [];
         if(!(req.body[`ticket_type`] == 'open')){  
             i = 1;
@@ -302,11 +310,13 @@ module.exports = function(app, Event, User, multer){
                     event_ticket.push(ticket)
                     i++;
                 }else{
+                    if(event_ticket.length < 1)
+                        text_upload = false;
                     break;
                 }
             }
         }
-        console.log(event_ticket)
+
         const event_url = [];
         i = 1;
         while(true){
@@ -320,7 +330,7 @@ module.exports = function(app, Event, User, multer){
                 break;
             }
         }
-        console.log(event_url)
+
         const event_contact = [];
         i = 1;
         while(true){
@@ -333,10 +343,36 @@ module.exports = function(app, Event, User, multer){
                 event_contact.push(contact)
                 i++;
             }else{
+                if(event_contact.length < 1)
+                    text_upload = false;
                 break;
             }
         }
-        console.log(event_contact)
+        
+        if(text_upload){
+            console.log('ha')
+            console.log(req.file)
+            /*upload(req, res, (err) => {
+                console.log(req.body)
+                if(err){
+                    res.render('test', {
+                        msg: err
+                    });
+                } else {
+                    if(req.file == undefined){
+                        res.render('test', {
+                            msg: 'Error: No File Selected!'
+                        });
+                    } else {
+                        res.render('test', {
+                            msg: 'File Uploaded!',
+                            file: `uploads/${req.file.filename}`
+                        });
+                    }
+                }
+            });*/
+        }
+
     })
 
     function authenticateRedirect(req, res, next) {
