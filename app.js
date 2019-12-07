@@ -109,14 +109,19 @@ function checkFileType(file, cb){
 
 app.post('/upload', (req, res) => {
 
-    // Init Upload
+    const txtupload = multer().any()
+    txtupload(req,res,(err)=>{
+        console.log(req.files)
+    })
+
+    /*// Init Upload
     const upload = multer({
         storage: storage,
         limits:{fileSize: 10000000},
         fileFilter: function(req, file, cb){
             checkFileType(file, cb);
         }
-    }).fields([{ name: 'myImage1', maxCount: 1 }]);
+    }).fields([{ name: 'event_title_image1', maxCount: 1 }]);
     upload(req, res, (err) => {
     console.log(req.files)
         if(err){
@@ -124,21 +129,21 @@ app.post('/upload', (req, res) => {
             /*res.render('index', {
                 msg: err
             });*/
-        } else {
-            if(req.files == undefined){
+        //} else {
+            //if(req.files == undefined){
                 console.log('no image')
                 /*res.render('index', {
                     msg: 'Error: No File Selected!'
                 });*/
-            } else {
-                console.log('upload')
+            //} else {
+                //console.log('upload')
                 /*res.render('index', {
                     msg: 'File Uploaded!',
                     file: `uploads/${req.file.filename}`
                 });*/
-            }
-        }
-    })//.single('myImage1');
+            //}
+        //}
+    //})//.single('myImage1');
 });
 
 /*const txtupload = multer().any()

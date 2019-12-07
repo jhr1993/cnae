@@ -568,7 +568,7 @@ $(document).on('change','.event-add-input-img',function(e){
     const container = $(this).parent().parent().parent().find('.event-add-image-preview-list')
     let eleContainer = document.createElement("div");
     $(eleContainer).addClass('event-add-image-preview-container');
-    let index = (container.hasClass('image-single')) ? 1 : container.children().length+1;
+    let index = (container.hasClass('image-single')) ? '' : '_'+container.children().length+1;
     let img = $(this).clone();
     let img_name = img.prop('name')
     img.prop('name', img_name+index)
