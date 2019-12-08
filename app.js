@@ -85,14 +85,15 @@ const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
-  destination: './public/uploads/',
-  filename: function(req, file, cb){
-      cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
+    destination: './public/uploads/',
+    filename: function(req, file, cb){
+        cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
 });
 
 // Check File Type
-function checkFileType(file, cb){
+function checkFileType(file, cb, body){
+    console.log(body)
     // Allowed ext
     const filetypes = /jpeg|jpg|png|gif|jfif/;
     // Check ext
@@ -107,89 +108,99 @@ function checkFileType(file, cb){
     }
 }
 
-app.post('/upload', (req, res) => {
-
+app.post('/upload', async (req, res) => {
     const txtupload = multer().any()
-    txtupload(req,res,(err)=>{
-        console.log(req.files)
-    })
-
-    /*// Init Upload
-    const upload = multer({
-        storage: storage,
-        limits:{fileSize: 10000000},
-        fileFilter: function(req, file, cb){
-            checkFileType(file, cb);
-        }
-    }).fields([{ name: 'event_title_image1', maxCount: 1 }]);
-    upload(req, res, (err) => {
-    console.log(req.files)
-        if(err){
-            console.log(err)
-            /*res.render('index', {
-                msg: err
-            });*/
-        //} else {
-            //if(req.files == undefined){
-                console.log('no image')
-                /*res.render('index', {
-                    msg: 'Error: No File Selected!'
-                });*/
-            //} else {
-                //console.log('upload')
-                /*res.render('index', {
-                    msg: 'File Uploaded!',
-                    file: `uploads/${req.file.filename}`
-                });*/
-            //}
-        //}
-    //})//.single('myImage1');
-});
-
-/*const txtupload = multer().any()
-txtupload(req,res,(err)=>{
     let validate = true
-    const validate_value = ['event_title','event_summary','event_desc','event_cat_content1','event_cat_id_content1','event_artist_content1','event_start_date_content1','event_end_date_content1','event_start_time_content1','event_end_time_content1','place_address2_content1','place_city_content1','place_state_content1','place_zip_content1','place_country_content1','contact_name_content1','contact_desc_content1','contact_phone_content1']
-    validate_value.forEach(element => {
-        if(!req.body[element]||req.body[element]==''||req.body[element]==' ')
+    
+    const test = function(){
+            txtupload(req,res, (err)=>{
+            console.log('work1')
             validate = false
-    });
-    if(!req.body.ticket_type)
-        validate = false
-    if(req.body.ticket_type == 'free' || req.body.ticket_type == 'paid'){
-        let ticket_validate = ['ticket_name_content1','ticket_capacity_content1'];
-        if(req.body.ticket_type == 'paid'){
-            ticket_validate.push('ticket_currency_content1','ticket_price_content1')
-        }
-        ticket_validate.forEach(element => {
-            if(!req.body[element]||req.body[element]==''||req.body[element]==' ')
+            const validate_value = ['event_title','event_summary','event_desc','event_cat_content1','event_cat_id_content1','event_artist_content1','event_start_date_content1','event_end_date_content1','event_start_time_content1','event_end_time_content1','place_address2_content1','place_city_content1','place_state_content1','place_zip_content1','place_country_content1','contact_name_content1','contact_desc_content1','contact_phone_content1']
+            validate_value.forEach(element => {
+                if (!req.body[element] || req.body[element] == '' || req.body[element] == ' ')
+                    validate = false;
+            });
+            if(!req.body.ticket_type)
                 validate = false
-        });
+            if(req.body.ticket_type == 'free' || req.body.ticket_type == 'paid'){
+                let ticket_validate = ['ticket_name_content1','ticket_capacity_content1'];
+                if(req.body.ticket_type == 'paid'){
+                    ticket_validate.push('ticket_currency_content1','ticket_price_content1')
+                }
+                ticket_validate.forEach(element => {
+                    if(!req.body[element]||req.body[element]==''||req.body[element]==' ')
+                        validate = false
+                });
+            }
+        })
     }
-    if(!validate){
-        console.log('not validate')
-    }else {
-        console.log('validate')
+
+    test().then(()=>{
+        console.log('ha')
+    });
+
+    if(validate){
+        //Init Upload
+        const upload = multer({
+            storage: storage,
+            limits:{fileSize: 10000000},
+            fileFilter: function(req, file, cb){
+                checkFileType(file, cb , req.body);
+            }
+        }).any();
         upload(req, res, (err) => {
             if(err){
                 console.log(err)
-                res.render('index', {
-                    msg: err
-                });
+                //res.render('index', {
+                    //msg: err
+                //});
             } else {
-                if(req.file == undefined){
+                if(req.files == undefined){
                     console.log('no image')
-                    res.render('index', {
-                        msg: 'Error: No File Selected!'
-                    });
+                    //res.render('index', {
+                        //msg: 'Error: No File Selected!'
+                    //});
                 } else {
                     console.log('upload')
-                    res.render('index', {
-                        msg: 'File Uploaded!',
-                        file: `uploads/${req.file.filename}`
-                    });
+                    //res.render('index', {
+                        //msg: 'File Uploaded!',
+                        //file: `uploads/${req.file.filename}`
+                    //});
                 }
             }
-        });
+        })
     }
-})*/ 
+
+    /*if(validate){
+        //Init Upload
+        const upload = multer({
+            storage: storage,
+            limits:{fileSize: 10000000},
+            fileFilter: function(req, file, cb){
+                checkFileType(file, cb);
+            }
+        }).any();
+        upload(req, res, (err) => {
+            if(err){
+                console.log(err)
+                //res.render('index', {
+                    //msg: err
+                //});
+            } else {
+                if(req.files == undefined){
+                    console.log('no image')
+                    //res.render('index', {
+                        //msg: 'Error: No File Selected!'
+                    //});
+                } else {
+                    console.log('upload')
+                    //res.render('index', {
+                        //msg: 'File Uploaded!',
+                        //file: `uploads/${req.file.filename}`
+                    //});
+                }
+            }
+        })
+    }*/
+});
