@@ -689,3 +689,18 @@ $(document).on('focusout','#event-category .event-add-content-category-title',fu
     $(this).parent().parent().find('.event-add-content-search-container').hide();
     $(this).parent().parent().find('.event-add-content-search').html('');
 })
+
+$(document).ready(function(){
+    const url_string = window.location.href;
+    const url = new URL(url_string);
+    const all = $(".event-add-required .event-add-sub-content-input").map(function() {
+        if(url.searchParams.get($(this).prop('name'))){
+            $(this).parent().parent().find('.alert-msg-error-type-empty').show();
+            $(this).parent().addClass('alert-msg-active-error');
+        }
+    })
+    /*var url_string = window.location.href;
+    var url = new URL(url_string);
+    var c = url.searchParams.get("event_title");
+    console.log(c);*/
+})

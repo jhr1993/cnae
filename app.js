@@ -10,8 +10,7 @@ const flash = require('express-flash');
 const passport = require('passport');
 const multer = require('multer');
 const path = require('path')
-const formidable = require('formidable')
-//const fs = require('fs');
+const fs = require('fs')
 
 
 // [CONFIGURE EJS]
@@ -93,8 +92,7 @@ const storage = multer.diskStorage({
 });
 
 // Check File Type
-function checkFileType(file, cb, body){
-    console.log(body)
+function checkFileType(file, cb){
     // Allowed ext
     const filetypes = /jpeg|jpg|png|gif|jfif/;
     // Check ext
@@ -109,105 +107,52 @@ function checkFileType(file, cb, body){
     }
 }
 
-app.post('/upload', async (req, res) => {
-    var form = new formidable.IncomingForm();
+const upload = multer({
+    storage: storage,
+    limits:{fileSize: 10000000},
+    fileFilter: function(req, file, cb){
+        checkFileType(file, cb);
+    }
+});
 
-    form.parse(req,(err,fields,files)=>{
-        console.log(fields)
-        console.log(files.event_title_image1.name)
-    });
+app.post('/upload', upload.any(), (req, res) => {
 
-    /*form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/public/uploads/' + file.name;
-    });
-
-    form.on('file', function (name, file){
-        console.log('Uploaded ' + file.name);
-    });*/
-
-    /*const txtupload = multer().any()
-    let validate = true
-    
-    txtupload(req,res, (err)=>{
-    console.log('work1')
-    validate = false
+    let error_value = [];
     const validate_value = ['event_title','event_summary','event_desc','event_cat_content1','event_cat_id_content1','event_artist_content1','event_start_date_content1','event_end_date_content1','event_start_time_content1','event_end_time_content1','place_address2_content1','place_city_content1','place_state_content1','place_zip_content1','place_country_content1','contact_name_content1','contact_desc_content1','contact_phone_content1']
     validate_value.forEach(element => {
-        if (!req.body[element] || req.body[element] == '' || req.body[element] == ' ')
-            validate = false;
+        if (!req.body[element] || req.body[element] == '' || req.body[element] == ' '){
+            error_value.push(element)
+        }
     });
     if(!req.body.ticket_type)
-        validate = false
+        error_value.push('ticket_type');
     if(req.body.ticket_type == 'free' || req.body.ticket_type == 'paid'){
         let ticket_validate = ['ticket_name_content1','ticket_capacity_content1'];
         if(req.body.ticket_type == 'paid'){
             ticket_validate.push('ticket_currency_content1','ticket_price_content1')
         }
         ticket_validate.forEach(element => {
-            if(!req.body[element]||req.body[element]==''||req.body[element]==' ')
+            if(!req.body[element]||req.body[element]==''||req.body[element]==' '){
                 validate = false
+                error_value.push(element)
+            }
         });
     }
-    
 
-    //Init Upload
-    const upload = multer({
-        storage: storage,
-        limits:{fileSize: 10000000},
-        fileFilter: function(req, file, cb){
-            checkFileType(file, cb , req.body);
+    if(error_value.length>0){
+        req.files.forEach(file => {
+            fs.unlink(file.path,(err)=>{
+                //res.redirect()
+            });
+        });
+
+        let error_get = '?';
+        for(let i = 0; i < error_value.length; i++){
+            error_get += `${error_value[i]}=1`;
+            if(i+1 != error_value.length)
+                error_get += '&';
         }
-    }).any();
-    upload(req, res, (err) => {
-        if(err){
-            console.log(err)
-            //res.render('index', {
-                //msg: err
-            //});
-        } else {
-            if(req.files == undefined){
-                console.log('no image')
-                //res.render('index', {
-                    //msg: 'Error: No File Selected!'
-                //});
-            } else {
-                console.log('upload')
-                //res.render('index', {
-                    //msg: 'File Uploaded!',
-                    //file: `uploads/${req.file.filename}`
-                //});
-            }
-        }
-    })
-    /*if(validate){
-        //Init Upload
-        const upload = multer({
-            storage: storage,
-            limits:{fileSize: 10000000},
-            fileFilter: function(req, file, cb){
-                checkFileType(file, cb);
-            }
-        }).any();
-        upload(req, res, (err) => {
-            if(err){
-                console.log(err)
-                //res.render('index', {
-                    //msg: err
-                //});
-            } else {
-                if(req.files == undefined){
-                    console.log('no image')
-                    //res.render('index', {
-                        //msg: 'Error: No File Selected!'
-                    //});
-                } else {
-                    console.log('upload')
-                    //res.render('index', {
-                        //msg: 'File Uploaded!',
-                        //file: `uploads/${req.file.filename}`
-                    //});
-                }
-            }
-        })
-    }*/
+
+        res.redirect(`/event_add${error_get}`);
+    }
 });
