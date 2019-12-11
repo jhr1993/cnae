@@ -199,23 +199,42 @@
             <div class="event-add-sector">
                 <div class="event-add-main-title">Place</div>
                 <div class="event-add-sector-body">
-                    <div class="event-add-sub-sector-container event-add-addable">
-                        <div id="category" class="event-add-content-container">
+                    <div id="event-place" class="event-add-sub-sector-container event-add-addable">
+                        <div class="event-add-content-container">
                             <div class="event-add-content event-add-addable-multiple">
                                 <div class="fa fa-close"></div>
                                 <div class="event-add-sub-content event-add-searchable-content">
                                     <div class="event-add-sub-title">Place Search</div>
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" type="text" placeholder="Place Search">
+                                        <input id="event_place_search1" class="event-add-sub-content-input event-add-input-text event-place-search" type="text" placeholder="Place Search">
+                                    </div>
+                                    <div id='event_place_map1' class="event-add-content-place-map"></div>
+                                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEpEB7aKAhd1FwGykhkQgGWnRKRntZ3ro&callback=initMap&libraries=places"
+                                    async defer></script>
+                                </div>
+                                <div class="event-add-sub-content event-add-required event-add-sub-half">
+                                    <div class="event-add-sub-title event-add-required-title">Latitude</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text place-lat" type="text" name='place_lat_content1' placeholder="0.00">
                                     </div>
                                     <div class="alert-msg-container">
-                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Event title must not be empty or must be selected</div>
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Latitude must not be empty</div>
                                     </div>
                                 </div>
+                                <div class="event-add-sub-content event-add-required event-add-sub-half">
+                                    <div class="event-add-sub-title event-add-required-title">Longitude</div>
+                                    <div class="event-add-sub-content-input-container">
+                                        <input class="event-add-sub-content-input event-add-input-text place-lng" type="text" name='place_lng_content1' placeholder="0.00">
+                                    </div>
+                                    <div class="alert-msg-container">
+                                        <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Longitude must not be empty</div>
+                                    </div>
+                                </div>
+                                <div class="clear-both"></div>
                                 <div class="event-add-sub-content event-add-searchable-content">
-                                    <div class="event-add-sub-title">Address</div>
+                                    <div class="event-add-sub-title event-add-required-title">Address</div>
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Address1 1" type="text" name='place_address1_content1' placeholder="Address1">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='place_address1_content1' placeholder="Address1">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Address must not be empty</div>
@@ -223,7 +242,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Address2 1" type="text" name='place_address2_content1' placeholder="Address2">
+                                        <input class="event-add-sub-content-input event-add-input-text" type="text" name='place_address2_content1' placeholder="Address2">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Address must not be empty</div>
@@ -231,7 +250,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test City1" type="text" name='place_city_content1' placeholder="City">
+                                        <input class="event-add-sub-content-input event-add-input-text place-city" type="text" name='place_city_content1' placeholder="City">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">City must not be empty</div>
@@ -239,7 +258,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test State1" type="text" name='place_state_content1' placeholder="State / Province">
+                                        <input class="event-add-sub-content-input event-add-input-text place-state" type="text" name='place_state_content1' placeholder="State / Province">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">State / Province must not be empty</div>
@@ -247,7 +266,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Zip1" type="text" name='place_zip_content1' placeholder=" Zip / Post code">
+                                        <input class="event-add-sub-content-input event-add-input-text place-zip" type="text" name='place_zip_content1' placeholder=" Zip / Post code">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Zip / Post code must not be empty</div>
@@ -255,7 +274,7 @@
                                 </div>
                                 <div class="event-add-sub-content event-add-searchable-content event-add-required">
                                     <div class="event-add-sub-content-input-container">
-                                        <input class="event-add-sub-content-input event-add-input-text" value="Test Country1" type="text" name='place_country_content1' placeholder="Country">
+                                        <input class="event-add-sub-content-input event-add-input-text place-country" type="text" name='place_country_content1' placeholder="Country">
                                     </div>
                                     <div class="alert-msg-container">
                                         <div class="alert-msg alert-msg-error alert-msg-error-type-empty">Country must not be empty</div>
@@ -437,8 +456,6 @@
             <button class="form-submit event-add-form-submit" type="submit">Submit</button>
         </div>
     </form>
-    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEpEB7aKAhd1FwGykhkQgGWnRKRntZ3ro&callback=initMap&libraries=places"
-    async defer></script>-->
 </div>
 
 <% include ./footer.ejs %>

@@ -176,20 +176,6 @@ app.post('/upload', upload.any(), (req, res) => {
     newEvent.category = cat_data;
     console.log(cat_data)
 
-    let artist_data = [];
-    i = 1;
-    while(req.body[`event_artist_content${i}`]){
-        let artData = {}
-        if(req.body[`event_artist_id_content${i}`]){
-            artData.id = req.body[`event_artist_id_content${i}`]
-        }
-        artData.artist = req.body[`event_artist_content${i}`]
-        artist_data.push(JSON.stringify(artData))
-        i++
-    }
-    newEvent.artists = artist_data;
-    console.log(artist_data)
-
     let date_data = [];
     i = 1
     while(req.body[`event_start_date_content${i}`]&&req.body[`event_end_date_content${i}`]&&req.body[`event_start_time_content${i}`]&&req.body[`event_end_time_content${i}`]){
@@ -266,12 +252,35 @@ app.post('/upload', upload.any(), (req, res) => {
         contact_data.push(JSON.stringify(contactData))
         i++
     }
-    console.log(contact_data)
     newEvent.contact = contact_data;
 
     newEvent.lat = 121.021;
     newEvent.lng = 83.012;
     newEvent.user = 'test user';
+    let event_artists_img = []
+    const patt = /event_artist_img_content[0-9]*/i
+    req.files.forEach(file => {
+        if(file.fieldname == 'event_title_image1') newEvent.title_img = 'event_title_image1';
+        else if(file.fieldname.match(/event_artist_img_content[0-9]*/i)) event_artists_img.push(file.fieldname)
+    });
+
+    let artist_data = [];
+    i = 1;
+    while(req.body[`event_artist_content${i}`]){
+        let artData = {}
+        if(req.body[`event_artist_id_content${i}`]){
+            artData.id = req.body[`event_artist_id_content${i}`]
+        }
+        if(event_artists_img.includes(`event_artist_img_content${i}`)){
+            artData.img = event_artists_img[event_artists_img.indexOf(`event_artist_img_content${i}`)];
+        }
+        artData.artist = req.body[`event_artist_content${i}`]
+        artist_data.push(JSON.stringify(artData))
+        i++
+    }
+    newEvent.artists = artist_data;
+    console.log(artist_data)
+
 
     newEvent.save((err)=>{
         if(err) {

@@ -4,7 +4,8 @@
 @import url("signinup.css"); /* Map CSS */
 
 html, body{
-    width: 100%;
+	width: 100%;
+	font-family: Roboto;
 }
 
 .float-clear-both {
@@ -565,6 +566,23 @@ form {
 
 .event-add-image-preview-content {
 	word-break:break-all;
+}
+
+.event-add-content-place-map {
+	height: 300px;
+	margin: 18px;
+}
+
+.event-place-search {
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: inherit !important;
+	width: 100% !important;
+	font-weight: inherit !important;
+}
+
+.gmnoprint, .gm-style-cc {
+	display: none;
 }
 
 

@@ -397,94 +397,7 @@ function errorDisplay(element, bool, msg = "[WARNING] We got some problems I gue
     window.scrollTo(0,element.offset().top-88)
 }
 
-var map;
-function initMap() {
-    map = new google.maps.Map(document.getElementById('event-add-content-place-map1'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 8
-    });
-
-    // Map function customise 
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
-    });
-    
-    var searchMarkers=[];
-    searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
-
-        if (places.length == 0) {
-            return;
-        }
-
-        // Clear out the old markers.
-        searchMarkers.forEach(function(searchMarkers) {
-            searchMarkers.setMap(null);
-        });
-        searchMarkers = [];
-
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            searchMarkers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
-            const address = place.address_components;
-            const addressOutput = {};
-            let locality = false;
-            console.log(address);
-            for(let i = 0; i < address.length; i++){
-                if(address[i].types.includes('locality')){
-                    addressOutput.city = address[i].long_name;
-                    locality = true;
-                }
-                if(address[i].types.includes('postal_code'))
-                    addressOutput.postal_code = address[i].long_name;
-                if(address[i].types.includes('country'))
-                    addressOutput.country = address[i].long_name;
-                if(address[i].types.includes('administrative_area_level_1'))
-                    addressOutput.state = address[i].long_name;
-                if(address[i].types.includes('administrative_area_level_2'))
-                    addressOutput.province = address[i].long_name;
-            }
-            console.log(addressOutput);
-            $(input).parent().find('.place-state').val(addressOutput.state);
-            $(input).parent().find('.place-zip').val(addressOutput.postal_code);
-            $(input).parent().find('.place-state').val(addressOutput.state);
-            $(input).parent().find('.place-city').val(addressOutput.city);
-            $(input).parent().find('.place-country').val(addressOutput.country);
-        });
-        map.fitBounds(bounds);
-    });
-}*/
+*/
 
 $(document).on('click','.event-add-form-submit',function(e){
     let all_clear = true;
@@ -535,6 +448,12 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
     clone.find('.event-add-content-input-parent').html('');
     clone.find('.alert-msg-error').hide();
     clone.find('.event-add-sub-content-input-container').removeClass('alert-msg-active-error');
+    let mapID = clone.find('.event-add-content-place-map').attr('id');
+    let mapNext = `${mapID.split('_map')[0]}_map${container.children().length+1}`;
+    clone.find('.event-add-content-place-map').attr('id',mapNext);
+    let searchID = clone.find('.event-place-search').attr('id');
+    let searchNext = `${searchID.split('_search')[0]}_search${container.children().length+1}`;
+    clone.find('.event-place-search').attr('id',searchNext);
     clone.appendTo(container);
     if(container.children().length>1){
         container.find('.fa-close').show();
@@ -699,8 +618,113 @@ $(document).ready(function(){
             $(this).parent().addClass('alert-msg-active-error');
         }
     })
-    /*var url_string = window.location.href;
-    var url = new URL(url_string);
-    var c = url.searchParams.get("event_title");
-    console.log(c);*/
+})
+
+var map;
+function initMap() {
+    map = new google.maps.Map(document.getElementById('event_place_map1'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+        google.maps.event.addListener(marker, "dblclick", function (e) { 
+            log("Double Click"); 
+        });
+    });
+}
+
+$(document).on('click','#event-place .event-add-sub-sector-content-button',function(){
+    console.log('ha')
+    const index = $('#event-place .event-add-content-container').children.length;
+    
+    
+})
+
+$(document).on('focusin','.event-place-search',function(){
+    const mapId = $(this).parent().parent().find('.event-add-content-place-map').attr('id')
+    const searchId = $(this).attr('id')
+
+    map = new google.maps.Map(document.getElementById(mapId), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+    });
+    // Map function customise 
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById(searchId);
+    var searchBox = new google.maps.places.SearchBox(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
+    });
+    
+    var searchMarkers=[];
+    searchBox.addListener('places_changed', function() {
+        var places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+            return;
+        }
+
+        // Clear out the old markers.
+        searchMarkers.forEach(function(searchMarkers) {
+            searchMarkers.setMap(null);
+        });
+        searchMarkers = [];
+
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            searchMarkers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+            const address = place.address_components;
+            const addressOutput = {};
+            let locality = false;
+            for(let i = 0; i < address.length; i++){
+                if(address[i].types.includes('locality')){
+                    addressOutput.city = address[i].long_name;
+                    locality = true;
+                }
+                if(address[i].types.includes('postal_code'))
+                    addressOutput.postal_code = address[i].long_name;
+                if(address[i].types.includes('country'))
+                    addressOutput.country = address[i].long_name;
+                if(address[i].types.includes('administrative_area_level_1'))
+                    addressOutput.state = address[i].long_name;
+                if(address[i].types.includes('administrative_area_level_2'))
+                    addressOutput.province = address[i].long_name;
+            }
+            //console.log(addressOutput);
+            $(input).parent().parent().parent().find('.place-state').val(addressOutput.state);
+            $(input).parent().parent().parent().find('.place-zip').val(addressOutput.postal_code);
+            $(input).parent().parent().parent().find('.place-state').val(addressOutput.state);
+            $(input).parent().parent().parent().find('.place-city').val(addressOutput.city);
+            $(input).parent().parent().parent().find('.place-country').val(addressOutput.country);
+            $(input).parent().parent().parent().find('.place-lat').val(place.geometry.location.lat());
+            $(input).parent().parent().parent().find('.place-lng').val(place.geometry.location.lng());
+        });
+        map.fitBounds(bounds);
+    });
 })
