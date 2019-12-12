@@ -625,9 +625,6 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('event_place_map1'), {
         center: {lat: -34.397, lng: 150.644},
         zoom: 8
-        google.maps.event.addListener(marker, "dblclick", function (e) { 
-            log("Double Click"); 
-        });
     });
 }
 
@@ -641,10 +638,13 @@ $(document).on('click','#event-place .event-add-sub-sector-content-button',funct
 $(document).on('focusin','.event-place-search',function(){
     const mapId = $(this).parent().parent().find('.event-add-content-place-map').attr('id')
     const searchId = $(this).attr('id')
+    const lat = ($(this).parent().parent().parent().find('.place-lat').val()=='') ? -34.397 : $(this).parent().parent().parent().find('.place-lat').val();
+    const lng = ($(this).parent().parent().parent().find('.place-lng').val()=='') ? 150.644 : $(this).parent().parent().parent().find('.place-lng').val();
+    const curZoom = map.getZoom()
 
     map = new google.maps.Map(document.getElementById(mapId), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 8
+        center: {lat: parseFloat(lat), lng: parseFloat(lng)},
+        zoom: curZoom
     });
     // Map function customise 
     // Create the search box and link it to the UI element.
@@ -700,26 +700,67 @@ $(document).on('focusin','.event-place-search',function(){
                 bounds.extend(place.geometry.location);
             }
             const address = place.address_components;
+            console.log(address);
             const addressOutput = {};
+            let address2 = ''
+            let statenprovince = ''
             let locality = false;
             for(let i = 0; i < address.length; i++){
+                if(address[i].types.includes('premise'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('street_number'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('street_address'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('intersection'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('route'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('subpremise'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('sublocality_level_1'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('sublocality_level_2'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('sublocality_level_3'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('sublocality_level_4'))
+                    address2 += address[i].long_name+', '
+                if(address[i].types.includes('sublocality_level_5'))
+                    address2 += address[i].long_name+', '
+
+
+
+
+
+
                 if(address[i].types.includes('locality')){
                     addressOutput.city = address[i].long_name;
-                    locality = true;
+                    locality = true
+                    console.log('locallity')
+                }else if(!locality){
+                    if(address[i].types.includes('administrative_area_level_1'))
+                    addressOutput.city = address[i].long_name;
                 }
                 if(address[i].types.includes('postal_code'))
                     addressOutput.postal_code = address[i].long_name;
                 if(address[i].types.includes('country'))
                     addressOutput.country = address[i].long_name;
                 if(address[i].types.includes('administrative_area_level_1'))
-                    addressOutput.state = address[i].long_name;
+                    statenprovince += address[i].long_name+' ';
                 if(address[i].types.includes('administrative_area_level_2'))
-                    addressOutput.province = address[i].long_name;
+                    statenprovince += address[i].long_name+' ';
+                if(address[i].types.includes('administrative_area_level_3'))
+                    statenprovince += address[i].long_name+' ';
+                if(address[i].types.includes('administrative_area_level_4'))
+                    statenprovince += address[i].long_name+' ';
+                if(address[i].types.includes('administrative_area_level_5'))
+                    statenprovince += address[i].long_name+' ';
             }
             //console.log(addressOutput);
-            $(input).parent().parent().parent().find('.place-state').val(addressOutput.state);
+            $(input).parent().parent().parent().find('.place-address2').val(address2);
             $(input).parent().parent().parent().find('.place-zip').val(addressOutput.postal_code);
-            $(input).parent().parent().parent().find('.place-state').val(addressOutput.state);
+            $(input).parent().parent().parent().find('.place-state').val(statenprovince);
             $(input).parent().parent().parent().find('.place-city').val(addressOutput.city);
             $(input).parent().parent().parent().find('.place-country').val(addressOutput.country);
             $(input).parent().parent().parent().find('.place-lat').val(place.geometry.location.lat());
@@ -727,4 +768,8 @@ $(document).on('focusin','.event-place-search',function(){
         });
         map.fitBounds(bounds);
     });
+})
+
+$(document).on('keyup','.place-lat, .place-lng',function(){
+    lat = $(this).parent().parent().parent().find('.place-lat') 
 })
