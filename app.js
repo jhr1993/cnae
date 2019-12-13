@@ -118,7 +118,7 @@ const upload = multer({
 app.post('/upload', upload.any(), (req, res) => {
 
     let error_value = [];
-    const validate_value = ['event_title','event_summary','event_desc','event_cat_content1','event_cat_id_content1','event_artist_content1','event_start_date_content1','event_end_date_content1','event_start_time_content1','event_end_time_content1','place_address2_content1','place_city_content1','place_state_content1','place_zip_content1','place_country_content1','contact_name_content1','contact_desc_content1','contact_phone_content1']
+    const validate_value = ['event_title','event_summary','event_desc','event_cat_content1','event_cat_id_content1','event_artist_content1','event_start_date_content1','event_end_date_content1','event_start_time_content1','event_end_time_content1','place_lat_content1','place_lng_content1','place_address2_content1','place_city_content1','place_state_content1','place_zip_content1','place_country_content1','contact_name_content1','contact_desc_content1','contact_phone_content1']
     validate_value.forEach(element => {
         if (!req.body[element] || req.body[element] == '' || req.body[element] == ' '){
             error_value.push(element)
@@ -195,8 +195,10 @@ app.post('/upload', upload.any(), (req, res) => {
 
     let place_data = [];
     i = 1
-    while(req.body[`place_address2_content${i}`]&&req.body[`place_city_content${i}`]&&req.body[`place_state_content${i}`]&&req.body[`place_zip_content${i}`]&&req.body[`place_country_content${i}`]){
+    while(req.body[`place_lat_content${i}`]&&req.body[`place_lng_content${i}`]&&req.body[`place_address2_content${i}`]&&req.body[`place_city_content${i}`]&&req.body[`place_state_content${i}`]&&req.body[`place_zip_content${i}`]&&req.body[`place_country_content${i}`]){
         let placeData = {}
+        placeData.lat = req.body[`place_lat_content${i}`]
+        placeData.lng = req.body[`place_lng_content${i}`]
         placeData.address2 = req.body[`place_address2_content${i}`]
         placeData.city = req.body[`place_city_content${i}`]
         placeData.state = req.body[`place_state_content${i}`]

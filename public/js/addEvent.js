@@ -448,13 +448,22 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
     clone.find('.event-add-content-input-parent').html('');
     clone.find('.alert-msg-error').hide();
     clone.find('.event-add-sub-content-input-container').removeClass('alert-msg-active-error');
-    let mapID = clone.find('.event-add-content-place-map').attr('id');
-    let mapNext = `${mapID.split('_map')[0]}_map${container.children().length+1}`;
-    clone.find('.event-add-content-place-map').attr('id',mapNext);
-    let searchID = clone.find('.event-place-search').attr('id');
-    let searchNext = `${searchID.split('_search')[0]}_search${container.children().length+1}`;
-    clone.find('.event-place-search').attr('id',searchNext);
+    let mapNext = '';
+    if(clone.hasClass('event-add-contain-google-map')){
+        let mapID = clone.find('.event-add-content-place-map').attr('id');
+        mapNext = `${mapID.split('_map')[0]}_map${container.children().length+1}`;
+        clone.find('.event-add-content-place-map').attr('id',mapNext);
+        let searchID = clone.find('.event-place-search').attr('id');
+        let searchNext = `${searchID.split('_search')[0]}_search${container.children().length+1}`;
+        clone.find('.event-place-search').attr('id',searchNext);
+    }
     clone.appendTo(container);
+    if(clone.hasClass('event-add-contain-google-map')){
+        maps[container.children().length-1] = new google.maps.Map(document.getElementById(mapNext), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 8
+        });
+    }
     if(container.children().length>1){
         container.find('.fa-close').show();
     }
@@ -620,9 +629,9 @@ $(document).ready(function(){
     })
 })
 
-var map;
+const maps = []
 function initMap() {
-    map = new google.maps.Map(document.getElementById('event_place_map1'), {
+    maps[0] = new google.maps.Map(document.getElementById('event_place_map1'), {
         center: {lat: -34.397, lng: 150.644},
         zoom: 8
     });
@@ -636,20 +645,16 @@ $(document).on('click','#event-place .event-add-sub-sector-content-button',funct
 })
 
 $(document).on('focusin','.event-place-search',function(){
-    const mapId = $(this).parent().parent().find('.event-add-content-place-map').attr('id')
     const searchId = $(this).attr('id')
-    const lat = ($(this).parent().parent().parent().find('.place-lat').val()=='') ? -34.397 : $(this).parent().parent().parent().find('.place-lat').val();
-    const lng = ($(this).parent().parent().parent().find('.place-lng').val()=='') ? 150.644 : $(this).parent().parent().parent().find('.place-lng').val();
-    const curZoom = map.getZoom()
-
-    map = new google.maps.Map(document.getElementById(mapId), {
-        center: {lat: parseFloat(lat), lng: parseFloat(lng)},
-        zoom: curZoom
-    });
     // Map function customise 
     // Create the search box and link it to the UI element.
     var input = document.getElementById(searchId);
     var searchBox = new google.maps.places.SearchBox(input);
+    index = searchId.split('_search')[1]
+    console.log(index)
+
+    const map = maps[index-1]
+    console.log(maps[0])
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
@@ -768,8 +773,81 @@ $(document).on('focusin','.event-place-search',function(){
         });
         map.fitBounds(bounds);
     });
-})
+});
 
 $(document).on('keyup','.place-lat, .place-lng',function(){
-    lat = $(this).parent().parent().parent().find('.place-lat') 
+    const mapId = $(this).parent().parent().parent().find('.event-add-content-place-map').attr('id')
+    const index = mapId.split('_map')[1]
+    const lat = ($(this).parent().parent().parent().find('.place-lat').val()=='') ? 0 : $(this).parent().parent().parent().find('.place-lat').val();
+    const lng = ($(this).parent().parent().parent().find('.place-lng').val()=='') ? 0 : $(this).parent().parent().parent().find('.place-lng').val();
+    const map = maps[index-1]
+    map.setCenter({lat:parseFloat(lat),lng:parseFloat(lng)})
+
+    if(markers[index]){
+        for (var i = 0; i < markers[index].length; i++) {
+            markers[index][i].setMap(null);
+        }
+        markers[index] = [];
+    }
+
+    let marker = new google.maps.Marker({
+        position: {lat:parseFloat(lat),lng:parseFloat(lng)},
+        map: map
+    });
+    if(!markers[index])
+        markers[index] = [];
+    markers[index].push(marker);
+
+    //Attach click event handler to the marker.
+    google.maps.event.addListener(marker, "click", function (e) {
+        var infoWindow = new google.maps.InfoWindow({
+            content: 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
+        });
+        infoWindow.open(map, marker);
+    });
+})
+
+const markers = []
+
+function addMarker(location,map,index,lat,lng) {
+}
+
+$(document).on('click','.event-add-content-place-map',function(){
+    const mapId = $(this).attr('id')
+    const lat = $(this).parent().parent().find('.place-lat');
+    const lng = $(this).parent().parent().find('.place-lng');
+    const index = mapId.split('_map')[1]
+    const map = maps[index-1]
+
+    //Attach click event handler to the map.
+    google.maps.event.addListener(map, 'click', function (e) {
+ 
+        //Determine the location where the user has clicked.
+        var location = e.latLng;
+
+        if(markers[index]){
+            for (var i = 0; i < markers[index].length; i++) {
+                markers[index][i].setMap(null);
+            }
+            markers[index] = [];
+        }
+
+        let marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+        if(!markers[index])
+            markers[index] = [];
+        markers[index].push(marker);
+        lat.val(marker.getPosition().lat())
+        lng.val(marker.getPosition().lng())
+ 
+        //Attach click event handler to the marker.
+        google.maps.event.addListener(marker, "click", function (e) {
+            var infoWindow = new google.maps.InfoWindow({
+                content: 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng()
+            });
+            infoWindow.open(map, marker);
+        });
+    });
 })
