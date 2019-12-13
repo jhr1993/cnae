@@ -371,6 +371,15 @@ form {
     outline: none;
 }
 
+.event-add-input-select {
+	border:none;
+	width: 100%;
+}
+
+.event-add-input-select:focus{
+    outline: none;
+}
+
 .event-add-input-radio {
 	padding: 5px !important;
 	width: auto !important;

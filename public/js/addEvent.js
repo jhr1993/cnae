@@ -448,6 +448,7 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
     clone.find('.event-add-content-input-parent').html('');
     clone.find('.alert-msg-error').hide();
     clone.find('.event-add-sub-content-input-container').removeClass('alert-msg-active-error');
+    
     let mapNext = '';
     if(clone.hasClass('event-add-contain-google-map')){
         let mapID = clone.find('.event-add-content-place-map').attr('id');
@@ -456,6 +457,12 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
         let searchID = clone.find('.event-place-search').attr('id');
         let searchNext = `${searchID.split('_search')[0]}_search${container.children().length+1}`;
         clone.find('.event-place-search').attr('id',searchNext);
+    }
+    if(clone.hasClass('event-add-contain-datepicker')){
+        clone.find('.date-start').removeClass('hasDatepicker')
+        clone.find('.date-end').removeClass('hasDatepicker')
+        clone.find('.date-start').datepicker({})
+        clone.find('.date-end').datepicker({})
     }
     clone.appendTo(container);
     if(clone.hasClass('event-add-contain-google-map')){
@@ -850,4 +857,8 @@ $(document).on('click','.event-add-content-place-map',function(){
             infoWindow.open(map, marker);
         });
     });
+})
+
+$(document).ready(function(){
+    $('.date-start, .date-end').not(".hasDatepicker").datepicker({})
 })
