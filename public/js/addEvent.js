@@ -436,9 +436,11 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
     const clone = cloneString.clone();
     const cloneChildrenInput = clone.find('.event-add-sub-content-input')
     for(let i = 0; i< cloneChildrenInput.length;i++){
-        const namefront = $(cloneChildrenInput[i]).prop('name').split('_content');
-        const index = `${namefront[0]}_content${container.children().length+1}`;
-        $(cloneChildrenInput[i]).prop('name',index);
+        if($(cloneChildrenInput[i]).prop('name')){
+            const namefront = $(cloneChildrenInput[i]).prop('name').split('_content');
+            const index = `${namefront[0]}_content${container.children().length+1}`;
+            $(cloneChildrenInput[i]).prop('name',index);
+        }
     }
     clone.find('.event-add-content-input-top').html('');
     clone.find('.event-add-sub-content-input').val('');
@@ -455,7 +457,7 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
         mapNext = `${mapID.split('_map')[0]}_map${container.children().length+1}`;
         clone.find('.event-add-content-place-map').attr('id',mapNext);
         let searchID = clone.find('.event-place-search').attr('id');
-        let searchNext = `${searchID.split('_search')[0]}_search${container.children().length+1}`;
+        let searchNext = `${searchID.split('_content')[0]}_content${container.children().length+1}`;
         clone.find('.event-place-search').attr('id',searchNext);
     }
     if(clone.hasClass('event-add-contain-datepicker')){
@@ -487,7 +489,24 @@ $(document).on('click','.event-add-addable .fa-close',function(){
     container = $(this).parent().parent();
     if(container.children().length > 1){
         if (confirm('Are you sure you want to remove this?')) {
+            const index = container.find('.event-place-search').attr('id').split('_content')[1];
+            maps.splice(index,1)
             $(this).parent().remove();
+
+            let i = 0
+            container.find('.event-add-content').each(function(){
+                i++
+                $(this).find('input').each(function(){
+                    if($(this).prop('name')){
+                        let namesplit = $(this).prop('name').split('_content');
+                        $(this).prop('name',`${namesplit[0]}_content${i}`);
+                    }
+                    if($(this).attr('id')){
+                        let idsplit = $(this).attr('id').split('_content');
+                        $(this).attr('id',`${idsplit[0]}_content${i}`);
+                    }
+                })
+            })
         }
     }
     if(container.children().length <= 1){
@@ -657,11 +676,10 @@ $(document).on('focusin','.event-place-search',function(){
     // Create the search box and link it to the UI element.
     var input = document.getElementById(searchId);
     var searchBox = new google.maps.places.SearchBox(input);
-    index = searchId.split('_search')[1]
-    console.log(index)
+    index = searchId.split('_content')[1]
 
     const map = maps[index-1]
-    console.log(maps[0])
+    console.log(maps)
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
@@ -712,7 +730,6 @@ $(document).on('focusin','.event-place-search',function(){
                 bounds.extend(place.geometry.location);
             }
             const address = place.address_components;
-            console.log(address);
             const addressOutput = {};
             let address2 = ''
             let statenprovince = ''
@@ -749,7 +766,6 @@ $(document).on('focusin','.event-place-search',function(){
                 if(address[i].types.includes('locality')){
                     addressOutput.city = address[i].long_name;
                     locality = true
-                    console.log('locallity')
                 }else if(!locality){
                     if(address[i].types.includes('administrative_area_level_1'))
                     addressOutput.city = address[i].long_name;
