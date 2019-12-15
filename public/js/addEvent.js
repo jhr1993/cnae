@@ -430,6 +430,8 @@ $(document).on('keyup keydown change','.event-add-required .event-add-sub-conten
     }
 });
 
+let mapi = 1
+
 $(document).on('click','.event-add-addable .event-add-sub-sector-content-button',function(){ 
     const container = $(this).parent().find('.event-add-content-container');
     const cloneString = container.find('.event-add-content:first');
@@ -454,7 +456,8 @@ $(document).on('click','.event-add-addable .event-add-sub-sector-content-button'
     let mapNext = '';
     if(clone.hasClass('event-add-contain-google-map')){
         let mapID = clone.find('.event-add-content-place-map').attr('id');
-        mapNext = `${mapID.split('_map')[0]}_map${container.children().length+1}`;
+        mapi++;
+        mapNext = `${mapID.split('_map')[0]}_map${mapi}`;
         clone.find('.event-add-content-place-map').attr('id',mapNext);
         let searchID = clone.find('.event-place-search').attr('id');
         let searchNext = `${searchID.split('_content')[0]}_content${container.children().length+1}`;
@@ -489,24 +492,31 @@ $(document).on('click','.event-add-addable .fa-close',function(){
     container = $(this).parent().parent();
     if(container.children().length > 1){
         if (confirm('Are you sure you want to remove this?')) {
-            const index = container.find('.event-place-search').attr('id').split('_content')[1];
-            maps.splice(index,1)
+            console.log($(this).parent().attr('class'))
+            console.log($(this).parent().hasClass('event-add-contain-google-map'))
+            if($(this).parent().hasClass('event-add-contain-google-map')){
+                const index = $(this).parent().find('.event-place-search').attr('id').split('_content')[1];
+                maps.splice(index-1,1);
+            }
             $(this).parent().remove();
 
-            let i = 0
-            container.find('.event-add-content').each(function(){
-                i++
-                $(this).find('input').each(function(){
-                    if($(this).prop('name')){
-                        let namesplit = $(this).prop('name').split('_content');
-                        $(this).prop('name',`${namesplit[0]}_content${i}`);
-                    }
-                    if($(this).attr('id')){
-                        let idsplit = $(this).attr('id').split('_content');
-                        $(this).attr('id',`${idsplit[0]}_content${i}`);
-                    }
+            
+            if($(this).parent().hasClass('event-add-contain-google-map')){
+                let i = 0
+                container.find('.event-add-content').each(function(){
+                    i++
+                    $(this).find('input').each(function(){
+                        if($(this).prop('name')){
+                            let namesplit = $(this).prop('name').split('_content');
+                            $(this).prop('name',`${namesplit[0]}_content${i}`);
+                        }
+                        if($(this).attr('id')){
+                            let idsplit = $(this).attr('id').split('_content');
+                            $(this).attr('id',`${idsplit[0]}_content${i}`);
+                        }
+                    })
                 })
-            })
+            }
         }
     }
     if(container.children().length <= 1){
@@ -664,7 +674,6 @@ function initMap() {
 }
 
 $(document).on('click','#event-place .event-add-sub-sector-content-button',function(){
-    console.log('ha')
     const index = $('#event-place .event-add-content-container').children.length;
     
     
@@ -679,7 +688,6 @@ $(document).on('focusin','.event-place-search',function(){
     index = searchId.split('_content')[1]
 
     const map = maps[index-1]
-    console.log(maps)
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
