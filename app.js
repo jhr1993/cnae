@@ -20,7 +20,7 @@ app.engine('html', require('ejs').renderFile);
 app.use(flash());
 
 // [CONFIGURE SERVER PORT]
-const portRunning = 80;
+const portRunning = 8080;
 const port = process.env.PORT || portRunning;
 
 // [RUN SERVER]
